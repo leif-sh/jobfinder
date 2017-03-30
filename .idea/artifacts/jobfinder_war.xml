@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jobfinder:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="jobfinder.war">
+      <element id="artifact" artifact-name="jobfinder:war exploded" />
+    </root>
+  </artifact>
+</component>
