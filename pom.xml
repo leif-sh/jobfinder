@@ -18,6 +18,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
+            <!-- 表示开发的时候引入，发布的时候不会加载此包 -->
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -114,6 +115,12 @@
             <version>5.1.30</version>
         </dependency>
 
+        <!--采用c3p0数据库连接池-->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.2</version>
+        </dependency>
 
         <!-- JSTL标签类 -->
         <dependency>
