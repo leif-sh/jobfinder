@@ -7,7 +7,10 @@
     <!-- 加载属性文件 -->
     <properties resource="jdbc.properties">
         <!--properties中还可以配置一些属性名和属性值  -->
-        <!-- <property name="jdbc.driver" value=""/> -->
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="1234"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/jobfinder?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
     </properties>
     <!-- 全局配置参数，需要时再设置 -->
     <!-- <settings>
@@ -23,15 +26,15 @@
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/jobfinder" />
-                <property name="username" value="root"/>
-                <property name="password" value="1234"/>
+                <property name="driver" value="${driverClassName}"/>
+                <property name="url" value="${url}" />
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>
     <mappers>
-        <!--<mapper resource="User.xml"/>-->
-        <mapper class="edu.ysu.ling.test.IUserDao"/>
+        <mapper resource="User.xml"/>
+       <!-- <mapper class="edu.ysu.ling.test.IUserDao"/>-->
     </mappers>
 </configuration>

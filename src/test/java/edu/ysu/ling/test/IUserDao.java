@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Select;
  * Created by ling on 2017/4/6.
  */
 public interface IUserDao {
-    @Select("select * from user where userId=#{id}")
-    public User findUserById(@Param("id") int id);
+
+    public User findUserById(int id);
 }
