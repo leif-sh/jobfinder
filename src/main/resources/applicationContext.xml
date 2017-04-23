@@ -3,12 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userService" class="edu.ysu.ling.service.impl.UserServiceImpl">
-        <property name="sessionFactory" ref="sqlSessionFactory"/>
-        <property name="userDao" ref="userDao" />
-    </bean>
+
 
     <import resource="spring-mybatis.xml"/>
     <import resource="applicationContext-service.xml"/>
-    <import resource="applicationContext-dao.xml"/>
 </beans>

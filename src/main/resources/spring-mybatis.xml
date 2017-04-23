@@ -7,7 +7,7 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>jdbc.properties</value>
+                <value>classpath:jdbc.properties</value>
             </list>
         </property>
     </bean>
@@ -16,7 +16,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation"  value="classpath:sqlMapConfig.xml"></property>
         <!-- 自动扫描mapping.xml文件 -->
-        <!--<property name="mapperLocations" value="classpath:edu/ysu/ling/mapping/*.xml"></property>-->
+        <property name="mapperLocations" value="classpath:edu/ysu/ling/mapping/*.xml"></property>
     </bean>
 
     <!-- data source -->
@@ -70,7 +70,7 @@
         </property>
     </bean>
 
-        <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+        <!-- DAO接口所在包名，Spring会自动查找其下的类 面向接口编程-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="edu.ysu.ling.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>

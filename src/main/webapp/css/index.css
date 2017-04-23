@@ -1,0 +1,39 @@
+.container {
+	width: 840px;
+	height: 352px;
+	overflow: hidden;
+}
+
+.containerimg {
+	width: 2520px;
+	height: 352px;
+	/*background: green;*/
+	transition: all 5s;
+	/*animation: name 30s;*/
+}
+
+.containerimg div {
+	float: left;
+}
+
+.img01 {
+	width: 840px;
+	height: 352px;
+	background: url(../img/ali.png)
+}
+
+.img02 {
+	width: 840px;
+	height: 352px;
+	background: url(../img/meituan.png);
+}
+
+.img03 {
+	width: 840px;
+	height: 352px;
+	background: url(../img/tengxun.jpg);
+}
+
+.container:hover .containerimg {
+	margin-left: -1680px;
+}

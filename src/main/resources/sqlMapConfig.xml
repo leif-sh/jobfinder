@@ -4,20 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <!-- 加载属性文件 -->
+<!--    &lt;!&ndash; 加载属性文件 &ndash;&gt;
     <properties resource="jdbc.properties">
-        <!--properties中还可以配置一些属性名和属性值  -->
-        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        &lt;!&ndash;properties中还可以配置一些属性名和属性值  &ndash;&gt;
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="username" value="root"/>
-        <property name="password" value="1234"/>-->
-        <!--<property name="url" value="jdbc:mysql://localhost:3306/test"/>-->
+        <property name="password" value="1234"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/test"/>
     </properties>
-    <!-- 全局配置参数，需要时再设置 -->
-    <!-- <settings>
+    &lt;!&ndash; 全局配置参数，需要时再设置 &ndash;&gt;
+    &lt;!&ndash; <settings>
 
-    </settings> -->
+    </settings> &ndash;&gt;
 
-    <!-- 别名定义 -->
+    &lt;!&ndash; 别名定义 &ndash;&gt;
     <typeAliases>
         <typeAlias type="edu.ysu.ling.pojo.User" alias="user"/>
         <package name="edu.ysu.ling.pojo"/>
@@ -35,7 +35,7 @@
     </environments>
     <mappers>
 
-        <mapper class="edu.ysu.ling.dao.IUserDao"/>
-        <mapper resource="edu/ysu/ling/mapping/User.xml"/>
-    </mappers>
+        &lt;!&ndash;<mapper class="edu.ysu.ling.dao.IUserDao"/>&ndash;&gt;
+        &lt;!&ndash;<mapper resource="edu/ysu/ling/mapping/User.xml"/>&ndash;&gt;
+    </mappers>-->
 </configuration>
