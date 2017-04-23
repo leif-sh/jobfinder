@@ -3,7 +3,6 @@ package edu.ysu.ling.controller;
 import edu.ysu.ling.crawler.BasicCrawlController;
 import edu.ysu.ling.pojo.User;
 import edu.ysu.ling.service.IUserService;
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

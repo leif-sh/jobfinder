@@ -4,6 +4,10 @@ package edu.ysu.ling.dao;/**
 
 import edu.ysu.ling.pojo.User;
 
+import javax.jws.soap.SOAPBinding;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by IntelliJ IDEA.
  * User: ling
@@ -12,5 +16,12 @@ import edu.ysu.ling.pojo.User;
  **/
 public interface IUserDao {
 
+    //通过Id查询用户
     public User selectUserByUserId(String userId);
+    //批量获取用户
+    public List<User> getUsers(Map params);
+    //增加用户
+    public void insertUser(User user);
+    //修改用户信息
+    public boolean updateUser(User user);
 }

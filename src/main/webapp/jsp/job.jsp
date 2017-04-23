@@ -20,10 +20,10 @@
 					<div class="nav">
 						<ul>
 							<li class="">
-								<a ka="header-home" href="/">首页</a>
+								<a ka="header-home" href="index.jsp">首页</a>
 							</li>
 							<li class="cur">
-								<a ka="header-job" href="/job_detail/">职位</a>
+								<a ka="header-job" href="job.jsp">职位</a>
 							</li>
 							<!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
 							<li class="">

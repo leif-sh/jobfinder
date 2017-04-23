@@ -21,10 +21,10 @@
 					<div class="nav">
 						<ul>
 							<li class="cur">
-								<a ka="header-home" href="/">首页</a>
+								<a ka="header-home" href="index.jsp">首页</a>
 							</li>
 							<li class="">
-								<a ka="header-job" href="/job_detail/">职位</a>
+								<a ka="header-job" href="job.jsp">职位</a>
 							</li>
 							<!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
 							<li class="">
@@ -36,8 +36,8 @@
 					<div class="user-nav">
 						<!--未登录-->
 						<div class="btns">
-							<a href="/user/signup.html" ka="header-register" class="btn btn-outline">注册</a>
-							<a href="/user/login.html" ka="header-login" class="btn btn-outline">登录</a>
+							<a href="login.jsp" ka="header-register" class="btn btn-outline">注册</a>
+							<a href="login.jsp" ka="header-login" class="btn btn-outline">登录</a>
 						</div>
 						<!--登录-->
 						<!--<ul>
