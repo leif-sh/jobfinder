@@ -1,6 +1,8 @@
 package edu.ysu.ling.test;
 
+import edu.ysu.ling.dao.IUserDao;
 import edu.ysu.ling.pojo.User;
+import edu.ysu.ling.service.IUserService;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -33,12 +35,14 @@ public class test {
             SqlSession session = sqlSessionFactory.openSession();
 
             try {
-                /*User user = (User) session.selectOne("user.findUserById", 1);
-                System.out.println(user.getUsername());
-                System.out.println(user.getPassword());*/
+                /*User user = (User) session.selectOne("edu.ysu.ling.dao.IUserDao.selectUserByUserId", "1001");
+                System.out.println(user.getUserName());*/
+
                 IUserDao userDao = session.getMapper(IUserDao.class);
-                User user = userDao.findUserById(1);
-                System.out.println(user.getUsername());
+                User user = userDao.selectUserByUserId("1001");
+                System.out.println(user.getUserName());
+
+
 
             } finally {
                 session.close();

@@ -30,7 +30,7 @@ public class BasicCrawlController {
      * Be polite: Make sure that we don't send more than 1 request per
      * second (1000 milliseconds between requests).
      */
-        config.setPolitenessDelay(100);
+        config.setPolitenessDelay(500);
         config.setMaxDepthOfCrawling(5);//设置深度
         config.setMaxPagesToFetch(10000);//要爬取的页面数量
         config.setIncludeBinaryContentInCrawling(false);//是否爬取二进制数据like pdf images

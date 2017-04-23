@@ -27,7 +27,7 @@ public class BasicCrawler extends WebCrawler{
     public boolean shouldVisit(Page page, WebURL url) {
         String href = url.getURL().toLowerCase();
 
-        return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.startsWith("https://www.bosszhipin.com/");
+        return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.startsWith("https://www.zhipin.com/");
     }
 
     /**
@@ -37,7 +37,7 @@ public class BasicCrawler extends WebCrawler{
     @Override
     public void visit(Page page) {
         String url = page.getWebURL().getURL();
-        if (url.startsWith("https://www.bosszhipin.com/job_detail")){
+        if (url.startsWith("https://www.zhipin.com/job_detail/")){
             int docid = page.getWebURL().getDocid();
             MethodInBoss.visitMethodOfBOSS(page,docid,url);
         }

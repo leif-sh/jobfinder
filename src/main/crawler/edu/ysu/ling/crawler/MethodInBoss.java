@@ -5,6 +5,7 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import edu.ysu.ling.domain.Message;
 import edu.ysu.ling.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -137,7 +138,7 @@ public class MethodInBoss {
             System.out.println("experienceBottom = " + message.getJobExperienceBottom());
             System.out.println("publishResource = " + message.getPublishResource());
             System.out.println("jobRequest = " + message.getJobRequest());
-            if (teamdesc != null) {
+            if (StringUtils.isNotBlank(teamdesc)) {
                 System.out.println("teamDescription = " + message.getTeamDescription());
             }
         }

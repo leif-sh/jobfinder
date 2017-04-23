@@ -9,8 +9,8 @@
         <!--properties中还可以配置一些属性名和属性值  -->
         <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="username" value="root"/>
-        <property name="password" value="1234"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/jobfinder?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+        <property name="password" value="1234"/>-->
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/test"/>-->
     </properties>
     <!-- 全局配置参数，需要时再设置 -->
     <!-- <settings>
@@ -34,7 +34,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="User.xml"/>
-       <!-- <mapper class="edu.ysu.ling.test.IUserDao"/>-->
+
+        <mapper class="edu.ysu.ling.dao.IUserDao"/>
+        <mapper resource="edu/ysu/ling/mapping/User.xml"/>
     </mappers>
 </configuration>
