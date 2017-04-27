@@ -16,7 +16,7 @@
     <bean id="daJieTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
         <property name="jobDetail" ref="daJiejob" />
         <!-- 每一分钟执行一次 -->
-        <property name="cronExpression" value="0 0/1 * * * ?" />
+        <property name="cronExpression" value="0 0/20 * * * ?" />
     </bean>
 
     <!-- 配置调度工厂 -->

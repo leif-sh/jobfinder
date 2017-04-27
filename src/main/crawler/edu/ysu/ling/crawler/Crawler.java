@@ -5,6 +5,7 @@ import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.url.WebURL;
 import edu.ysu.ling.htmlParse.MethodInBoss;
 import edu.ysu.ling.htmlParse.MethodInDaJie;
+import edu.ysu.ling.htmlParse.MethodInLaGou;
 
 import java.util.regex.Pattern;
 
@@ -22,24 +23,27 @@ public class Crawler extends WebCrawler{
                     "(\\?.*)?$"); // For url Query parts ( URL?q=... )
     private final static Pattern nubmer = Pattern.compile(".*[0-9]");
     private final static Pattern JobInDaJie = Pattern.compile("https://job.dajie.com/(.*)?.html");
+    private final static Pattern JobInLaGou = Pattern.compile("https://www.lagou.com/jobs/[0-9]*.html");
 
     @Override
     public boolean shouldVisit(Page page, WebURL url) {
         String href = url.getURL().toLowerCase();
 
         /*return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.startsWith("https://www.zhipin.com/");*/
-        return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.contains("job.dajie.com/");
+        //return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.contains("job.dajie.com/");
+        return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.contains("lagou.com/");
     }
 
     @Override
     public void visit(Page page) {
         String url = page.getWebURL().getURL();
+        int docid = page.getWebURL().getDocid();
         if (url.startsWith("https://www.zhipin.com/job_detail/")){
-            int docid = page.getWebURL().getDocid();
             MethodInBoss.parseJobInBOSS(page, docid, url);
         } else if (JobInDaJie.matcher(url).matches()) {
-            int docid = page.getWebURL().getDocid();
             MethodInDaJie.parseDaJie(page, docid, url);
+        } else if (JobInLaGou.matcher(url).matches()) {
+            MethodInLaGou.parseLaGou(page, docid, url);
         }
     }
 }

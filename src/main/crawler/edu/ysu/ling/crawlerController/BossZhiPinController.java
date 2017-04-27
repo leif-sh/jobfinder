@@ -20,7 +20,7 @@ public class BossZhiPinController {
 
     public static void main(String[] args) throws Exception {
 
-        String crawlStorageFolder = "./tmp";
+        String crawlStorageFolder = "./tmp/boss";
         int numberOfCrawlers = 3;//设置爬虫的数量
 
         CrawlConfig config = new CrawlConfig();

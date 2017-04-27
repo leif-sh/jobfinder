@@ -10,12 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by ling on 2017/4/25.
+ * Created by 10047 on 2017/4/27.
  */
-public class DaJieController {
+
+public class LaGouController {
     public static void main(String[] args) throws Exception {
 
-        String crawlStorageFolder = "./tmp/dajie";
+        String crawlStorageFolder = "./tmp/lagou";
         int numberOfCrawlers = 1;//设置爬虫的数量
         CrawlConfig config = new CrawlConfig();
 
@@ -32,9 +33,8 @@ public class DaJieController {
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
-        controller.addSeed("https://so.dajie.com/job/search?keyword=java&from=job&clicktype=blank");
-        //controller.addSeed("https://job.dajie.com/job/intern");
-        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120201&positionName=Java&from=job");
+        controller.addSeed("https://www.lagou.com/zhaopin/");
+        controller.addSeed("https://www.lagou.com/");
         controller.start(Crawler.class, numberOfCrawlers);
     }
 }

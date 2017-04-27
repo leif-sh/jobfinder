@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by ling on 2017/4/25.
@@ -39,6 +40,7 @@ public class MethodInDaJie {
             Document document = Jsoup.parse(html);
 
             Requirementinfo requirementinfo = parseJobInDaJie(document);
+            requirementinfo.setJobMessageId(UUID.randomUUID().toString());
             Company company = parseCompanyInDaJie(document);
 
             logger.info(requirementinfo.toString());

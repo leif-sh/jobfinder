@@ -4,6 +4,7 @@ import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import edu.ysu.ling.domain.Message;
+import edu.ysu.ling.pojo.Requirementinfo;
 import edu.ysu.ling.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -60,7 +61,7 @@ public class MethodInBoss {
                 time = item.text();
             }
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Message message = new Message();
+            Requirementinfo message = new Requirementinfo();
             try {
                 message.setJobDateTime(dateFormat.parse(time.substring(0,10)));
             } catch (ParseException e) {
@@ -70,7 +71,7 @@ public class MethodInBoss {
             Elements bodyEles = document.select("body");
 
             message.setJobName(name);
-            message.setCompanyName(company);
+            message.setSourceCompanyName(company);
             for(Element item : bodyEles){
 
                 message.setSalary(item.select(".c_salary").text());
