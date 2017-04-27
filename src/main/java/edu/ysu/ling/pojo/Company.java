@@ -12,6 +12,8 @@ public class Company {
     private String companyScale;//公司规模
     private String companyPosition;//公司位置
     private String companyIntroduction;
+    private String companyProperty;
+    private String companyWebsite;
 
     public int getCompanyId() {
         return companyId;
@@ -59,5 +61,35 @@ public class Company {
 
     public void setCompanyIntroduction(String companyIntroduction) {
         this.companyIntroduction = companyIntroduction;
+    }
+
+    public String getCompanyProperty() {
+        return companyProperty;
+    }
+
+    public void setCompanyProperty(String companyProperty) {
+        this.companyProperty = companyProperty;
+    }
+
+    public String getCompanyWebsite() {
+        return companyWebsite;
+    }
+
+    public void setCompanyWebsite(String companyWebsite) {
+        this.companyWebsite = companyWebsite;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "companyId=" + companyId +
+                ", companyName='" + companyName + '\'' +
+                ", companyType='" + companyType + '\'' +
+                ", companyScale='" + companyScale + '\'' +
+                ", companyPosition='" + companyPosition + '\'' +
+                ", companyIntroduction='" + companyIntroduction + '\'' +
+                ", companyProperty='" + companyProperty + '\'' +
+                ", companyWebsite='" + companyWebsite + '\'' +
+                '}';
     }
 }

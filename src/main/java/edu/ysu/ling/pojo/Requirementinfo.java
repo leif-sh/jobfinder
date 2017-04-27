@@ -1,30 +1,37 @@
 package edu.ysu.ling.pojo;
 
+import java.util.Date;
+
 /**
  * Created by 10047 on 2017/4/22.
  */
 
 public class Requirementinfo {
-    private String jobMessageId;
-    private int companyId;
-    private long campusRequirementId;
-    private int businessUserId;
-    private String jobName;
-    private String salary;
-    private String publishResource;
-    private String jobLabels;
-    private String jobClass;
-    private int salaryTop;
-    private int salaryBottom;
-    private String jobAdvantage;
-    private String jobQualification;
-    private String jobDescription;
-    private String jobAddress;
-    private String jobCity;
-    private String jobExperience;
-    private int jobExperienceTop;
-    private int jobExperienceBottom;
-    private String educationLevel;
+    private String jobMessageId;//职位编号
+    private String jobName;//职位名称
+    private String sourceCompanyName;//公司名称
+    private String salary;//工资范围
+    private String publishResource;//信息来源
+    private String jobLabels;//工作标签 包括Java c++等等
+    private String jobClass;//工作类型 全职 兼职
+    private int    salaryTop;//工资上限
+    private int    salaryBottom;//工资下限
+    private String jobRequest;//实际工作需要掌握的技能标签
+    private String jobAdvantage;//职位诱惑
+    private String jobQualification;//任职资格
+    private String jobDescription;//职位描述
+    private String jobAddress;//工作地址
+    private String jobCity;//工作城市
+    private String jobExperience;//工作经验
+    private int    jobExperienceTop;//工作经验上限
+    private int    JobExperienceBottom;//工作经验下限
+    private String educationLevel;//学历
+    private Date jobDateTime;//职位信息更新日期时间
+    private String teamDescription;//团队描述
+    private int companyId;//公司编号
+    private long campusRequirementId;//校招编号
+    private int businessUserId;//企业用户Id
+
 
     public String getJobMessageId() {
         return jobMessageId;
@@ -34,36 +41,20 @@ public class Requirementinfo {
         this.jobMessageId = jobMessageId;
     }
 
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public long getCampusRequirementId() {
-        return campusRequirementId;
-    }
-
-    public void setCampusRequirementId(long campusRequirementId) {
-        this.campusRequirementId = campusRequirementId;
-    }
-
-    public int getBusinessUserId() {
-        return businessUserId;
-    }
-
-    public void setBusinessUserId(int businessUserId) {
-        this.businessUserId = businessUserId;
-    }
-
     public String getJobName() {
         return jobName;
     }
 
     public void setJobName(String jobName) {
         this.jobName = jobName;
+    }
+
+    public String getSourceCompanyName() {
+        return sourceCompanyName;
+    }
+
+    public void setSourceCompanyName(String sourceCompanyName) {
+        this.sourceCompanyName = sourceCompanyName;
     }
 
     public String getSalary() {
@@ -112,6 +103,14 @@ public class Requirementinfo {
 
     public void setSalaryBottom(int salaryBottom) {
         this.salaryBottom = salaryBottom;
+    }
+
+    public String getJobRequest() {
+        return jobRequest;
+    }
+
+    public void setJobRequest(String jobRequest) {
+        this.jobRequest = jobRequest;
     }
 
     public String getJobAdvantage() {
@@ -171,11 +170,11 @@ public class Requirementinfo {
     }
 
     public int getJobExperienceBottom() {
-        return jobExperienceBottom;
+        return JobExperienceBottom;
     }
 
     public void setJobExperienceBottom(int jobExperienceBottom) {
-        this.jobExperienceBottom = jobExperienceBottom;
+        JobExperienceBottom = jobExperienceBottom;
     }
 
     public String getEducationLevel() {
@@ -184,5 +183,75 @@ public class Requirementinfo {
 
     public void setEducationLevel(String educationLevel) {
         this.educationLevel = educationLevel;
+    }
+
+    public Date getJobDateTime() {
+        return jobDateTime;
+    }
+
+    public void setJobDateTime(Date jobDateTime) {
+        this.jobDateTime = jobDateTime;
+    }
+
+    public String getTeamDescription() {
+        return teamDescription;
+    }
+
+    public void setTeamDescription(String teamDescription) {
+        this.teamDescription = teamDescription;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+    public long getCampusRequirementId() {
+        return campusRequirementId;
+    }
+
+    public void setCampusRequirementId(long campusRequirementId) {
+        this.campusRequirementId = campusRequirementId;
+    }
+
+    public int getBusinessUserId() {
+        return businessUserId;
+    }
+
+    public void setBusinessUserId(int businessUserId) {
+        this.businessUserId = businessUserId;
+    }
+
+    @Override
+    public String toString() {
+        return "Requirementinfo{" +
+                "jobMessageId='" + jobMessageId + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", sourceCompanyName='" + sourceCompanyName + '\'' +
+                ", salary='" + salary + '\'' +
+                ", publishResource='" + publishResource + '\'' +
+                ", jobLabels='" + jobLabels + '\'' +
+                ", jobClass='" + jobClass + '\'' +
+                ", salaryTop=" + salaryTop +
+                ", salaryBottom=" + salaryBottom +
+                ", jobRequest='" + jobRequest + '\'' +
+                ", jobAdvantage='" + jobAdvantage + '\'' +
+                ", jobQualification='" + jobQualification + '\'' +
+                ", jobDescription='" + jobDescription + '\'' +
+                ", jobAddress='" + jobAddress + '\'' +
+                ", jobCity='" + jobCity + '\'' +
+                ", jobExperience='" + jobExperience + '\'' +
+                ", jobExperienceTop=" + jobExperienceTop +
+                ", JobExperienceBottom=" + JobExperienceBottom +
+                ", educationLevel='" + educationLevel + '\'' +
+                ", jobDateTime=" + jobDateTime +
+                ", teamDescription='" + teamDescription + '\'' +
+                ", companyId=" + companyId +
+                ", campusRequirementId=" + campusRequirementId +
+                ", businessUserId=" + businessUserId +
+                '}';
     }
 }

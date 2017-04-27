@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * Created by 10047 on 2017/4/23.
@@ -27,6 +28,23 @@ public class UserServiceImpl implements IUserService {
         userDao = session.getMapper(IUserDao.class);
         User user = userDao.selectUserByUserId(userId);
         return user;
+    }
+
+    @Override
+    public User addUser(User user) {
+        SqlSession session = sessionFactory.openSession();
+        try {
+            UUID uuid  =  UUID.randomUUID();
+            user.setUserId(uuid.toString());
+            userDao = session.getMapper(IUserDao.class);
+            userDao.insertUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }finally {
+            session.close();
+            return user;
+        }
     }
 
     public SqlSessionFactory getSessionFactory() {

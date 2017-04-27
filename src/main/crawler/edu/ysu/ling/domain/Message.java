@@ -186,4 +186,30 @@ public class Message {
     public void setJobExperienceBottom(int jobExperienceBottom) {
         JobExperienceBottom = jobExperienceBottom;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "jobName='" + jobName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", salary='" + salary + '\'' +
+                ", publishResource='" + publishResource + '\'' +
+                ", jobLabels='" + jobLabels + '\'' +
+                ", jobClass='" + jobClass + '\'' +
+                ", salaryTop=" + salaryTop +
+                ", salaryBottom=" + salaryBottom +
+                ", jobRequest='" + jobRequest + '\'' +
+                ", jobAdvantage='" + jobAdvantage + '\'' +
+                ", jobQualification='" + jobQualification + '\'' +
+                ", jobDescription='" + jobDescription + '\'' +
+                ", jobAddress='" + jobAddress + '\'' +
+                ", jobCity='" + jobCity + '\'' +
+                ", jobExperience='" + jobExperience + '\'' +
+                ", jobExperienceTop=" + jobExperienceTop +
+                ", JobExperienceBottom=" + JobExperienceBottom +
+                ", educationLevel='" + educationLevel + '\'' +
+                ", jobDateTime=" + jobDateTime +
+                ", teamDescription='" + teamDescription + '\'' +
+                '}';
+    }
 }

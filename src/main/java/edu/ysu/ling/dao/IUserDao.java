@@ -3,6 +3,7 @@ package edu.ysu.ling.dao;/**
  */
 
 import edu.ysu.ling.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.List;
@@ -21,7 +22,9 @@ public interface IUserDao {
     //批量获取用户
     public List<User> getUsers(Map params);
     //增加用户
-    public void insertUser(User user);
+    public void insertUser(@Param("user") User user);
     //修改用户信息
     public boolean updateUser(User user);
+    //删除用户
+    public boolean deleteUser(User user);
 }

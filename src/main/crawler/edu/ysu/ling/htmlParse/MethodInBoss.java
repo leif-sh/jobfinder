@@ -1,4 +1,4 @@
-package edu.ysu.ling.crawler;
+package edu.ysu.ling.htmlParse;
 
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
@@ -10,26 +10,27 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Set;
 
+
 /**
  * Created by 10047 on 2017/4/22.
  */
 
 public class MethodInBoss {
-    public static void visitMethodOfBOSS(Page page, int docid, String url){
-        String domain = page.getWebURL().getDomain();
-        String parentUrl = page.getWebURL().getParentUrl();
-        String anchor = page.getWebURL().getAnchor();
 
-        System.out.println("Docid: "+docid);
-        System.out.print("URL: "+url);
-        System.out.println("Domain: "+domain);
-        System.out.println("Anchor text: "+anchor);
+    private static Logger logger = LoggerFactory.getLogger(MethodInBoss.class);
+
+    public static void parseJobInBOSS(Page page, int docid, String url){
+        String anchor = page.getWebURL().getAnchor();
+        logger.info("Docid",docid);
+        logger.info("URL", url);
 
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
@@ -122,24 +123,9 @@ public class MethodInBoss {
 
 
             System.out.println("name = " + name);
-            System.out.println("company = " + message.getCompanyName());
-            System.out.println("salary = " + message.getSalary());
-            System.out.println("joblabels = " + message.getJobLabels());
-            System.out.println("jobDescription = " + message.getJobDescription());
-            System.out.println("positionAddress = " + message.getJobAddress());
-            System.out.println("jobDate = " + message.getJobDateTime());
-            System.out.println("jobCity = " + message.getJobCity());
-            System.out.println("jobExperience = " + message.getJobExperience());
-            System.out.println("jobEducationLevel = " + message.getEducationLevel());
-            System.out.println("jobClass = " + message.getJobClass());
-            System.out.println("salaryTop = " + message.getSalaryTop());
-            System.out.println("salaryBottom = " + message.getSalaryBottom());
-            System.out.println("experienceTop = " + message.getJobExperienceTop());
-            System.out.println("experienceBottom = " + message.getJobExperienceBottom());
-            System.out.println("publishResource = " + message.getPublishResource());
-            System.out.println("jobRequest = " + message.getJobRequest());
+            logger.info(message.toString());
             if (StringUtils.isNotBlank(teamdesc)) {
-                System.out.println("teamDescription = " + message.getTeamDescription());
+                logger.info("teamDescription = " , message.getTeamDescription());
             }
         }
 
@@ -151,6 +137,6 @@ public class MethodInBoss {
         System.out.println("{"+header.getName()+"}: {"+header.getValue()+"}");
       }
       }*/
-        System.out.println("=============");
+        logger.info("===================");
     }
 }

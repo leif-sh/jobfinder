@@ -1,4 +1,4 @@
-package edu.ysu.ling.crawler;
+package edu.ysu.ling.crawlerController;
 
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
@@ -6,6 +6,7 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
+import edu.ysu.ling.crawler.Crawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,9 +14,9 @@ import org.slf4j.LoggerFactory;
  * Created by 10047 on 2017/4/22.
  */
 
-public class BasicCrawlController {
+public class BossZhiPinController {
 
-    private static Logger logger = LoggerFactory.getLogger(BasicCrawlController.class);
+    private static Logger logger = LoggerFactory.getLogger(BossZhiPinController.class);
 
     public static void main(String[] args) throws Exception {
 
@@ -69,6 +70,6 @@ public class BasicCrawlController {
      * Start the crawl. This is a blocking operation, meaning that your code
      * will reach the line after this only when crawling is finished.
      */
-        controller.start(BasicCrawler.class, numberOfCrawlers);
+        controller.start(Crawler.class, numberOfCrawlers);
     }
 }

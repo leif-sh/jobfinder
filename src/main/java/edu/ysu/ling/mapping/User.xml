@@ -10,5 +10,20 @@
         SELECT * FROM USER WHERE userId = #{userId}
     </select>
 
+    <select id="getUsers" parameterType="java.util.Map" resultType="java.util.List">
+        SELECT * FROM USER
+        <where>
+            <if test="params.dreamSalaryTop != null">
+                #{params.dreamSalaryTop} > 100
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertUser" parameterType="edu.ysu.ling.pojo.User" >
+        INSERT INTO USER
+        (userId,account,password)
+        VALUES
+        (#{user.userId},#{user.account},#{user.password});
+    </insert>
 
 </mapper>

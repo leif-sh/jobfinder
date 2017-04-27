@@ -12,4 +12,5 @@ import edu.ysu.ling.pojo.User;
  **/
 public interface IUserService {
     public User findUserByUserId(String userId);
+    public User addUser(User user);
 }

@@ -44,12 +44,15 @@
       <div class="sign-tab">
         <span>使用邮箱注册</span>
       </div>
-      <form action="/registe/save.json" method="post">
+      <form action="/User/register.do" method="post">
         <div class="form-row row-select">
-          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="tel" class="ipt ipt-pwd required" ka="signin-account" placeholder="邮箱" name="phone" /></span>
+          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="text" class="ipt ipt-pwd required" ka="signin-account" placeholder="邮箱" name="account" /></span>
         </div>
         <div class="form-row">
-          <span class="ipt-wrap"><i class="icon-sign-sms"></i><input type="text" class="ipt ipt-sms required" ka="signup-sms" placeholder="邮箱验证码" name="phoneCode" maxlength="4" /><input type="hidden" name="smsType" value="2" /><button type="button" class="btn btn-sms" data-url="/registe/sendSms.json">发送邮件</button></span>
+          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="text" class="ipt ipt-pwd required" ka="signin-account" placeholder="邮箱验证码" name="phoneCode" maxlength="4" /><input type="hidden" name="smsType" value="2" /><button type="button" class="btn btn-sms">发送邮件</button></span>
+        </div>
+        <div class="form-row">
+          <span class="ipt-wrap"><i class="icon-sign-pwd"></i><input type="password" class="ipt ipt-pwd required" ka="signin-password" placeholder="密码" name="password" /></span>
         </div>
         <div class="form-btn">
           <button type="submit" class="btn">注册</button>
@@ -73,7 +76,7 @@
   </div>
 </div>
 <script src="https://www.zhipin.com/v2/web/geek/js/lib/jquery-1.12.2.min.js"></script>
-<script src="https://www.zhipin.com/v2/web/geek/js/main.js"></script>
+<script src="../js/main2.js"></script>
 <input type="hidden" id="page_key_name" value="cpc_user_sign_up" />
 <script src="https://img.bosszhipin.com/js/analytics.min.js"></script>
 <script src="https://img.bosszhipin.com/js/utils/ka.js?v=1.0"></script>

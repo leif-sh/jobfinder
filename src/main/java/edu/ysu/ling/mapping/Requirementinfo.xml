@@ -10,5 +10,11 @@
         SELECT * FROM requirementinfo WHERE jobMessageId = #{id}
     </select>
 
+    <insert id="insertRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
+        INSERT INTO requirementinfo
+        (jobMessageId,bussinessUserId,jobName,jobLabels,jobClass,salaryTop,salaryBottom,jobRequest,jobAdvantage,jobQualification,jobDescription,jobCity,jobAddres,jobExperienceTop,jobExperienceBottom,educationLevel)
+        VALUE
+        (#{Requirementinfo.jobMessageId},#{Requirementinfo.bussinessUserId},#{Requirementinfo.jobName},#{Requirementinfo.jobLabels},#{Requirementinfo.jobClass},#{Requirementinfo.salaryTop},#{Requirementinfo.salaryBottom},#{Requirementinfo.jobRequest},#{Requirementinfo.jobAdvantage},#{Requirementinfo.jobQualification},#{Requirementinfo.jobDescription},#{Requirementinfo.jobCity},#{Requirementinfo.jobAddres},#{Requirementinfo.jobExperienceTop},#{Requirementinfo.jobExperienceBottom},#{Requirementinfo.educationLevel})
+    </insert>
 
 </mapper>

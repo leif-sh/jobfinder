@@ -16,6 +16,7 @@ public class User {
     private String realName;
     private String location;
     private String levelId;
+    private Dreamjob dreamjob;
 
     public String getUserId() {
         return userId;
@@ -103,5 +104,21 @@ public class User {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(String levelId) {
+        this.levelId = levelId;
+    }
+
+    public Dreamjob getDreamjob() {
+        return dreamjob;
+    }
+
+    public void setDreamjob(Dreamjob dreamjob) {
+        this.dreamjob = dreamjob;
     }
 }

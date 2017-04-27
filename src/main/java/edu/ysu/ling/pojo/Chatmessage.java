@@ -13,6 +13,7 @@ public class Chatmessage {
     private String userId;
     private String chatInfo;
     private Date chatDateTime;
+    private String sendFrom;//1 表示普通用户发送 2 表示企业用户发送
 
     public String getChatId() {
         return chatId;
@@ -52,5 +53,13 @@ public class Chatmessage {
 
     public void setChatDateTime(Date chatDateTime) {
         this.chatDateTime = chatDateTime;
+    }
+
+    public String getSendFrom() {
+        return sendFrom;
+    }
+
+    public void setSendFrom(String sendFrom) {
+        this.sendFrom = sendFrom;
     }
 }
