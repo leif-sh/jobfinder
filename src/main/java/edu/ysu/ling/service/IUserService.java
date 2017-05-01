@@ -11,6 +11,25 @@ import edu.ysu.ling.pojo.User;
  * Time: 11:18
  **/
 public interface IUserService {
-    public User findUserByUserId(String userId);
-    public User addUser(User user);
+    /**
+     * 通过用户编号查找用户信息
+     * @param userId
+     * @return
+     */
+    public abstract User findUserByUserId(String userId);
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    public abstract User addUser(User user);
+
+    /**
+     * 登录验证
+     * @param user
+     * @return
+     */
+    public abstract boolean loginVerify(User user);
+
 }

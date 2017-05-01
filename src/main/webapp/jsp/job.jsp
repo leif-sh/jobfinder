@@ -1,5 +1,6 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="standard">
 
@@ -33,28 +34,22 @@
 					</div>
 
 					<div class="user-nav">
-						<!--未登录-->
-						<!--<div class="btns">
-                <a href="/user/signup.html" ka="header-register"  class="btn btn-outline" >注册</a>
-                <a href="/user/login.html" ka="header-login"  class="btn btn-outline" >登录</a>
-            </div>-->
-						<ul>
-							<li class="">
-								<a ka="header-chat" href="/gchat/chat.html">聊天<span class="nav-chat-num"></span></a>
-							</li>
-							<li class="">
-								<a ka="header-delivery-box" href="/geek/deliver.html">投递箱</a>
-							</li>
-							<li class="">
-								<a ka="header-my-resume" href="/geek/myresume.html">我的简历</a>
-							</li>
-							<li class="nav-figure">
-								<a href="/geek/myresume.html" ka="header-username"><span class="label-text">李铁</span> <img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20161026/a6d6f3c253ad0c2e0839623048d43415668e4f6582898ba1716941858023f2e0_s.jpg" alt="" /></a>
-								<div class="dropdown">
-									<a href="/logout/" ka="header-logout">退出</a>
-								</div>
-							</li>
-						</ul>
+						<c:if test="${sessionScope.userinfo != null}">
+							<!--登录-->
+							<ul>
+								<li class=""><a ka="header-chat" href="chat.jsp" >聊天<span class="nav-chat-num"></span></a></li>
+								<li class=""><a ka="header-delivery-box" href="" >投递箱</a></li>
+								<li class="cur"><a ka="header-my-resume" href="resume.jsp" >我的简历</a></li>
+								<li class="nav-figure"><a href="resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
+							</ul>
+						</c:if>
+						<c:if test="${sessionScope.userinfo == null}">
+							<!--未登录-->
+							<div class="btns">
+								<a href="/jsp/login.jsp" ka="header-register" class="btn btn-outline">注册</a>
+								<a href="/jsp/login.jsp" ka="header-login" class="btn btn-outline">登录</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -1039,7 +1034,6 @@
 
 						<!--有职位 start-->
 						<ul>
-
 							<li>
 								<a href="/job_detail/1411146326.html" ka="search_list_1" data-itemId="1" data-lid="0-5rOcY6K" data-jobid="11146326" data-index="1" target="_blank">
 									<div class="job-primary">
@@ -1054,7 +1048,6 @@
 											</div>
 										</div>
 									</div>
-
 									<div class="job-tags">
 										<div class="job-author">
 											<p>乜东彬<em class="vline"></em>高级技术专家<img src="https://img2.bosszhipin.com/boss/avatar/avatar_6.png" /></p>
@@ -1065,370 +1058,38 @@
 
 								</a>
 							</li>
-
-							<li>
-								<a href="/job_detail/1411145043.html" ka="search_list_2" data-itemId="2" data-lid="0-5rOcY6K" data-jobid="11145043" data-index="2" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">后端开发工程师 <span class="red">20K-40K</span></h3>
-											<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">百度</h3>
-												<p>互联网<em class="vline"></em>已上市<em class="vline"></em>10000人以上</p>
+							<c:if test="${empty jobList}">
+								<script>
+									window.location = "/job/getJobList.do?pageName=job";
+								</script>
+							</c:if>
+							<c:if test="${!empty jobList}">
+								<c:forEach items="${jobList}" var="job">
+									<li>
+										<a href="/job/${job.jobMessageId}" ka="search_list_1" data-itemId="1" data-lid="0-5rOcY6K" data-jobid="11146326" data-index="1" target="_blank">
+											<div class="job-primary">
+												<div class="info-primary">
+													<h3 class="name">${job.jobName}<span class="red">${job.salary}</span></h3>
+													<p>北京<em class="vline"></em>1-3年<em class="vline"></em>本科</p>
+												</div>
+												<div class="info-comapny">
+													<div class="company-text">
+														<h3 class="name">${job.sourceCompanyName}</h3>
+														<p>O2O<em class="vline"></em>D轮及以上<em class="vline"></em>10000人以上</p>
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>郭太东<em class="vline"></em>高级项目经理<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20161009/27cd62de7166e01f3424869b80aa839d9711e1ca9d6761b5bbdf8332017aaf20_s.jpg" /></p>
-										</div>
-										<span>PHP</span><span>Python</span><span>后端开发</span>
-									</div>
-									<div class="job-time"><span class="time">发布于16:26</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411147685.html" ka="search_list_3" data-itemId="3" data-lid="0-5rOcY6K" data-jobid="11147685" data-index="3" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">Bpm工作流技术专家 <span class="red">22K-38K</span></h3>
-											<p>北京<em class="vline"></em>5-10年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">滴滴出行</h3>
-												<p>移动互联网<em class="vline"></em>D轮及以上<em class="vline"></em>1000-9999人</p>
+											<div class="job-tags">
+												<div class="job-author">
+													<p>乜东彬<em class="vline"></em>高级技术专家<img src="https://img2.bosszhipin.com/boss/avatar/avatar_6.png" /></p>
+												</div>
+												<span>Java</span><span>后端开发</span><span>中间件</span>
 											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>中原<em class="vline"></em>开发经理<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20161202/57a7d1be6a5d6f4f281de616db6006f88c7dd922ad47494fc02c388e12c00eac_s.jpg" /></p>
-										</div>
-										<span>BPM</span><span>Activiti</span><span>工作流</span>
-									</div>
-									<div class="job-time"><span class="time">发布于22:23</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411146434.html" ka="search_list_4" data-itemId="4" data-lid="0-5rOcY6K" data-jobid="11146434" data-index="4" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">系统工程师 <span class="red">20K-35K</span></h3>
-											<p>北京<em class="vline"></em>5-10年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">网宿科技</h3>
-												<p>互联网<em class="vline"></em>已上市<em class="vline"></em>1000-9999人</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>陈镇<em class="vline"></em>前端<img src="https://img2.bosszhipin.com/boss/avatar/avatar_8.png" /></p>
-										</div>
-										<span>C/C++</span><span>Linux</span><span>tcp</span>
-									</div>
-									<div class="job-time"><span class="time">发布于19:46</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411141617.html" ka="search_list_5" data-itemId="5" data-lid="0-5rOcY6K" data-jobid="11141617" data-index="5" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">Java <span class="red">25K-45K</span></h3>
-											<p>北京<em class="vline"></em>5-10年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">华为</h3>
-												<p>IT软件<em class="vline"></em>不需要融资<em class="vline"></em>10000人以上</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>虞学伦<em class="vline"></em>高级软件工程师<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20170220/76722fa514184814d49f68d3c367a5a7b40f558b2f95e6e1d90113a2b62cec83_s.jpg" /></p>
-										</div>
-										<span>Hadoop</span><span>数据挖掘</span><span>Java</span>
-									</div>
-									<div class="job-time"><span class="time">发布于14:43</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411142284.html" ka="search_list_6" data-itemId="6" data-lid="0-5rOcY6K" data-jobid="11142284" data-index="6" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">Android <span class="red">15K-25K</span></h3>
-											<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">中软国际</h3>
-												<p>IT软件<em class="vline"></em>已上市<em class="vline"></em>10000人以上</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>罗媛<em class="vline"></em>HR<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20160830/12a2f87b3bb306d677b8b8517eb994d38c7dd922ad47494fc02c388e12c00eac_s.jpg" /></p>
-										</div>
-										<span>Android</span><span>移动开发</span><span>app客户端</span>
-									</div>
-									<div class="job-time"><span class="time">发布于13:06</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411139137.html" ka="search_list_7" data-itemId="7" data-lid="0-5rOcY6K" data-jobid="11139137" data-index="7" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">产品经理 <span class="red">20K-25K</span></h3>
-											<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">京东</h3>
-												<p>电子商务<em class="vline"></em>已上市<em class="vline"></em>10000人以上</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>王贯扬<em class="vline"></em>产品经理<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20161023/6cc2f940c2e0c5b396b922f2dd54f0aac7b0605d9b7c7e560e58e9c70a6818ae_s.jpg" /></p>
-										</div>
-										<span>产品经理</span>
-									</div>
-									<div class="job-time"><span class="time">发布于09:41</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411140691.html" ka="search_list_8" data-itemId="8" data-lid="0-5rOcY6K" data-jobid="11140691" data-index="8" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">深度学习平台开发工程师 <span class="red">20K-25K</span></h3>
-											<p>北京<em class="vline"></em>3-5年<em class="vline"></em>硕士</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">美图公司</h3>
-												<p>互联网<em class="vline"></em>D轮及以上<em class="vline"></em>1000-9999人</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>赵丽丽<em class="vline"></em>技术总监<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20170422/e9c1acaae8beba3a597d5fa51b45ee028c7dd922ad47494fc02c388e12c00eac_s.jpg" /></p>
-										</div>
-										<span>Linux</span><span>后端开发</span><span>系统架构</span>
-									</div>
-									<div class="job-time"><span class="time">发布于10:53</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411138971.html" ka="search_list_9" data-itemId="9" data-lid="0-5rOcY6K" data-jobid="11138971" data-index="9" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">网络工程师 <span class="red">15K-22K</span></h3>
-											<p>北京<em class="vline"></em>1-3年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">美团点评</h3>
-												<p>O2O<em class="vline"></em>D轮及以上<em class="vline"></em>10000人以上</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>朱晏<em class="vline"></em>高级技术经理<img src="https://img2.bosszhipin.com/boss/avatar/avatar_7.png" /></p>
-										</div>
-										<span>网络</span>
-									</div>
-									<div class="job-time"><span class="time">发布于09:02</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411135444.html" ka="search_list_10" data-itemId="10" data-lid="0-5rOcY6K" data-jobid="11135444" data-index="10" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">高级iOS开发工程师 <span class="red">15K-30K</span></h3>
-											<p>北京<em class="vline"></em>1-3年<em class="vline"></em>硕士</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">网易乐得</h3>
-												<p>互联网<em class="vline"></em>不需要融资<em class="vline"></em>10000人以上</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>金秋实<em class="vline"></em>iOS工程师<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20170421/70208052452076684d1c04b6a5a173498c7dd922ad47494fc02c388e12c00eac_s.jpg" /></p>
-										</div>
-										<span>iOS</span>
-									</div>
-									<div class="job-time"><span class="time">发布于昨天</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411122883.html" ka="search_list_11" data-itemId="11" data-lid="0-5rOcY6K" data-jobid="11122883" data-index="11" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">Java开发工程师【京东】 <span class="red">20K-30K</span></h3>
-											<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">京东商城</h3>
-												<p>电子商务<em class="vline"></em>已上市<em class="vline"></em>10000人以上</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>时金贵<em class="vline"></em>研发工程师<img src="https://img2.bosszhipin.com/boss/avatar/avatar_8.png" /></p>
-										</div>
-										<span>Java</span>
-									</div>
-									<div class="job-time"><span class="time">发布于昨天</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411133524.html" ka="search_list_12" data-itemId="12" data-lid="0-5rOcY6K" data-jobid="11133524" data-index="12" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">中级安全开发工程师 <span class="red">10K-20K</span></h3>
-											<p>北京<em class="vline"></em>1-3年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">链家网</h3>
-												<p>移动互联网<em class="vline"></em>已上市<em class="vline"></em>1000-9999人</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>杜全喜<em class="vline"></em>技术总监<img src="https://img2.bosszhipin.com/boss/avatar/avatar_6.png" /></p>
-										</div>
-										<span>Node.js</span><span>python爬虫</span><span>Web前端</span>
-									</div>
-									<div class="job-time"><span class="time">发布于昨天</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411112700.html" ka="search_list_13" data-itemId="13" data-lid="0-5rOcY6K" data-jobid="11112700" data-index="13" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">阿里彩票技术 <span class="red">15K-30K</span></h3>
-											<p>北京<em class="vline"></em>1-3年<em class="vline"></em>硕士</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">阿里巴巴集团</h3>
-												<p>互联网<em class="vline"></em>已上市<em class="vline"></em>10000人以上</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>刘荣逵<em class="vline"></em>高级技术专家<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20161117/0d888746f2003e6d140ab3f6855906ca8c7dd922ad47494fc02c388e12c00eac_s.jpg" /></p>
-										</div>
-										<span>Java</span>
-									</div>
-									<div class="job-time"><span class="time">发布于04月20日</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411110370.html" ka="search_list_14" data-itemId="14" data-lid="0-5rOcY6K" data-jobid="11110370" data-index="14" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">JAVA研发高级工程师 <span class="red">20K-28K</span></h3>
-											<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">京东JD</h3>
-												<p>互联网<em class="vline"></em>已上市<em class="vline"></em>10000人以上</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>朱智刚<em class="vline"></em>研发经理<img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20170420/73d1f00e2b22c1ed7c399768447bef538c7dd922ad47494fc02c388e12c00eac_s.jpg" /></p>
-										</div>
-										<span>Java</span><span>JS</span>
-									</div>
-									<div class="job-time"><span class="time">发布于04月20日</span></div>
-
-								</a>
-							</li>
-
-							<li>
-								<a href="/job_detail/1411124985.html" ka="search_list_15" data-itemId="15" data-lid="0-5rOcY6K" data-jobid="11124985" data-index="15" target="_blank">
-									<div class="job-primary">
-										<div class="info-primary">
-											<h3 class="name">java 研发工程师 <span class="red">20K-35K</span></h3>
-											<p>北京<em class="vline"></em>5-10年<em class="vline"></em>大专</p>
-										</div>
-										<div class="info-comapny">
-											<div class="company-text">
-												<h3 class="name">京东金融</h3>
-												<p>互联网<em class="vline"></em>不需要融资<em class="vline"></em>1000-9999人</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-tags">
-										<div class="job-author">
-											<p>张克新<em class="vline"></em>京东金融<img src="https://img2.bosszhipin.com/boss/avatar/avatar_5.png" /></p>
-										</div>
-										<span>Java</span><span>系统架构</span><span>大数据</span>
-									</div>
-									<div class="job-time"><span class="time">发布于昨天</span></div>
-								</a>
-							</li>
-
+											<div class="job-time"><span class="time">发布于18:19</span></div>
+										</a>
+									</li>
+								</c:forEach>
+							</c:if>
 						</ul>
 
 						<div class="page">
@@ -1464,13 +1125,11 @@
 				</ul>
 			</div>
 
-			<script src="https://www.zhipin.com/v2/web/geek/js/lib/jquery-1.12.2.min.js"></script>
-			<script src="https://www.zhipin.com/v2/web/geek/js/main.js"></script>
-			<input type="hidden" id="page_key_name" value="cpc_job_list" />
+			<script src="../js/jquery-1.12.2.min.js"></script>
+			<script src="../js/main.js"></script>
+			<input type="hidden" id="pageName" value="job" />
 
-			<script src="https://img.bosszhipin.com/js/analytics.min.js"></script>
-			<script src="https://img.bosszhipin.com/js/utils/ka.js?v=1.0"></script>
-			
+		</div>
 	</body>
 
 </html>

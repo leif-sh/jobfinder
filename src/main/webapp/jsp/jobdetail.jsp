@@ -1188,9 +1188,4 @@
 	</body>
 	<input type="hidden" id="page_key_name" value="cpc_job_detail" />
 
-	<script src="https://img.bosszhipin.com/js/analytics.min.js"></script>
-	<script src="https://img.bosszhipin.com/js/utils/ka.js?v=1.0"></script>
-	<script>
-	</script>
-
 </html>

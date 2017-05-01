@@ -16,7 +16,7 @@ public class DaJieController {
     public static void main(String[] args) throws Exception {
 
         String crawlStorageFolder = "./tmp/dajie";
-        int numberOfCrawlers = 1;//设置爬虫的数量
+        int numberOfCrawlers = 3;//设置爬虫的数量
         CrawlConfig config = new CrawlConfig();
 
         config.setCrawlStorageFolder(crawlStorageFolder);

@@ -4,7 +4,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="userService" class="edu.ysu.ling.service.impl.UserServiceImpl">
-        <property name="sessionFactory" ref="sqlSessionFactory"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+   <!-- <bean id="laGouMethod" class="edu.ysu.ling.htmlParse.MethodInLaGou">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>-->
+    <bean id="requirementinfoService" class="edu.ysu.ling.service.impl.RequirementinfoServiceImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
     <import resource="spring-mybatis.xml"/>
 </beans>

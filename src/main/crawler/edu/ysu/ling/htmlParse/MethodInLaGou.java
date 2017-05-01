@@ -3,26 +3,40 @@ package edu.ysu.ling.htmlParse;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
-import edu.ysu.ling.pojo.Company;
+import edu.ysu.ling.dao.IRequirementinfoDao;
 import edu.ysu.ling.pojo.Requirementinfo;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import javax.annotation.Resource;
+import java.io.Reader;
+import java.util.*;
 
 /**
  * Created by 10047 on 2017/4/27.
  */
 
 public class MethodInLaGou {
-    private static Logger logger = LoggerFactory.getLogger(MethodInDaJie.class);
+    private static Logger logger = LoggerFactory.getLogger(MethodInLaGou.class);
+    private static SqlSessionFactory sqlSessionFactory;
+    private static Reader reader;
+    static{
+        try{
+            reader  = Resources.getResourceAsReader("sqlMapConfig.xml");
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public static void parseLaGou(Page page, int docid, String url){
         String anchor = page.getWebURL().getAnchor();
@@ -38,10 +52,22 @@ public class MethodInLaGou {
 
             Requirementinfo requirementinfo = parseJobInLaGou(document);
             requirementinfo.setJobMessageId(UUID.randomUUID().toString());
+            requirementinfo.setJobUrl(url);
+            requirementinfo.setCatchJobTime(new Date());
             /*Company company = parseCompanyInDaJie(document);*/
 
-            logger.info(requirementinfo.toString());
+            //logger.info(requirementinfo.toString());
             //logger.info(company.toString());
+
+            SqlSession session = sqlSessionFactory.openSession();
+            try {
+                IRequirementinfoDao requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
+                requirementinfoDao.catchRequirementinfo(requirementinfo);
+                session.commit();
+                logger.info("添加一条数据成功！！！");
+            } finally {
+                session.close();
+            }
         }
         logger.info("===================");
     }
@@ -82,7 +108,7 @@ public class MethodInLaGou {
                 logger.error("未抓取到职位标签");
             }
 
-            requirementinfo.setJobLabels(jobLabels.toString());
+            //requirementinfo.setJobLabels(jobLabels.toString());
 
             requirementinfo.setJobAdvantage(item.select("dd.job-advantage p").first().text());
 
@@ -104,4 +130,13 @@ public class MethodInLaGou {
         }
         return requirementinfo;
     }
+
+    public static SqlSessionFactory getSqlSessionFactory() {
+        return sqlSessionFactory;
+    }
+
+    public static void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        MethodInLaGou.sqlSessionFactory = sqlSessionFactory;
+    }
+
 }

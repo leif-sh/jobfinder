@@ -18,13 +18,13 @@ import java.util.UUID;
 public class UserServiceImpl implements IUserService {
 
     @Resource
-    private SqlSessionFactory sessionFactory;
+    private SqlSessionFactory sqlSessionFactory;
 
     private IUserDao userDao;
 
     @Override
     public User findUserByUserId(String userId) {
-        SqlSession session = sessionFactory.openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         userDao = session.getMapper(IUserDao.class);
         User user = userDao.selectUserByUserId(userId);
         return user;
@@ -32,7 +32,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User addUser(User user) {
-        SqlSession session = sessionFactory.openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         try {
             UUID uuid  =  UUID.randomUUID();
             user.setUserId(uuid.toString());
@@ -47,11 +47,22 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
-    public SqlSessionFactory getSessionFactory() {
-        return sessionFactory;
+    @Override
+    public boolean loginVerify(User user) {
+        SqlSession session = sqlSessionFactory.openSession();
+        userDao = session.getMapper(IUserDao.class);
+        User user1 = userDao.selectUserByAccount(user.getAccount());
+        if (user.getPassword().equals(user1.getPassword())) {
+            return true;
+        }
+        return false;
     }
 
-    public void setSessionFactory(SqlSessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public SqlSessionFactory getSqlSessionFactory() {
+        return sqlSessionFactory;
+    }
+
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 }

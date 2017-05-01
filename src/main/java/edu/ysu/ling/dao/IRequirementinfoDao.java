@@ -12,7 +12,7 @@ import java.util.Map;
 public interface IRequirementinfoDao {
 
     //获取招聘信息列表
-    public abstract List<Requirementinfo> getRequirementinfos(Map params);
+    public abstract List<Requirementinfo> selectRequirementinfos(Map params);
 
     //通过编号获取招聘信息
     public abstract Requirementinfo selectRequirementinfoById(String id);
@@ -22,6 +22,12 @@ public interface IRequirementinfoDao {
 
     //添加招聘信息
     public abstract void insertRequirementinfo(Requirementinfo requirementinfo);
+
+    /**
+     * 收集一条招聘信息
+     * @param requirementinfo
+     */
+    public abstract void catchRequirementinfo(Requirementinfo requirementinfo);
 
     //修改招聘信息
     public abstract boolean updateRequirementinfo(Requirementinfo requirementinfo);

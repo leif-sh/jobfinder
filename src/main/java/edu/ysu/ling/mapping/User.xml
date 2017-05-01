@@ -5,6 +5,9 @@
 
 <mapper namespace="edu.ysu.ling.dao.IUserDao">
 
+    <select id="selectUserByAccount" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.User">
+        SELECT * FROM USER WHERE account = #{account} limit 0,1
+    </select>
 
     <select id="selectUserByUserId" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.User">
         SELECT * FROM USER WHERE userId = #{userId}
@@ -14,7 +17,7 @@
         SELECT * FROM USER
         <where>
             <if test="params.dreamSalaryTop != null">
-                #{params.dreamSalaryTop} > 100
+                #{dreamSalaryTop} > 100
             </if>
         </where>
     </select>
@@ -23,7 +26,7 @@
         INSERT INTO USER
         (userId,account,password)
         VALUES
-        (#{user.userId},#{user.account},#{user.password});
+        (#{userId},#{account},#{password});
     </insert>
 
 </mapper>

@@ -3,9 +3,16 @@ package edu.ysu.ling.htmlParse;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
+import edu.ysu.ling.dao.ICompanyDao;
+import edu.ysu.ling.dao.IJobLabelsDao;
+import edu.ysu.ling.dao.IRequirementinfoDao;
 import edu.ysu.ling.pojo.Company;
 import edu.ysu.ling.pojo.Requirementinfo;
 import edu.ysu.ling.util.StringUtil;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,6 +20,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Reader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +34,16 @@ import java.util.UUID;
 public class MethodInDaJie {
 
     private static Logger logger = LoggerFactory.getLogger(MethodInDaJie.class);
+    private static SqlSessionFactory sqlSessionFactory;
+    private static Reader reader;
+    static{
+        try{
+            reader  = Resources.getResourceAsReader("sqlMapConfig.xml");
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public static void parseDaJie(Page page, int docid, String url){
         String anchor = page.getWebURL().getAnchor();
@@ -43,6 +61,18 @@ public class MethodInDaJie {
             requirementinfo.setJobMessageId(UUID.randomUUID().toString());
             Company company = parseCompanyInDaJie(document);
 
+            SqlSession session = sqlSessionFactory.openSession();
+            try {
+                IRequirementinfoDao requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
+                requirementinfoDao.catchRequirementinfo(requirementinfo);
+                IJobLabelsDao jobLabelsDao = session.getMapper(IJobLabelsDao.class);
+                //jobLabelsDao.catchJobLabels();
+                ICompanyDao companyDao = session.getMapper(ICompanyDao.class);
+                session.commit();
+                logger.info("添加一条数据成功！！！");
+            } finally {
+                session.close();
+            }
             logger.info(requirementinfo.toString());
             //logger.info(company.toString());
         }

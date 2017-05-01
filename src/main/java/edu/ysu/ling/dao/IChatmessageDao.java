@@ -25,13 +25,16 @@ public interface IChatmessageDao {
     public List<Chatmessage> getChatmessages(Map params);
 
     //获取最近沟通的联系人
-    public List<User> getChatUsers(Map params);
+    public List<String> getChatUsers(Map params);
 
     //获取最近沟通的企业联系人
-    public List<Businessuser> getChatBusinessusers(Map params);
+    public List<String> getChatBusinessusers(Map params);
 
-    //增加聊天
-    public void insertUser(Chatmessage chatmessage);
+    /**
+     * 增加聊天
+     * @param chatmessage
+     */
+    public void insertChatmessage(Chatmessage chatmessage);
 
     //删除聊天
     public boolean deleteChatmessage();

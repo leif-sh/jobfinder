@@ -5,7 +5,6 @@
 
 <mapper namespace="edu.ysu.ling.dao.IRequirementinfoDao">
 
-
     <select id="selectRequirementinfoById" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Requirementinfo">
         SELECT * FROM requirementinfo WHERE jobMessageId = #{id}
     </select>
@@ -14,7 +13,16 @@
         INSERT INTO requirementinfo
         (jobMessageId,bussinessUserId,jobName,jobLabels,jobClass,salaryTop,salaryBottom,jobRequest,jobAdvantage,jobQualification,jobDescription,jobCity,jobAddres,jobExperienceTop,jobExperienceBottom,educationLevel)
         VALUE
-        (#{Requirementinfo.jobMessageId},#{Requirementinfo.bussinessUserId},#{Requirementinfo.jobName},#{Requirementinfo.jobLabels},#{Requirementinfo.jobClass},#{Requirementinfo.salaryTop},#{Requirementinfo.salaryBottom},#{Requirementinfo.jobRequest},#{Requirementinfo.jobAdvantage},#{Requirementinfo.jobQualification},#{Requirementinfo.jobDescription},#{Requirementinfo.jobCity},#{Requirementinfo.jobAddres},#{Requirementinfo.jobExperienceTop},#{Requirementinfo.jobExperienceBottom},#{Requirementinfo.educationLevel})
+        (#{jobMessageId},#{bussinessUserId},#{jobName},#{jobLabels},#{jobClass},#{salaryTop},#{salaryBottom},#{jobRequest},#{jobAdvantage},#{jobQualification},#{jobDescription},#{jobCity},#{jobAddres},#{jobExperienceTop},#{jobExperienceBottom},#{educationLevel})
     </insert>
 
+    <insert id="catchRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
+        INSERT INTO requirementinfo
+        (jobMessageId,jobName,salary,publishResource,jobLabels,jobClass,jobAdvantage,jobDescription,jobAddress,jobCity)
+        VALUES
+        (#{jobMessageId},#{jobName},#{salary},#{publishResource},#{jobLabels},#{jobClass},#{jobAdvantage},#{jobDescription},#{jobAddress},#{jobCity})
+    </insert>
+    <select id="selectRequirementinfos" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Requirementinfo" >
+        SELECT * FROM requirementinfo limit 0,10
+    </select>
 </mapper>

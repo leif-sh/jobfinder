@@ -31,7 +31,8 @@ public class Requirementinfo {
     private int companyId;//公司编号
     private long campusRequirementId;//校招编号
     private int businessUserId;//企业用户Id
-
+    private String jobUrl;
+    private Date catchJobTime;//抓取时间
 
     public String getJobMessageId() {
         return jobMessageId;
@@ -225,6 +226,22 @@ public class Requirementinfo {
         this.businessUserId = businessUserId;
     }
 
+    public String getJobUrl() {
+        return jobUrl;
+    }
+
+    public void setJobUrl(String jobUrl) {
+        this.jobUrl = jobUrl;
+    }
+
+    public Date getCatchJobTime() {
+        return catchJobTime;
+    }
+
+    public void setCatchJobTime(Date catchJobTime) {
+        this.catchJobTime = catchJobTime;
+    }
+
     @Override
     public String toString() {
         return "Requirementinfo{" +
@@ -252,6 +269,8 @@ public class Requirementinfo {
                 ", companyId=" + companyId +
                 ", campusRequirementId=" + campusRequirementId +
                 ", businessUserId=" + businessUserId +
+                ", jobUrl='" + jobUrl + '\'' +
                 '}';
     }
+
 }

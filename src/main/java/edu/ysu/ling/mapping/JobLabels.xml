@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.ysu.ling.dao.IJobLabelsDao">
+    <insert id="insertJobLabels" parameterType="edu.ysu.ling.pojo.Joblabels">
+        INSERT INTO joblabels
+        (labelId,labels,jobMessageId)
+        VALUES
+        (#{labelId},#{labels},#{jobMessageId})
+    </insert>
+
+    <select id="selectJobIdByJobLabels" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT jobMessageId FROM joblabels WHERE labels = #{labels} limit 0,10
+    </select>
+</mapper>

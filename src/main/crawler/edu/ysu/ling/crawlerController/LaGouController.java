@@ -6,8 +6,6 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 import edu.ysu.ling.crawler.Crawler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by 10047 on 2017/4/27.
@@ -35,6 +33,7 @@ public class LaGouController {
 
         controller.addSeed("https://www.lagou.com/zhaopin/");
         controller.addSeed("https://www.lagou.com/");
+        controller.addSeed("https://www.lagou.com/jobs/list_?px=new&city=%E4%B8%8A%E6%B5%B7#filterBox");
         controller.start(Crawler.class, numberOfCrawlers);
     }
 }

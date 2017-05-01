@@ -16,15 +16,40 @@ import java.util.Map;
  * Time: 11:10
  **/
 public interface IUserDao {
-
-    //通过Id查询用户
+    /**
+     * 通过Id查询用户
+     * @param userId
+     * @return
+     */
     public User selectUserByUserId(String userId);
-    //批量获取用户
+
+    /**
+     *
+     * @param account
+     * @return
+     */
+    public abstract User selectUserByAccount(String account);
+    /**
+     * 批量获取用户
+     * @param params
+     * @return
+     */
     public List<User> getUsers(Map params);
-    //增加用户
-    public void insertUser(@Param("user") User user);
-    //修改用户信息
+    /**
+     * 增加用户
+     * @param user
+     */
+    public void insertUser(User user);
+    /**
+     * 修改用户信息
+     * @param user
+     * @return
+     */
     public boolean updateUser(User user);
-    //删除用户
+    /**
+     * 删除用户
+     * @param user
+     * @return
+     */
     public boolean deleteUser(User user);
 }

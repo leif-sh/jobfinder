@@ -1,5 +1,6 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="standard">
 
@@ -24,7 +25,7 @@
 								<a ka="header-home" href="index.jsp">首页</a>
 							</li>
 							<li class="">
-								<a ka="header-job" href="job.jsp">职位</a>
+								<a ka="header-job" href="/jsp/job.jsp">职位</a>
 							</li>
 							<!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
 							<li class="">
@@ -34,18 +35,22 @@
 					</div>
 
 					<div class="user-nav">
-						<!--未登录-->
-						<div class="btns">
-							<a href="login.jsp" ka="header-register" class="btn btn-outline">注册</a>
-							<a href="login.jsp" ka="header-login" class="btn btn-outline">登录</a>
-						</div>
-						<!--登录-->
-						<!--<ul>
-                <li class=""><a ka="header-chat" href="/gchat/chat.html" >聊天<span class="nav-chat-num"></span></a></li>
-                <li class=""><a ka="header-delivery-box" href="/geek/deliver.html" >投递箱</a></li>
-                <li class="cur"><a ka="header-my-resume" href="/geek/myresume.html" >我的简历</a></li>
-                <li class="nav-figure"><a href="/geek/myresume.html" ka="header-username" ><span class="label-text">李铁</span> <img src="" alt="" /></a><div class="dropdown"><a href="/logout/" ka="header-logout">退出</a></div></li>
-            </ul>-->
+						<c:if test="${sessionScope.userinfo != null}">
+							<!--登录-->
+							<ul>
+								<li class=""><a ka="header-chat" href="chat.jsp" >聊天<span class="nav-chat-num"></span></a></li>
+								<li class=""><a ka="header-delivery-box" href="" >投递箱</a></li>
+								<li class="cur"><a ka="header-my-resume" href="resume.jsp" >我的简历</a></li>
+								<li class="nav-figure"><a href="resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
+							</ul>
+						</c:if>
+						<c:if test="${sessionScope.userinfo == null}">
+							<!--未登录-->
+							<div class="btns">
+								<a href="/jsp/login.jsp" ka="header-register" class="btn btn-outline">注册</a>
+								<a href="/jsp/login.jsp" ka="header-login" class="btn btn-outline">登录</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -58,8 +63,8 @@
 							<dl>
 								<dt><i class="icon-arrow-right"></i>研发</dt>
 								<dd>
-									<a href="/c101010100-p100101/" ka="cpc_side_100101">Java</a>
-									<a href="/c101010100-p100103/" ka="cpc_side_100103">PHP</a>
+									<a href="/job/searchJob.do?labels=java" ka="cpc_side_100101">Java</a>
+									<a href="/job/searchJob.do?labels=php" ka="cpc_side_100103">PHP</a>
 									<a href="/c101010100-p100205/" ka="cpc_side_100205">Web前端</a>
 									<a href="/c101010100-p100104/" ka="cpc_side_100104">数据挖掘</a>
 								</dd>
@@ -1324,168 +1329,32 @@
 										</div>
 									</a>
 								</li>
-
-								<li>
-									<a href="/job_detail/1411142284.html" ka="job_list_2" data-itemId="2" data-lid="4-5rbJJsj" data-index="2" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">Android</h3>
-												<p class="saraly"><span class="red">15K-25K</span></p>
-												<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">中软国际</div>
-													<p>IT软件<em class="vline"></em>已上市</p>
+								<c:if test="${empty jobList}">
+									<script type="text/javascript" >
+                                        window.location = "/job/getJobList.do?pageName=index";
+									</script>
+								</c:if>
+								<c:if test="${!empty jobList}">
+									<c:forEach items="${jobList}" var="job">
+										<li>
+											<a href="/job/${job.jobMessageId}" ka="job_list_1" data-itemId="1" data-lid="4-5rbJJsj" data-index="1" target="_blank">
+												<div class="job-primary">
+													<div class="info-primary">
+														<h3 class="name">${job.jobName}</h3>
+														<p class="saraly"><span class="red">${job.salary}</span></p>
+														<p>${job.jobCity}<em class="vline"></em>5-10年<em class="vline"></em>本科</p>
+													</div>
+													<div class="info-comapny">
+														<div class="company-text">
+															<div class="company-logo">${job.sourceCompanyName}</div>
+															<p>IT软件<em class="vline"></em>不需要融资</p>
+														</div>
+													</div>
 												</div>
-											</div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="/job_detail/1411138971.html" ka="job_list_3" data-itemId="3" data-lid="4-5rbJJsj" data-index="3" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">网络工程师</h3>
-												<p class="saraly"><span class="red">15K-22K</span></p>
-												<p>北京<em class="vline"></em>1-3年<em class="vline"></em>本科</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">美团点评</div>
-													<p>O2O<em class="vline"></em>D轮及以上</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="/job_detail/1411139137.html" ka="job_list_4" data-itemId="4" data-lid="4-5rbJJsj" data-index="4" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">产品经理</h3>
-												<p class="saraly"><span class="red">20K-25K</span></p>
-												<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">京东</div>
-													<p>电子商务<em class="vline"></em>已上市</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="/job_detail/1411143795.html" ka="job_list_5" data-itemId="5" data-lid="4-5rbJJsj" data-index="5" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">大数据开发工程师/专家</h3>
-												<p class="saraly"><span class="red">20K-40K</span></p>
-												<p>北京<em class="vline"></em>5-10年<em class="vline"></em>本科</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">滴滴出行</div>
-													<p>移动互联网<em class="vline"></em>D轮及以上</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="/job_detail/1411137192.html" ka="job_list_6" data-itemId="6" data-lid="4-5rbJJsj" data-index="6" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">高级产品经理</h3>
-												<p class="saraly"><span class="red">15K-30K</span></p>
-												<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">百度</div>
-													<p>互联网<em class="vline"></em>已上市</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="/job_detail/1411140691.html" ka="job_list_7" data-itemId="7" data-lid="4-5rbJJsj" data-index="7" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">深度学习平台开发工程师</h3>
-												<p class="saraly"><span class="red">20K-25K</span></p>
-												<p>北京<em class="vline"></em>3-5年<em class="vline"></em>硕士</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">美图公司</div>
-													<p>互联网<em class="vline"></em>D轮及以上</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="/job_detail/1411122883.html" ka="job_list_8" data-itemId="8" data-lid="4-5rbJJsj" data-index="8" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">Java开发工程师【京东】</h3>
-												<p class="saraly"><span class="red">20K-30K</span></p>
-												<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">京东商城</div>
-													<p>电子商务<em class="vline"></em>已上市</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="/job_detail/1411133524.html" ka="job_list_9" data-itemId="9" data-lid="4-5rbJJsj" data-index="9" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">中级安全开发工程师</h3>
-												<p class="saraly"><span class="red">10K-20K</span></p>
-												<p>北京<em class="vline"></em>1-3年<em class="vline"></em>本科</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">链家网</div>
-													<p>移动互联网<em class="vline"></em>已上市</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="/job_detail/1411138655.html" ka="job_list_10" data-itemId="10" data-lid="4-5rbJJsj" data-index="10" target="_blank">
-										<div class="job-primary">
-											<div class="info-primary">
-												<h3 class="name">资深前端开发工程师/前端开发专家</h3>
-												<p class="saraly"><span class="red">16K-30K</span></p>
-												<p>北京<em class="vline"></em>3-5年<em class="vline"></em>本科</p>
-											</div>
-											<div class="info-comapny">
-												<div class="company-text">
-													<div class="company-logo">阿里影业</div>
-													<p>文化娱乐<em class="vline"></em>已上市</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</li>
+											</a>
+										</li>
+									</c:forEach>
+								</c:if>
 							</ul>
 							<div class="link-all">
 								<a href="/c101010100/" ka="all-jobs">全部职位</a>
@@ -1518,51 +1387,10 @@
 			</div>
 
 		</div>
-		<script src="https://www.zhipin.com/v2/web/geek/js/lib/jquery-1.12.2.min.js"></script>
-		<script src="https://www.zhipin.com/v2/web/geek/js/main.js"></script>
-		<input type="hidden" id="page_key_name" value="cpc_job_index" />
+		<script src="../js/jquery-1.12.2.min.js"></script>
+		<script src="../js/main.js"></script>
+		<input type="hidden" name="pageName" value="index" />
 
-		<script src="https://img.bosszhipin.com/js/analytics.min.js"></script>
-		<script src="https://img.bosszhipin.com/js/utils/ka.js?v=1.0"></script>
-		<script>
-			function get_share_datas_from_html_inapp() {
-				var shid = "shdefault";
-				var urlShid = getQueryString('shid');
-				var urlSid = getQueryString('sid');
-				if(urlShid) {
-					shid = urlShid;
-				} else if(urlSid) {
-					shid = urlSid;
-				}
-				var pk = "pkdefault";
-				var pp = "ppdefault";
-				var pkn = document.getElementById("page_key_name");
-				if(pkn) {
-					var pknVal = pkn.value;
-					if(pknVal) {
-						var pkArray = pknVal.split("|")
-						if(pkArray.length == 1) {
-							pk = pkArray[0];
-						} else if(pkArray.length >= 2) {
-							pk = pkArray[0];
-							pp = pkArray[1];
-						}
-					}
-				}
-				var ret = new Array();
-				ret['shid'] = shid;
-				ret['pk'] = pk;
-				ret['pp'] = pp;
-				return ret;
-			}
-
-			function getQueryString(name) {
-				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-				var r = window.location.search.substr(1).match(reg);
-				if(r != null) return unescape(r[2]);
-				return null;
-			}
-		</script>
 	</body>
 
 </html>

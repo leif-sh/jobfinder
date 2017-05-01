@@ -18,16 +18,16 @@
     <!--密码登录-->
     <div class="sign-form sign-pwd" style="display:block;">
       <h3 class="title">登录JobFinder</h3>
-      <div class="tip-error"></div>
+      <div class="tip-error">${requestScope.errorMessage}</div>
       <div class="sign-tab">
       	<span class="link-signin cur"style="margin-left:120px;border: none;">密码登录</span>
       </div>
-      <form action="/login/account.json" method="post">
+      <form action="/User/login.do" method="post">
         <div class="form-row row-select">
-          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="tel" class="ipt ipt-pwd required" ka="signin-account" placeholder="手机号" name="account" /></span>
+          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="tel" class="ipt ipt-pwd required account" ka="signin-account" placeholder="账号" name="account" /></span>
         </div>
         <div class="form-row">
-          <span class="ipt-wrap"><i class="icon-sign-pwd"></i><input type="password" class="ipt ipt-pwd required" ka="signin-password" placeholder="密码" name="password" /></span>
+          <span class="ipt-wrap"><i class="icon-sign-pwd"></i><input type="password" class="ipt ipt-pwd required password" ka="signin-password" placeholder="密码" name="password" /></span>
         </div>
         
         <div class="form-btn">
@@ -46,13 +46,13 @@
       </div>
       <form action="/User/register.do" method="post">
         <div class="form-row row-select">
-          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="text" class="ipt ipt-pwd required" ka="signin-account" placeholder="邮箱" name="account" /></span>
+          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="text" class="ipt ipt-pwd required account" ka="signin-account" placeholder="邮箱" name="account" /></span>
         </div>
         <div class="form-row">
-          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="text" class="ipt ipt-pwd required" ka="signin-account" placeholder="邮箱验证码" name="phoneCode" maxlength="4" /><input type="hidden" name="smsType" value="2" /><button type="button" class="btn btn-sms">发送邮件</button></span>
+          <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="text" class="ipt ipt-pwd required emailCode" ka="signin-account" placeholder="邮箱验证码" name="emailCode" maxlength="4" /><input type="hidden" name="smsType" value="2" /><button type="button" class="btn btn-sms">发送邮件</button></span>
         </div>
         <div class="form-row">
-          <span class="ipt-wrap"><i class="icon-sign-pwd"></i><input type="password" class="ipt ipt-pwd required" ka="signin-password" placeholder="密码" name="password" /></span>
+          <span class="ipt-wrap"><i class="icon-sign-pwd"></i><input type="password" class="ipt ipt-pwd required password" ka="signin-password" placeholder="设置密码" name="password" /></span>
         </div>
         <div class="form-btn">
           <button type="submit" class="btn">注册</button>
@@ -75,11 +75,10 @@
     </div>
   </div>
 </div>
-<script src="https://www.zhipin.com/v2/web/geek/js/lib/jquery-1.12.2.min.js"></script>
-<script src="../js/main2.js"></script>
+<script src="../js/jquery-1.12.2.min.js"></script>
+<script src="../js/login.js"></script>
 <input type="hidden" id="page_key_name" value="cpc_user_sign_up" />
-<script src="https://img.bosszhipin.com/js/analytics.min.js"></script>
-<script src="https://img.bosszhipin.com/js/utils/ka.js?v=1.0"></script>
+
 <script>
 </script>
 </body>
