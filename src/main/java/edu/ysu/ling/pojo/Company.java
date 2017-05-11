@@ -6,20 +6,20 @@ package edu.ysu.ling.pojo;
 
 public class Company {
 
-    private int companyId;//公司编号
+    private String companyId;//公司编号
     private String companyName;//公司名称
-    private String companyType;//公司类型
+    private String companyType;//公司类型 电子商务 互联网
     private String companyScale;//公司规模
     private String companyPosition;//公司位置
     private String companyIntroduction;
-    private String companyProperty;
-    private String companyWebsite;
+    private String companyProperty;//公司
+    private String companyWebsite;//公司网站
 
-    public int getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 

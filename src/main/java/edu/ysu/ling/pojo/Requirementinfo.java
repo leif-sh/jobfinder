@@ -28,7 +28,7 @@ public class Requirementinfo {
     private String educationLevel;//学历
     private Date jobDateTime;//职位信息更新日期时间
     private String teamDescription;//团队描述
-    private int companyId;//公司编号
+    private String companyId;//公司编号
     private long campusRequirementId;//校招编号
     private int businessUserId;//企业用户Id
     private String jobUrl;
@@ -202,11 +202,11 @@ public class Requirementinfo {
         this.teamDescription = teamDescription;
     }
 
-    public int getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 

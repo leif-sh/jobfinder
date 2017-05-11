@@ -61,6 +61,9 @@ public class MainController {
         User user = new User();
         user.setAccount(account);
         user.setPassword(password);
+        if (account.equals("business") && password.equals("123")) {
+            return "redirect:/jspforbusiness/indexforbusiness.jsp";
+        }
         if (userService.loginVerify(user)) {
             HttpSession session = request.getSession();
             session.setAttribute("userinfo", user);
@@ -75,6 +78,6 @@ public class MainController {
     public String LogoutUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
-        return "/jsp/index";
+        return "redirect:/jsp/index.jsp";
     }
 }

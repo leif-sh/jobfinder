@@ -22,14 +22,14 @@
 					<div class="nav">
 						<ul>
 							<li class="cur">
-								<a ka="header-home" href="index.jsp">首页</a>
+								<a ka="header-home" href="/jsp/index.jsp">首页</a>
 							</li>
 							<li class="">
 								<a ka="header-job" href="/jsp/job.jsp">职位</a>
 							</li>
 							<!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
 							<li class="">
-								<a ka="header-article" href="/article/">校招</a>
+								<a ka="header-article" href="">校招</a>
 							</li>
 						</ul>
 					</div>
@@ -38,10 +38,10 @@
 						<c:if test="${sessionScope.userinfo != null}">
 							<!--登录-->
 							<ul>
-								<li class=""><a ka="header-chat" href="chat.jsp" >聊天<span class="nav-chat-num"></span></a></li>
-								<li class=""><a ka="header-delivery-box" href="" >投递箱</a></li>
-								<li class="cur"><a ka="header-my-resume" href="resume.jsp" >我的简历</a></li>
-								<li class="nav-figure"><a href="resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
+								<li class=""><a ka="header-chat" href="/jsp/chat.jsp" >聊天<span class="nav-chat-num"></span></a></li>
+								<li class=""><a ka="header-delivery-box" href="/jsp/collect.jsp" >收藏</a></li>
+								<li class=""><a ka="header-my-resume" href="/jsp/resume.jsp" >我的简历</a></li>
+								<li class="nav-figure"><a href="/jsp/resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
 							</ul>
 						</c:if>
 						<c:if test="${sessionScope.userinfo == null}">
@@ -1357,7 +1357,7 @@
 								</c:if>
 							</ul>
 							<div class="link-all">
-								<a href="/c101010100/" ka="all-jobs">全部职位</a>
+								<a href="/jsp/job.jsp" ka="all-jobs">全部职位</a>
 							</div>
 							<!--有职位 end-->
 						</div>
@@ -1368,11 +1368,9 @@
 			<div id="footer">
 				<div class="inner">
 					<div class="footer-social">
-
 					</div>
 					<div class="copyright">
 						<div class="footer-logo"></div>
-
 						<p>联系地址：河北省秦皇岛市燕山大学东校区</p>
 					</div>
 				</div>
@@ -1385,12 +1383,10 @@
 					<!--<li class="siderbar-qrcode" title="BOSS直聘APP"><div class="qrcode-layer"><i></i><img src="https://www.zhipin.com/qrcode/common.json?content=https%3A%2F%2Fwww.zhipin.com%2Fd%2Fv2%2F%3Ftype%3Dqr%26pkn%3Dqt%26sid%3D&w=200&h=200" alt="" />下载BOSS直聘APP</div></li>-->
 				</ul>
 			</div>
-
 		</div>
 		<script src="../js/jquery-1.12.2.min.js"></script>
 		<script src="../js/main.js"></script>
 		<input type="hidden" name="pageName" value="index" />
-
 	</body>
 
 </html>

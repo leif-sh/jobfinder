@@ -14,4 +14,15 @@
     <select id="selectJobIdByJobLabels" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT jobMessageId FROM joblabels WHERE labels = #{labels} limit 0,10
     </select>
+
+    <insert id="catchJobLabels" parameterType="edu.ysu.ling.pojo.Joblabels">
+        INSERT INTO joblabels
+        (labelId,labels,jobMessageId)
+        VALUES
+        (#{labelId},#{labels},#{jobMessageId})
+    </insert>
+
+    <select id="selectJobLabelsByJobMessageId" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT labels FROM joblabels WHERE jobMessageId = #{jobMessageId}
+    </select>
 </mapper>

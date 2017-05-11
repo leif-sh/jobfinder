@@ -18,9 +18,9 @@
 
     <insert id="catchRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
         INSERT INTO requirementinfo
-        (jobMessageId,jobName,salary,publishResource,jobLabels,jobClass,jobAdvantage,jobDescription,jobAddress,jobCity)
+        (jobMessageId,jobName,salary,salaryTop,salaryBottom,educationLevel,jobDateTime,teamDescription,publishResource,jobRequest,jobQualification,jobClass,jobAdvantage,jobDescription,jobAddress,jobCity,catchJobTime)
         VALUES
-        (#{jobMessageId},#{jobName},#{salary},#{publishResource},#{jobLabels},#{jobClass},#{jobAdvantage},#{jobDescription},#{jobAddress},#{jobCity})
+        (#{jobMessageId},#{jobName},#{salary},#{salaryTop},#{salaryBottom},#{educationLevel},#{jobDateTime},#{teamDescription},#{publishResource},#{jobRequest},#{jobQualification},#{jobClass},#{jobAdvantage},#{jobDescription},#{jobAddress},#{jobCity},#{catchJobTime})
     </insert>
     <select id="selectRequirementinfos" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Requirementinfo" >
         SELECT * FROM requirementinfo limit 0,10

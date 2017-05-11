@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="standard">
 <head>
@@ -22,36 +23,29 @@
             <h1 class="logo"><a href="/" ka="header-home-logo" title="JobFinder"><span>BOSS直聘</span></a></h1>
             <div class="nav">
                 <ul>
-                    <li class="">
-                        <a ka="header-home" href="/">首页</a>
-                    </li>
-                    <li class="">
-                        <a ka="header-job" href="/job_detail/">职位</a>
-                    </li>
+                    <li class=""><a ka="header-home" href="/jsp/index.jsp">首页</a></li>
+                    <li class=""><a ka="header-job" href="/jsp/job.jsp">职位</a></li>
                     <!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
-                    <li class="">
-                        <a ka="header-article" href="/article/">校招</a>
-                    </li>
+                    <li class=""><a ka="header-article" href="">校招</a></li>
                 </ul>
             </div>
             <div class="user-nav">
-                <ul>
-                    <li class="cur">
-                        <a ka="header-chat" href="/gchat/chat.html">聊天<span class="nav-chat-num"></span></a>
-                    </li>
-                    <li class="">
-                        <a ka="header-delivery-box" href="/geek/deliver.html">投递箱</a>
-                    </li>
-                    <li class="">
-                        <a ka="header-my-resume" href="/geek/myresume.html">我的简历</a>
-                    </li>
-                    <li class="nav-figure">
-                        <a href="/geek/myresume.html" ka="header-username"><span class="label-text">李铁</span> <img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20161026/a6d6f3c253ad0c2e0839623048d43415668e4f6582898ba1716941858023f2e0_s.jpg" alt="" /></a>
-                        <div class="dropdown">
-                            <a href="/logout/" ka="header-logout">退出</a>
-                        </div>
-                    </li>
-                </ul>
+                <c:if test="${!empty sessionScope.userinfo}">
+                    <!--登录-->
+                    <ul>
+                        <li class="cur"><a ka="header-chat" href="/jsp/chat.jsp" >聊天<span class="nav-chat-num">3</span></a></li>
+                        <li class=""><a ka="header-delivery-box" href="/jsp/collect.jsp" >收藏</a></li>
+                        <li class=""><a ka="header-my-resume" href="/jsp/resume.jsp" >我的简历</a></li>
+                        <li class="nav-figure"><a href="resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
+                    </ul>
+                </c:if>
+                <c:if test="${empty sessionScope.userinfo}">
+                    <!--未登录-->
+                    <div class="btns">
+                        <a href="/jsp/login.jsp" ka="header-register" class="btn btn-outline">注册</a>
+                        <a href="/jsp/login.jsp" ka="header-login" class="btn btn-outline">登录</a>
+                    </div>
+                </c:if>
             </div>
         </div>
     </div>

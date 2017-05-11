@@ -11,5 +11,23 @@ import edu.ysu.ling.pojo.Company;
  * Time: 22:48
  **/
 public interface ICompanyDao {
+    /**
+     * 抓取公司信息
+     * @param company
+     */
     public abstract void catchCompanyinfos(Company company);
+
+    /**
+     * 通过名称查询公司
+     * @param company
+     * @return
+     */
+    public abstract Company selectCompanyByName(Company company);
+
+    /**
+     * 通过Id查询公司
+     * @param companyId
+     * @return
+     */
+    public abstract Company selectCompanyById(String companyId);
 }

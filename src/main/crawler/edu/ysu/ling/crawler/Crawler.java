@@ -28,10 +28,8 @@ public class Crawler extends WebCrawler{
     @Override
     public boolean shouldVisit(Page page, WebURL url) {
         String href = url.getURL().toLowerCase();
-
-        /*return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.startsWith("https://www.zhipin.com/");*/
-        //return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.contains("job.dajie.com/");
-        return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && href.contains("lagou.com/");
+        return !BINARY_FILES_EXTENSIONS.matcher(href).matches()
+                && (href.contains("lagou.com/") || href.contains("job.dajie.com/") || href.startsWith("https://www.zhipin.com/") );
     }
 
     @Override

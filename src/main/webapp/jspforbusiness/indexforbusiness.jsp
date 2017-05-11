@@ -39,7 +39,7 @@
                     <span>${bussinessuser.userName}</span>
                 </div>
                 <dl class="menu-position cur">
-                    <dt><a class="menu-job-manage" ka="menu-manager-job" href="joblist.html" target="mainframe"><i class="icon-menu-position"></i>职位管理</a></dt>
+                    <dt><a class="menu-job-manage" ka="menu-manager-job" href="joblist.jsp" target="mainframe"><i class="icon-menu-position"></i>职位管理</a></dt>
                 </dl>
                 <dl class="menu-recommend ">
                     <dt><a class="menu-recommend-person" ka="menu-geek-recommend" href="javascript:;" data-url="/boss/recommend/conditions.json"><i class="icon-menu-recommend"></i>推荐牛人</a></dt>
@@ -60,12 +60,12 @@
         <div id="container">
             <!--消息 start-->
             <div class="chat-container page-container" style="display: none;">
-                <iframe name="mainframe" class="frame-container" src="chatforbusiness.jsp"></iframe>
+                <iframe name="mainframe" class="frame-container" src="/jspforbusiness/chatforbusiness.jsp"></iframe>
             </div>
             <!--消息 end-->
             <!--推荐页面内容插入容器-->
             <div class="sync-container page-container" style="display: none;">
-                <iframe name="mainframe2" class="frame-container" src="recommendperson.jsp"></iframe>
+                <iframe name="mainframe2" class="frame-container" src="/jspforbusiness/recommendperson.jsp"></iframe>
             </div>
             <!--推荐页面内容插入容器 end-->
             <!--容器-->
@@ -85,12 +85,12 @@
             <!--公司信息容器 end-->
             <!--职位列表页面插入容器-->
             <div class="rsync-container page-container"  width="100%" style="display: block;">
-                <iframe name="mainframe6" class="frame-container" src="joblist.html"></iframe>
+                <iframe name="mainframe6" class="frame-container" src="/jspforbusiness/joblist.jsp"></iframe>
             </div>
             <!--职位列表页面插入容器 end-->
             <!--设置页面内容插入容器-->
             <div class="set-container page-container" style="display: none;">
-                <iframe name="mainframe7" class="frame-container" src="settingforbussiness.html"></iframe>
+                <iframe name="mainframe7" class="frame-container" src="/jspforbusiness/settingforbussiness.jsp"></iframe>
             </div>
             <!--设置页面内容插入容器 end-->
         </div>

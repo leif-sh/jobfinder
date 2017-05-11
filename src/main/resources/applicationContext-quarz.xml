@@ -20,7 +20,7 @@
     <!-- 配置定时表达式 -->
     <bean id="daJieTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
         <property name="jobDetail" ref="daJiejob" />
-        <property name="cronExpression" value="0 0/10 * * * ?" />
+        <property name="cronExpression" value="0/5 * * * * ?" />
     </bean>
     <bean id="laGouTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
         <property name="jobDetail" ref="laGoujob" />

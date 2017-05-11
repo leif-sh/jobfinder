@@ -20,16 +20,10 @@
 					<h1 class="logo"><a href="/" ka="header-home-logo" title="JobFinder"><span>JobFinder</span></a></h1>
 					<div class="nav">
 						<ul>
-							<li class="">
-								<a ka="header-home" href="index.jsp">首页</a>
-							</li>
-							<li class="cur">
-								<a ka="header-job" href="job.jsp">职位</a>
-							</li>
+							<li class=""><a ka="header-home" href="/jsp/index.jsp">首页</a></li>
+							<li class="cur"><a ka="header-job" href="/jsp/job.jsp">职位</a></li>
 							<!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
-							<li class="">
-								<a ka="header-article" href="/article/">校招</a>
-							</li>
+							<li class=""><a ka="header-article" href="">校招</a></li>
 						</ul>
 					</div>
 
@@ -1018,20 +1012,10 @@
 						</dd>
 					</dl>
 				</div>
-				<div class="job-box">
-					<div class="sider">
-						<div class="promotion-img nomargin">
-							<a href="/app.html" target="_blank" ka="ad_banner_1"><img src="/v2/web/geek/images/pro-1.png" alt="" /></a>
-						</div>
-						<div class="promotion-img">
-							<a href="/user/login.html?initType=3" target="_blank" ka="ad_banner_2"><img src="/v2/web/geek/images/pro-2.png" alt="" /></a>
-						</div>
-					</div>
-					<div class="job-list" data-filter="" data-keyword="" data-l3code="" data-rescount="281832" data-page="1" data-source="">
-
+				<div class="job-box" style="width: 100%;">
+					<div class="job-list" style="width: 100%;" data-filter="" data-keyword="" data-l3code="" data-rescount="281832" data-page="1" data-source="">
 						<div class="job-tab">
 						</div>
-
 						<!--有职位 start-->
 						<ul>
 							<li>
@@ -1109,7 +1093,6 @@
 			<div id="footer">
 				<div class="inner">
 					<div class="footer-social">
-
 					</div>
 					<div class="copyright">
 						<div class="footer-logo"></div>

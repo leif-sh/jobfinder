@@ -59,6 +59,7 @@ public class MethodInDaJie {
 
             Requirementinfo requirementinfo = parseJobInDaJie(document);
             requirementinfo.setJobMessageId(UUID.randomUUID().toString());
+            requirementinfo.setCatchJobTime(new Date());
             Company company = parseCompanyInDaJie(document);
 
             SqlSession session = sqlSessionFactory.openSession();
@@ -97,13 +98,29 @@ public class MethodInDaJie {
         int n = 1;
         for (Element item : companyinfos) {
             if (n == 1) {
-                company.setCompanyScale(item.text());
+                try {
+                    company.setCompanyScale(item.text());
+                } catch (Exception e) {
+                    logger.error("未解析到公司规模");
+                }
             } else if (n == 2) {
-                company.setCompanyType(item.text());
+                try {
+                    company.setCompanyType(item.text());
+                } catch (Exception e) {
+                    logger.error("未解析到公司类型");
+                }
             } else if (n == 3) {
-                company.setCompanyProperty(item.text());
+                try {
+                    company.setCompanyProperty(item.text());
+                } catch (Exception e) {
+                    logger.info("未解析到公司属性");
+                }
             } else if (n == 4) {
-                company.setCompanyWebsite(item.select("a").first().text());
+                try {
+                    company.setCompanyWebsite(item.select("a").first().text());
+                } catch (Exception e) {
+                    logger.error("未解析到公司网站");
+                }
             }
             n++;
         }
@@ -149,8 +166,16 @@ public class MethodInDaJie {
                 logger.error("未解析到工资范围");
             }
 
-            jobDescription = item.select("p.multiline").first().text();
-            jobAddress = item.select("p-corp-detail-info dl dd p.oneline").first().text();
+            try {
+                jobDescription = item.select("p.multiline").first().text();
+            } catch (Exception e) {
+                logger.error("未解析到职位描述");
+            }
+            try {
+                jobAddress = item.select("p-corp-detail-info dl dd p.oneline").first().text();
+            } catch (Exception e) {
+                logger.error("未解析到工作地址");
+            }
         }
         jobDescription = jobDescription.replaceAll("<br>", "").replaceAll("\"","");
         jobDateTime = jobDateTime.substring(3);

@@ -18,7 +18,7 @@
     <!--密码登录-->
     <div class="sign-form sign-pwd" style="display:block;">
       <h3 class="title">登录JobFinder</h3>
-      <div class="tip-error">${requestScope.errorMessage}</div>
+      <div class="tip-error">${errormessage}</div>
       <div class="sign-tab">
       	<span class="link-signin cur"style="margin-left:120px;border: none;">密码登录</span>
       </div>

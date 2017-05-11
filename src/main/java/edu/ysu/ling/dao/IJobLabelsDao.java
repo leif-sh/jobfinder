@@ -32,4 +32,10 @@ public interface IJobLabelsDao {
      * @return
      */
     public abstract List<String> selectJobIdByJobLabels(Map params);
+
+    /**
+     * 通过职位id查找标签
+     * @return
+     */
+    public abstract List<String> selectJobLabelsByJobMessageId(String jobMessageId);
 }

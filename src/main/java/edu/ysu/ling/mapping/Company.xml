@@ -6,8 +6,16 @@
 <mapper namespace="edu.ysu.ling.dao.ICompanyDao">
     <insert id="catchCompanyinfos" parameterType="edu.ysu.ling.pojo.Company">
         INSERT INTO company
-        (companyId,companyName.companyType,companyScale,companyPosition,companyIntroduction)
+        (companyId,companyName,companyType,companyScale,companyPosition,companyIntroduction,companyProperty,companyWebsite)
         VALUES
-        (#{companyId},#{companyName},#{companyType},#{companyScale},#{companyPosition},#{companyIntroduction}
+        (#{companyId},#{companyName},#{companyType},#{companyScale},#{companyPosition},#{companyIntroduction},#{companyProperty},#{companyWebsite})
     </insert>
+
+    <select id="selectCompanyByName" parameterType="edu.ysu.ling.pojo.Company" resultType="edu.ysu.ling.pojo.Company">
+        SELECT * FROM company WHERE companyName = #{companyName}
+    </select>
+
+    <select id="selectCompanyById" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Company">
+        SELECT * FROM company WHERE companyId = #{companyId}
+    </select>
 </mapper>

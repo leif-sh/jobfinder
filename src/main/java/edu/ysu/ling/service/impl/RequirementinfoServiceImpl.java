@@ -30,13 +30,11 @@ public class RequirementinfoServiceImpl implements IRequirementinfoService {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
-
             if (!params.isEmpty()) {
                 List list = jobLabelsDao.selectJobIdByJobLabels(params);
             }else {
                 requirementinfoList = requirementinfoDao.selectRequirementinfos(params);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }finally {

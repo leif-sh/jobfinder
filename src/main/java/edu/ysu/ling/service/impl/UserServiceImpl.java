@@ -51,9 +51,13 @@ public class UserServiceImpl implements IUserService {
     public boolean loginVerify(User user) {
         SqlSession session = sqlSessionFactory.openSession();
         userDao = session.getMapper(IUserDao.class);
-        User user1 = userDao.selectUserByAccount(user.getAccount());
-        if (user.getPassword().equals(user1.getPassword())) {
-            return true;
+        try {
+            User user1 = userDao.selectUserByAccount(user.getAccount());
+            if (user.getPassword().equals(user1.getPassword())) {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
         }
         return false;
     }

@@ -1,52 +1,45 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="standard">
-
 	<head>
 		<meta charset="utf-8">
-		<title>【测试经理招聘】京东金融测试经理招聘-BOSS直聘</title>
-		<meta name="keywords" content="测试经理,测试经理招聘,京东金融测试经理招聘" />
-		<meta name="description" content="京东金融招聘测试经理牛人,更多京东金融测试经理招聘信息,请登录BOSS直聘查看详细的京东金融对测试经理岗位牛人的岗位职责要求、工作内容说明、薪资待遇介绍等招聘信息。" />
+		<title>【${Requirementinfo.jobName}】-JobFinder</title>
+		<meta name="keywords" content="JobFinder" />
+		<meta name="description" content="JobFinder，互联网时代的领跑者！" />
 		<link href="../css/main.css" type="text/css" rel="stylesheet">
 	</head>
-
 	<body class="page-white">
 		<div id="wrap">
-			<script>
-			</script>
-
 			<div id="header">
 				<div class="inner">
-					<h1 class="logo"><a href="/" ka="header-home-logo" title="JobFinder"><span>JobFinder</span></a></h1>
+					<h1 class="logo"><a href="/jsp/index.jsp" ka="header-home-logo" title="JobFinder"><span>JobFinder</span></a></h1>
 					<div class="nav">
 						<ul>
-							<li class="cur">
-								<a ka="header-home" href="/">首页</a>
-							</li>
-							<li class="">
-								<a ka="header-job" href="/job_detail/">职位</a>
-							</li>
+							<li class=""><a ka="header-home" href="/jsp/index.jsp">首页</a></li>
+							<li class=""><a ka="header-job" href="/jsp/job.jsp">职位</a></li>
 							<!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
-							<li class="">
-								<a ka="header-article" href="/article/">校招</a>
-							</li>
+							<li class=""><a ka="header-article" href="">校招</a></li>
 						</ul>
 					</div>
-
 					<div class="user-nav">
-						<!--未登录-->
-						<div class="btns">
-							<a href="/user/signup.html" ka="header-register" class="btn btn-outline">注册</a>
-							<a href="/user/login.html" ka="header-login" class="btn btn-outline">登录</a>
-						</div>
-						<!--登录-->
-						<!--<ul>
-                <li class=""><a ka="header-chat" href="/gchat/chat.html" >聊天<span class="nav-chat-num"></span></a></li>
-                <li class=""><a ka="header-delivery-box" href="/geek/deliver.html" >投递箱</a></li>
-                <li class="cur"><a ka="header-my-resume" href="/geek/myresume.html" >我的简历</a></li>
-                <li class="nav-figure"><a href="/geek/myresume.html" ka="header-username" ><span class="label-text">李铁</span> <img src="" alt="" /></a><div class="dropdown"><a href="/logout/" ka="header-logout">退出</a></div></li>
-            </ul>-->
+						<c:if test="${!empty sessionScope.userinfo}">
+							<!--登录-->
+							<ul>
+								<li class="cur"><a ka="header-chat" href="/jsp/chat.jsp" >聊天<span class="nav-chat-num">3</span></a></li>
+								<li class=""><a ka="header-delivery-box" href="/jsp/collect.jsp" >收藏</a></li>
+								<li class=""><a ka="header-my-resume" href="/jsp/resume.jsp" >我的简历</a></li>
+								<li class="nav-figure"><a href="resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
+							</ul>
+						</c:if>
+						<c:if test="${empty sessionScope.userinfo}">
+							<!--未登录-->
+							<div class="btns">
+								<a href="/jsp/login.jsp" ka="header-register" class="btn btn-outline">注册</a>
+								<a href="/jsp/login.jsp" ka="header-login" class="btn btn-outline">登录</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -56,27 +49,23 @@
 						<div class="job-primary">
 							<div class="info-primary">
 								<div class="job-author"><span class="time">发布于20:09</span></div>
-								<div class="name">测试经理 <span class="badge">30K-50K</span></div>
-								<p>北京<em class="vline"></em>5-10年<em class="vline"></em>本科</p>
-
+								<div class="name">${Requirementinfo.jobName} <span class="badge">${Requirementinfo.salary}</span></div>
+								<p>${Requirementinfo.jobCity}<em class="vline"></em>${Requirementinfo.jobExperience}<em class="vline"></em>${Requirementinfo.educationLevel}</p>
 								<div class="job-tags">
-
-									<span>高级技术管理</span>
-
-									<span>测试管理</span>
-
-									<span>技术管理</span>
-
+									<c:if test="${empty jobLabelsList}">
+										<c:forEach items="${jobLabelsList}" var="label">
+											<span>${label}</span>
+										</c:forEach>
+									</c:if>
 								</div>
-
 							</div>
 							<div class="info-comapny">
 								<div class="company-logo">
-									<a ka="job-detail-company" href="/gongsi/r4309.html" target="_blank"><img src="https://img.bosszhipin.com/beijin/mcs/bar/brand/4309.jpg" alt="" /></a>
+									<a ka="job-detail-company" href="/jsp/companydetail.jsp" target="_blank"><img src="https://img.bosszhipin.com/beijin/mcs/bar/brand/4309.jpg" alt="" /></a>
 								</div>
-								<h3 class="name"><a ka="job-detail-company" href="/gongsi/r4309.html" target="_blank">京东金融</a></h3>
-								<p>网银在线（北京）科技有限公司</p>
-								<p>互联网<em class="vline"></em>不需要融资<em class="vline"></em>1000-9999人</p>
+								<h3 class="name"><a ka="job-detail-company" href="/jsp/companydetail.jsp" target="_blank">${company.companyName}</a></h3>
+								<p>${company.companyName}</p>
+								<p>${company.companyType}<em class="vline"></em>${company.companyProperty}<em class="vline"></em>${company.companyScale}</p>
 							</div>
 						</div>
 					</div>
@@ -88,7 +77,7 @@
 								<a ka="go_greet_tosign_11150463" href="javascript:;" data-url="/gchat/addRelation.json?jobId=3212c9296c83faf81nV73t25FlE~" redirect-url="/gchat/im.html?bossId=387368168f89c3d71XJz2dq4FVc~" target="_blank" class="btn btn-startchat">立即沟通</a>
 							</div>
 						</div>
-						<div class="name">测试经理 <span class="badge">30K-50K</span></div>
+						<div class="name">${Requirementinfo.jobName} <span class="badge">${Requirementinfo.salary}</span></div>
 					</div>
 				</div>
 				<div class="job-box">
@@ -157,32 +146,30 @@
 
 							</div>
 
-							<div class="promotion-img">
-								<a href="/app.html" ka="job-detail-app" target="_blank"><img src="/v2/web/geek/images/pro-1.png" alt=""></a>
-							</div>
+
 						</div>
 						<div class="job-detail">
 							<div class="detail-figure"><img src="https://img2.bosszhipin.com/boss/avatar/avatar_2.png" alt="" /></div>
 							<div class="detail-op">
 								<div class="btns">
-									<a ka="go_greet_tosign_11150463" href="javascript:;" data-url="/gchat/addRelation.json?jobId=3212c9296c83faf81nV73t25FlE~" redirect-url="/gchat/im.html?bossId=387368168f89c3d71XJz2dq4FVc~" target="_blank" class="btn btn-startchat">立即沟通</a>
+									<a ka="go_greet_tosign_11150463" href="javascript:;"  redirect-url="" target="_blank" class="btn btn-startchat">立即沟通</a><a>收藏</a>
 								</div>
 								<h2 class="name">武金萍</h2>
-								<p class="gray">测试工程师<em class="vdot">·</em>刚刚在线</p>
+								<p class="gray">测试工程师</p>
 							</div>
 							<div class="detail-content">
 
 								<div class="job-sec">
 									<h3>职位描述</h3>
 									<div class="text">
-										1、负责带领测试团队完成移动产品的测试工作；<br/>2、制定测试计划，测试方案，完成测试用例的编写及评审；<br/>3、积极配合开发重现测试中出现的bug，提高产品质量；<br/>4、制定移动端产品质量监控体系，保证线上质量。<br/>5、完善移动端自动化及性能测试体系。<br/><br/>任职资格:<br/>1、5年以上移动领域测试管理经验，工作认真，有责任心；<br/>2、熟悉IOS、Android 、server、h5等平台的测试方法；<br/>3、有独立编写完整的移动产品测试计划和case的经验；<br/>4、熟练使用移动端测试常用工具并能对团队成员及时培训指导；<br/>5、良好的发现问题，分析问题能力；<br/>6、要有良好的沟通能力与协调能力，较好的工作激情；<br/>7、有组建Android / iOS 自动化或性能测试团队，设计移动端自动化或性能测试框架经验者优先；<br/>8、有组建移动端研发质量监控体系经验者优先；<br/><br/>简历投递：wujinping@jd.com
+										${Requirementinfo.jobDescription}
 									</div>
 								</div>
 
 								<div class="job-sec">
 									<h3>工作地址</h3>
 									<div class="job-location">
-										<div class="location-address">北京大兴区京东大厦</div>
+										<div class="location-address">${Requirementinfo.jobAddress}</div>
 										<div id="map-container" class="map-container" data-long-lat="116.563,39.78665"></div>
 									</div>
 								</div>
@@ -1142,8 +1129,8 @@
 			</div>
 
 		</div>
-		<script src="js/jquery-1.12.2.min.js"></script>
-		<script src="js/main.js"></script>
+		<script src="/js/jquery-1.12.2.min.js"></script>
+		<script src="/js/main.js"></script>
 
 		<script src="https://webapi.amap.com/maps?v=1.3&key=60085a6ee91616cf689ce0321e1f30c4&plugin=AMap.Geocoder"></script>
 		<script>
@@ -1184,8 +1171,6 @@
 				})
 			})
 		</script>
-
 	</body>
 	<input type="hidden" id="page_key_name" value="cpc_job_detail" />
-
 </html>

@@ -16,7 +16,7 @@ public class DaJieController {
     public static void main(String[] args) throws Exception {
 
         String crawlStorageFolder = "./tmp/dajie";
-        int numberOfCrawlers = 3;//设置爬虫的数量
+        int numberOfCrawlers = 1;//设置爬虫的数量
         CrawlConfig config = new CrawlConfig();
 
         config.setCrawlStorageFolder(crawlStorageFolder);
@@ -26,14 +26,22 @@ public class DaJieController {
         config.setIncludeBinaryContentInCrawling(false);//是否爬取二进制数据like pdf images
         config.setResumableCrawling(false);
 
-
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
         controller.addSeed("https://so.dajie.com/job/search?keyword=java&from=job&clicktype=blank");
-        //controller.addSeed("https://job.dajie.com/job/intern");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120201&positionName=Java&from=job");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120202&positionName=Python");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120102&positionName=Javascript");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120103&positionName=HTML5");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120203&positionName=PHP");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120208&positionName=Perl");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120210&positionName=Node.js");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120301&positionName=Android");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120302&positionName=IOS");
+        controller.addSeed("https://so.dajie.com/job/search?positionFunction=120304&positionName=COCOS2DX");
         controller.addSeed("https://so.dajie.com/job/search?positionFunction=120201&positionName=Java&from=job");
         controller.start(Crawler.class, numberOfCrawlers);
     }
