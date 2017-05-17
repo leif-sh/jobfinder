@@ -18,4 +18,28 @@
     <select id="selectCompanyById" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Company">
         SELECT * FROM company WHERE companyId = #{companyId}
     </select>
+
+    <select id="batchSelectCompanyById" parameterType="java.util.List" resultType="edu.ysu.ling.pojo.Company">
+        SELECT *
+        FROM company
+        WHERE
+        companyId IN
+            <foreach collection="list" index="index" item="item" separator="," open="(" close=")" >
+                #{item}
+            </foreach>
+            ORDER BY field (companyId,
+            <foreach collection="list" index="index" item="item" separator=",">
+                #{item}
+            </foreach>
+            )
+    </select>
+
+    <select id="selectNumInList" parameterType="java.util.List" resultType="int">
+        SELECT COUNT (*)
+        FROM company
+        WHERE companyId IN
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")" >
+            #{item}
+        </foreach>
+    </select>
 </mapper>

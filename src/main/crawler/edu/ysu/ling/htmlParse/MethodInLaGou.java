@@ -3,26 +3,16 @@ package edu.ysu.ling.htmlParse;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
-import edu.ysu.ling.dao.ICompanyDao;
-import edu.ysu.ling.dao.IJobLabelsDao;
-import edu.ysu.ling.dao.IRequirementinfoDao;
 import edu.ysu.ling.pojo.Company;
-import edu.ysu.ling.pojo.Joblabels;
 import edu.ysu.ling.pojo.Requirementinfo;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import edu.ysu.ling.util.DaoUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.io.Reader;
 import java.util.*;
 
 /**
@@ -31,16 +21,6 @@ import java.util.*;
 
 public class MethodInLaGou {
     private static Logger logger = LoggerFactory.getLogger(MethodInLaGou.class);
-    private static SqlSessionFactory sqlSessionFactory;
-    private static Reader reader;
-    static{
-        try{
-            reader  = Resources.getResourceAsReader("sqlMapConfig.xml");
-            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 
     public static void parseLaGou(Page page, int docid, String url){
         String anchor = page.getWebURL().getAnchor();
@@ -54,6 +34,7 @@ public class MethodInLaGou {
             /*解析html*/
             Document document = Jsoup.parse(html);
             List<String> joblabelsList = new ArrayList<>();
+
             Requirementinfo requirementinfo = parseJobInLaGou(document,joblabelsList);
             String jobMessageId = UUID.randomUUID().toString();
             requirementinfo.setJobMessageId(jobMessageId);
@@ -64,40 +45,7 @@ public class MethodInLaGou {
             //logger.info(requirementinfo.toString());
             //logger.info(company.toString());
 
-            SqlSession session = sqlSessionFactory.openSession();
-            try {
-                ICompanyDao companyDao = session.getMapper(ICompanyDao.class);
-                Company company1 = companyDao.selectCompanyByName(company);
-                if (company1 != null) {
-                    requirementinfo.setCompanyId(company1.getCompanyId());
-                    requirementinfo.setSourceCompanyName(company1.getCompanyName());
-                } else {
-                    company.setCompanyId(UUID.randomUUID().toString());
-                    companyDao.catchCompanyinfos(company);
-                    requirementinfo.setSourceCompanyName(company.getCompanyName());
-                    requirementinfo.setCompanyId(company.getCompanyId());
-                }
-
-                IRequirementinfoDao requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
-                requirementinfoDao.catchRequirementinfo(requirementinfo);
-
-                IJobLabelsDao jobLabelsDao = session.getMapper(IJobLabelsDao.class);
-                for (int n = 0; n < joblabelsList.size(); n++) {
-                    Joblabels joblabels = new Joblabels();
-                    joblabels.setJobMessageId(requirementinfo.getJobMessageId());
-                    joblabels.setLabels(joblabelsList.get(n));
-                    joblabels.setLabelId(UUID.randomUUID().toString());
-                    jobLabelsDao.catchJobLabels(joblabels);
-                }
-
-                session.commit();
-                logger.info("添加一条数据成功！！！");
-            } catch (Exception e) {
-                logger.error("插入数据失败");
-                e.printStackTrace();
-            } finally {
-                session.close();
-            }
+            DaoUtil.catchJobAndCompany(requirementinfo,company,joblabelsList);
         }
         logger.info("===================");
     }
@@ -174,7 +122,7 @@ public class MethodInLaGou {
                 StringBuilder jobDescription = new StringBuilder();
                 Elements elements3 = item.select(".job_bt div p");
                 for (Element element : elements3) {
-                    jobDescription.append(element.text());
+                    jobDescription.append(element.text() + "<br/>");
                 }
                 requirementinfo.setJobDescription(jobDescription.toString());
             } catch (Exception e) {
@@ -259,12 +207,6 @@ public class MethodInLaGou {
         }
         return company;
     }
-    public static SqlSessionFactory getSqlSessionFactory() {
-        return sqlSessionFactory;
-    }
 
-    public static void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-        MethodInLaGou.sqlSessionFactory = sqlSessionFactory;
-    }
 
 }

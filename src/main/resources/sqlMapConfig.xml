@@ -9,10 +9,13 @@
         <!--properties中还可以配置一些属性名和属性值  -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="username" value="root"/>
-        <property name="password" value="123"/>
+        <property name="password" value="1234"/>
         <property name="url" value="jdbc:mysql://localhost:3306/jobfinder"/>
     </properties>
     <!-- 全局配置参数，需要时再设置 -->
+    <settings>
+        <setting name="logImpl" value="LOG4J" />
+    </settings>
     <!-- <settings>
 
     </settings> -->
@@ -25,11 +28,28 @@
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
+            <dataSource type="pooled"><!--edu.ysu.ling.util.C3P0DataSourceFactory-->
                 <property name="driver" value="${driverClassName}"/>
                 <property name="url" value="${url}" />
                 <property name="username" value="${username}"/>
                 <property name="password" value="${password}"/>
+                <!-- 连接池初始化大小为3 -->
+                <!--<property name="initialPoolSize" value="5"/>
+                &lt;!&ndash; 连接池最大为10 &ndash;&gt;
+                <property name="maxPoolSize" value="20"/>
+                &lt;!&ndash; 连接池最小为3 &ndash;&gt;
+                <property name="minPoolSize" value="5"/>
+                &lt;!&ndash; 连接池在无空闲连接可用时一次性最多创建的新数据库连接数  &ndash;&gt;
+                <property name="acquireIncrement" value="5"/>
+                &lt;!&ndash; 连接的最大空闲时间，如果超过这个时间（秒），某个数据库连接还没有被使用，则会断开掉这个连接。如果为0，则永远不会断开连接,即回收此连接 &ndash;&gt;
+                <property name="maxIdleTime" value="30"/>
+
+                &lt;!&ndash; 最大的Statement数量 &ndash;&gt;
+                <property name="maxStatements" value="500"/>
+                &lt;!&ndash; 每个连接启动的最大Statement数量 &ndash;&gt;
+                <property name="maxStatementsPerConnection" value="50"/>
+                &lt;!&ndash; 同时运行的线程数 &ndash;&gt;
+                <property name="numHelperThreads" value="5"/>-->
             </dataSource>
         </environment>
     </environments>

@@ -2,10 +2,7 @@ package edu.ysu.ling.dao;/**
  * Created by 10047 on 2017/4/24.
  */
 
-import edu.ysu.ling.pojo.Businessuser;
 import edu.ysu.ling.pojo.Chatmessage;
-import edu.ysu.ling.pojo.User;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +28,7 @@ public interface IChatmessageDao {
     public List<String> getChatBusinessusers(Map params);
 
     /**
-     * 增加聊天
+     * 增加聊天信息
      * @param chatmessage
      */
     public void insertChatmessage(Chatmessage chatmessage);

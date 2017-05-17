@@ -22,7 +22,20 @@
         (#{labelId},#{labels},#{jobMessageId})
     </insert>
 
-    <select id="selectJobLabelsByJobMessageId" parameterType="java.lang.String" resultType="java.lang.String">
+    <insert id="batchCatchJobLabels" parameterType="java.util.List" >
+        INSERT INTO joblabels
+        (labelId,labels,jobMessageId)
+        VALUES
+        <foreach collection="jobLabelsList" item="item" separator="," index="index">
+            (#{item.labelId},#{item.labels},#{item.jobMessageId})
+        </foreach>
+    </insert>
+
+    <select id="selectLabelsByJobMessageId" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT labels FROM joblabels WHERE jobMessageId = #{jobMessageId}
+    </select>
+
+    <select id="selectJobLabelsByJobMessageId" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Joblabels">
+        SELECT * FROM joblabels WHERE jobMessageId = #{jobMessageId}
     </select>
 </mapper>

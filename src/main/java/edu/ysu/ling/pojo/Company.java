@@ -9,10 +9,10 @@ public class Company {
     private String companyId;//公司编号
     private String companyName;//公司名称
     private String companyType;//公司类型 电子商务 互联网
-    private String companyScale;//公司规模
+    private String companyScale;//公司规模 0-20
     private String companyPosition;//公司位置
     private String companyIntroduction;
-    private String companyProperty;//公司
+    private String companyProperty;//公司性质 第几轮融资
     private String companyWebsite;//公司网站
 
     public String getCompanyId() {

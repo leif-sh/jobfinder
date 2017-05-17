@@ -18,11 +18,43 @@
 
     <insert id="catchRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
         INSERT INTO requirementinfo
-        (jobMessageId,jobName,salary,salaryTop,salaryBottom,educationLevel,jobDateTime,teamDescription,publishResource,jobRequest,jobQualification,jobClass,jobAdvantage,jobDescription,jobAddress,jobCity,catchJobTime)
+        (jobExperienceTop,jobExperienceBottom,jobExperience,jobUrl,sourceCompanyName,companyId,jobMessageId,jobName,salary,salaryTop,salaryBottom,educationLevel,jobDateTime,teamDescription,publishResource,jobRequest,jobQualification,jobClass,jobAdvantage,jobDescription,jobAddress,jobCity,catchJobTime)
         VALUES
-        (#{jobMessageId},#{jobName},#{salary},#{salaryTop},#{salaryBottom},#{educationLevel},#{jobDateTime},#{teamDescription},#{publishResource},#{jobRequest},#{jobQualification},#{jobClass},#{jobAdvantage},#{jobDescription},#{jobAddress},#{jobCity},#{catchJobTime})
+        (#{jobExperienceTop},#{jobExperienceBottom},#{jobExperience},#{jobUrl},#{sourceCompanyName},#{companyId},#{jobMessageId},#{jobName},#{salary},#{salaryTop},#{salaryBottom},#{educationLevel},#{jobDateTime},#{teamDescription},#{publishResource},#{jobRequest},#{jobQualification},#{jobClass},#{jobAdvantage},#{jobDescription},#{jobAddress},#{jobCity},#{catchJobTime})
     </insert>
     <select id="selectRequirementinfos" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Requirementinfo" >
-        SELECT * FROM requirementinfo limit 0,10
+        SELECT * FROM requirementinfo WHERE companyId IS NOT NULL ORDER BY catchJobTime DESC limit 0,20
+    </select>
+
+    <!--条件：标签 城市 学历 工作经验 规模 行业 薪资-->
+    <select id="selectRequirementinfoInSearch" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Requirementinfo">
+        SELECT requirement.jobMessageId,requirement.jobName,requirement.salary,requirement.sourceCompanyName,requirement.educationLevel,requirement.companyId,requirement.jobCity,requirement.jobExperience,requirement.catchJobTime
+        FROM requirementinfo requirement LEFT JOIN joblabels job
+        ON job.jobMessageId = requirement.jobMessageId
+        <where>
+            <if test="companyType != null">
+                #{companyType}
+            </if>
+            <if test="companyScale != null">
+                #{companyScale}
+            </if>
+            <if test="jobExperience != null">
+                #{jobExperience}
+            </if>
+            <if test="educationLevel != null">
+                #{educationLevel}
+            </if>
+            <if test="salary != null">
+                #{salary}
+            </if>
+            <if test="city != null">
+                AND requirement.jobCity = #{city}
+            </if>
+            <if test="labels != null">
+               AND LOWER(job.labels) LIKE CONCAT('%',LOWER(#{labels}),'%')
+            </if>
+
+        </where>
+        LIMIT #{page.thispage},#{page.pagesize}
     </select>
 </mapper>

@@ -1,6 +1,7 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html class="standard">
 	<head>
@@ -48,7 +49,7 @@
 					<div class="inner">
 						<div class="job-primary">
 							<div class="info-primary">
-								<div class="job-author"><span class="time">发布于20:09</span></div>
+								<div class="job-author"><span class="time">发布于&nbsp;<fmt:formatDate value="${Requirementinfo.catchJobTime}" pattern="yyyy年MM月dd日 HH:mm:ss"/> </span></div>
 								<div class="name">${Requirementinfo.jobName} <span class="badge">${Requirementinfo.salary}</span></div>
 								<p>${Requirementinfo.jobCity}<em class="vline"></em>${Requirementinfo.jobExperience}<em class="vline"></em>${Requirementinfo.educationLevel}</p>
 								<div class="job-tags">
@@ -170,7 +171,7 @@
 									<h3>工作地址</h3>
 									<div class="job-location">
 										<div class="location-address">${Requirementinfo.jobAddress}</div>
-										<div id="map-container" class="map-container" data-long-lat="116.563,39.78665"></div>
+										<div id="container" class="map-container" ></div>
 									</div>
 								</div>
 								<div class="search-box detail-search">
@@ -1132,44 +1133,29 @@
 		<script src="/js/jquery-1.12.2.min.js"></script>
 		<script src="/js/main.js"></script>
 
-		<script src="https://webapi.amap.com/maps?v=1.3&key=60085a6ee91616cf689ce0321e1f30c4&plugin=AMap.Geocoder"></script>
-		<script>
-			$(function() {
-				/*高德地图API在IE7下不支持异步加载*/
-				$('.map-container').each(function() {
-					var id = $(this).attr('id'),
-						lat = $(this).attr('data-long-lat').split(',');
-					var map = new AMap.Map(id, {
-						resizeEnable: true,
-						scrollWheel: false,
-						center: [lat[0], lat[1]],
-						zoom: 15
-					});
-					var clickEventListener = map.on('click', function() {
-						map.setStatus({
-							scrollWheel: true
-						});
-					});
-					var mouseOutEventListener = map.on('mouseout', function() {
-						map.setStatus({
-							scrollWheel: false
-						});
-					});
-					new AMap.Marker({
-						map: map,
-						position: [lat[0], lat[1]],
-						icon: new AMap.Icon({
-							size: new AMap.Size(42, 50),
-							image: "/v2/web/geek/images/icon-poi.png",
-							imageOffset: new AMap.Pixel(0, -60)
-						})
-					});
-				})
-				$('.location-item').on('click', function() {
-					$(this).parent().find('.location-item').removeClass('show-map');
-					$(this).addClass('show-map');
-				})
-			})
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=e7b1cd31a6ccc8fb822b078d365b4944&plugin=AMap.Geocoder"></script>
+		<script type="text/javascript">
+            var geocoder = new AMap.Geocoder({
+                //city: "010"//城市，默认：“全国”
+            });
+            /*成都 - 高新区 - 玉林 - 泰然坏球时代中心 3栋 1616号*/
+            geocoder.getLocation('${Requirementinfo.jobAddress}',function(status,result){
+                if(status=='complete'&&result.geocodes.length){
+                    var map = new AMap.Map('container',{
+                        resizeEnable: true,
+                        zoom: 13,
+                        center: result.geocodes[0].location
+                    });
+                    new AMap.Marker({
+                        map:map,
+                        bubble:true
+                    })
+                }else{
+                    var container = document.getElementById('container');
+                    container.html('显示位置失败');
+                    console.log('获取位置失败');
+                }
+            })
 		</script>
 	</body>
 	<input type="hidden" id="page_key_name" value="cpc_job_detail" />

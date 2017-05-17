@@ -6,8 +6,6 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 import edu.ysu.ling.crawler.Crawler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by ling on 2017/4/25.
@@ -16,7 +14,7 @@ public class DaJieController {
     public static void main(String[] args) throws Exception {
 
         String crawlStorageFolder = "./tmp/dajie";
-        int numberOfCrawlers = 1;//设置爬虫的数量
+        int numberOfCrawlers = 5;//设置爬虫的数量
         CrawlConfig config = new CrawlConfig();
 
         config.setCrawlStorageFolder(crawlStorageFolder);

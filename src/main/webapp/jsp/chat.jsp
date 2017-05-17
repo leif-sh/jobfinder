@@ -19,6 +19,7 @@
 </head>
 
 <body>
+
 <div id="wrap">
     <div id="header">
         <div class="inner">
@@ -26,7 +27,7 @@
             <div class="nav">
                 <ul>
                     <li class=""><a ka="header-home" href="/jsp/index.jsp">首页</a></li>
-                    <li class=""><a ka="header-job" href="/jsp/job.jsp">职位</a></li>
+                    <li class=""><a ka="header-job" href="/search/searchJob.do">职位</a></li>
                    <%-- <li class=""><a ka="header-app" href="/app.html">APP</a></li>--%>
                     <li class=""><a ka="header-article" href="">校招</a></li>
                 </ul>

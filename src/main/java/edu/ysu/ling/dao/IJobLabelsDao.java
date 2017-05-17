@@ -27,6 +27,12 @@ public interface IJobLabelsDao {
     public abstract void catchJobLabels(Joblabels joblabels);
 
     /**
+     * 批量抓取职位标签
+     * @param joblabelsList
+     */
+    public abstract void batchCatchJobLabels(List<Joblabels> joblabelsList);
+
+    /**
      * 通过标签查找相应的工作ID
      * @param params
      * @return
@@ -37,5 +43,12 @@ public interface IJobLabelsDao {
      * 通过职位id查找标签
      * @return
      */
-    public abstract List<String> selectJobLabelsByJobMessageId(String jobMessageId);
+    public abstract List<String> selectLabelsByJobMessageId(String jobMessageId);
+
+    /**
+     * 通过职位id查找标签
+     * @param jobMessageId
+     * @return
+     */
+    public abstract List<Joblabels> selectJobLabelsByJobMessageId(String jobMessageId);
 }

@@ -26,6 +26,10 @@ public class CompanyServiceImpl implements ICompanyService {
         try {
             companyDao = sqlSession.getMapper(ICompanyDao.class);
             company = companyDao.selectCompanyById(companyId);
+            company.setCompanyWebsite(company.getCompanyWebsite().replace("公司主页","").trim());
+            company.setCompanyName(company.getCompanyName().replace("拉勾未认证企业","").trim());
+            company.setCompanyScale(company.getCompanyScale().replace("规模","").trim());
+            company.setCompanyProperty(company.getCompanyProperty().replace("发展阶段","").trim());
         } catch (Exception e) {
             e.printStackTrace();
         }finally {

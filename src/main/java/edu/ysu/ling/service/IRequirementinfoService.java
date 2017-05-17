@@ -21,7 +21,18 @@ public interface IRequirementinfoService {
      */
     public abstract List<Requirementinfo> getJobs(Map params);
 
+    /**
+     * 通过id获取职位
+     * @param jobMessageId
+     * @return
+     */
     public abstract Requirementinfo getJobById(String jobMessageId);
 
+    /**
+     * 添加职位
+     * @param requirementinfo
+     */
     public abstract void addJob(Requirementinfo requirementinfo);
+
+
 }

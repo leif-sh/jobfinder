@@ -24,7 +24,7 @@ public class JobLabelsServiceImpl implements IJobLabelsService {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             jobLabelsDao = sqlSession.getMapper(IJobLabelsDao.class);
-            list = jobLabelsDao.selectJobLabelsByJobMessageId(id);
+            list = jobLabelsDao.selectLabelsByJobMessageId(id);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {

@@ -1,6 +1,7 @@
 package edu.ysu.ling.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 10047 on 2017/4/22.
@@ -12,27 +13,35 @@ public class Requirementinfo {
     private String sourceCompanyName;//公司名称
     private String salary;//工资范围
     private String publishResource;//信息来源
+
     private String jobLabels;//工作标签 包括Java c++等等
     private String jobClass;//工作类型 全职 兼职
     private int    salaryTop;//工资上限
     private int    salaryBottom;//工资下限
     private String jobRequest;//实际工作需要掌握的技能标签
+
     private String jobAdvantage;//职位诱惑
     private String jobQualification;//任职资格
     private String jobDescription;//职位描述
     private String jobAddress;//工作地址
     private String jobCity;//工作城市
-    private String jobExperience;//工作经验
+
+    private String jobExperience;//工作经验   无经验 1年以下
     private int    jobExperienceTop;//工作经验上限
     private int    JobExperienceBottom;//工作经验下限
     private String educationLevel;//学历
     private Date jobDateTime;//职位信息更新日期时间
+
     private String teamDescription;//团队描述
     private String companyId;//公司编号
     private long campusRequirementId;//校招编号
     private int businessUserId;//企业用户Id
     private String jobUrl;
+
     private Date catchJobTime;//抓取时间
+    private Company company;
+    private List<Joblabels> joblabelsList;
+    private Businessuser businessuser;
 
     public String getJobMessageId() {
         return jobMessageId;
@@ -240,6 +249,30 @@ public class Requirementinfo {
 
     public void setCatchJobTime(Date catchJobTime) {
         this.catchJobTime = catchJobTime;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public List<Joblabels> getJoblabelsList() {
+        return joblabelsList;
+    }
+
+    public void setJoblabelsList(List<Joblabels> joblabelsList) {
+        this.joblabelsList = joblabelsList;
+    }
+
+    public Businessuser getBusinessuser() {
+        return businessuser;
+    }
+
+    public void setBusinessuser(Businessuser businessuser) {
+        this.businessuser = businessuser;
     }
 
     @Override
