@@ -37,7 +37,7 @@
                         <li class="cur"><a ka="header-chat" href="/jsp/chat.jsp" >聊天<span class="nav-chat-num">3</span></a></li>
                         <li class=""><a ka="header-delivery-box" href="/jsp/collect.jsp" >收藏</a></li>
                         <li class=""><a ka="header-my-resume" href="/jsp/resume.jsp" >我的简历</a></li>
-                        <li class="nav-figure"><a href="resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
+                        <li class="nav-figure"><a href="resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/user/logout.do" ka="header-logout">退出</a></div></li>
                     </ul>
                 </c:if>
                 <c:if test="${empty sessionScope.userinfo}">

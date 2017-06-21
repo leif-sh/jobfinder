@@ -1,0 +1,14 @@
+$(document).ready(function(){
+	$("#chatContainer").click(function(){
+		$(".chat-box").addClass('show-box');
+		$(".resume-container").removeClass('show-box');
+		$("#chatContainer").addClass('cur');
+		$("#resumeContainer").removeClass('cur');
+	});
+	$("#resumeContainer").click(function(){
+		$(".chat-box").removeClass('show-box');
+		$(".resume-container").addClass('show-box');
+		$("#chatContainer").removeClass('cur');
+		$("#resumeContainer").addClass('cur');
+	});
+})

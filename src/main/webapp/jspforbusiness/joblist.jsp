@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ling
@@ -14,11 +15,16 @@
     <title>JobFinder-职位</title>
     <meta name="keywords" content="JobFinder" />
     <meta name="description" content="JobFinder，互联网时代的领跑者！" />
-    <link rel="stylesheet" type="text/css" href="../cssforbusiness/position.css">
-    <link href="../cssforbusiness/mainforbusiness.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/cssforbusiness/position.css">
+    <link href="/cssforbusiness/mainforbusiness.css" type="text/css" rel="stylesheet">
 
 </head>
-<body  class="candidate">
+<body class="candidate">
+<c:if test="${empty selectStatus}">
+    <script>
+        window.location = "/business/job/getPublishJob.do";
+    </script>
+</c:if>
 <div id="wrapper">
     <div id="main">
         <div id="container">
@@ -27,7 +33,7 @@
                 <div class="sec-top">
                     <div class="pull-right">
                         <div class="sel-release">
-                            <a ka="job-add-job" href="../jspforbusiness/addjob.html" class="btn btn-release">发布职位</a>
+                            <a ka="job-add-job" href="/jspforbusiness/addjob.jsp" class="btn btn-release">发布职位</a>
                         </div>
                         <div class="sel-type">
                             <span class="label-text" ka="main_filter"><b>筛选</b><i class="fz fz-arrow-down"></i></span>
@@ -36,13 +42,6 @@
                     <div class="data-tab">职位管理</div>
                 </div>
                 <div class="sec-filter">
-                    <dl>
-                        <dt>职位类别：</dt>
-                        <dd>
-                            <a ka="job-position0" href="javascript:;" data-type="0" class="cur">全部职位</a>
-
-                        </dd>
-                    </dl>
                     <dl>
                         <dt>职位状态：</dt>
                         <dd>
@@ -53,27 +52,47 @@
                     </dl>
                 </div>
             </div>
-            <div class="data-tips">
+            <div class="data-tips" style="display: none;">
                 <div class="data-blank">
                     <i class="tip-errordata">
-
                     </i>
                     <b>没有相关数据</b>
                 </div>
             </div>
             <!-- 职位列表 -->
             <ul class="position-list">
+                <c:forEach items="${requirementinfoList}" var="job">
+                    <li class="read">
+                        <div class="position-item">
+                            <div class="position-footer">
+                                <div>
+                                    <h3 class="name">${job.jobName} <span class="red">${job.salary}</span></h3>
+                                    <a href="/business/job/closeJob.do?jobMessageId=${job.jobMessageId}" style="float: right;" class="btn btn-continue">关闭</a>
+                                    <a href="/business/job/getJobDetail.do?jobMessageId=${job.jobMessageId}" style="float: right;" class="btn btn-continue">编辑</a>
+                                </div>
+                                <div style="margin-top: 20px;">
+                                    ${job.jobCity}<em class="vline"></em>
+                                    ${job.jobExperience}<em class="vline"></em>
+                                    ${job.educationLevel}<em class="vline"></em>
+                                    不限
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </c:forEach>
             </ul>
+
             <div class="loadmore" data-url="/bossweb/joblist/data.json" style="display: none;">滚动加载更多</div>
         </div>
     </div>
 </div>
 <div class="pop"></div>
-<script src="../js/jquery-1.12.2.min.js" type="text/javascript"></script>
-<script src="../js/position.js" type="text/javascript"></script>
-<script src="../jsforbusiness/indexforbusiness.js"></script>
-<script src="../jsforbusiness/require.js"></script>
+<script src="/js/jquery-1.12.2.min.js" type="text/javascript"></script>
+<script src="/js/position.js" type="text/javascript"></script>
+<script src="/jsforbusiness/indexforbusiness.js"></script>
+<script src="/jsforbusiness/require.js"></script>
 <input type="hidden" id="page_key_name" value="bpc_job_list" />
 </body>
 </html>
+
 

@@ -6,38 +6,61 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html class="standard">
+
 <head>
     <meta charset="utf-8">
     <title>jobFinder-个人简历</title>
     <meta name="keywords" content="JobFinder" />
     <meta name="description" content="JobFinder，互联网时代的领跑者！" />
-    <link href="../css/main.css" type="text/css" rel="stylesheet">
+    <link href="/css/main.css" type="text/css" rel="stylesheet">
+    <link href="/css/ECalendarstyle.css" rel="stylesheet" />
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/Ecalendar.jquery.min.js"></script>
 </head>
+
 <body>
+<c:if test="${empty selectStatus}">
+    <script>
+        window.location = "/user/resume/getResume.do";
+    </script>
+</c:if>
 <div id="wrap">
     <div id="header">
         <div class="inner">
             <h1 class="logo"><a href="/" ka="header-home-logo" title="JobFinder"><span>JobFinder</span></a></h1>
             <div class="nav">
                 <ul>
-                    <li class=""><a ka="header-home" href="/jsp/index.jsp">首页</a></li>
-                    <li class=""><a ka="header-job" href="/jsp/job.jsp">求职</a></li>
-                    <%--<li class=""><a ka="header-app" href="/app.html">APP</a>--%>
-                    </li><li class=""><a ka="header-article" href="">校招</a> </li>
+                    <li class="">
+                        <a ka="header-home" href="/jsp/index.jsp">首页</a>
+                    </li>
+                    <li class="">
+                        <a ka="header-job" href="/jsp/job.jsp">求职</a>
+                    </li>
+                   <%-- <li class="">
+                        <a ka="header-article" href="">校招</a>
+                    </li>--%>
                 </ul>
             </div>
 
             <div class="user-nav">
                 <ul>
-                    <li class=""><a ka="header-chat" href="/jsp/chat.jsp">聊天<span class="nav-chat-num"></span></a> </li>
-                    <li class=""><a ka="header-delivery-box" href="/jsp/collect.jsp">收藏</a></li>
-                    <li class="cur"><a ka="header-my-resume" href="/jsp/resume.jsp">我的简历</a></li>
+                    <li class="">
+                        <a ka="header-chat" href="/jsp/chat.jsp">聊天<span class="nav-chat-num"></span></a>
+                    </li>
+                    <li class="">
+                        <a ka="header-delivery-box" href="/jsp/collect.jsp">收藏</a>
+                    </li>
+                    <li class="cur">
+                        <a ka="header-my-resume" href="/jsp/resume.jsp">我的简历</a>
+                    </li>
                     <li class="nav-figure">
-                        <a href="/geek/myresume.html" ka="header-username"><span class="label-text">${userinfo.userName}</span> <img src="../img/ico-1.jpg" alt="" /></a>
+                        <a href="/geek/myresume.html" ka="header-username"><span class="label-text">${userinfo.userName}</span> <img src="/img/ico-1.jpg" alt="" /></a>
                         <div class="dropdown">
-                            <a href="/User/logout.do" ka="header-logout">退出</a>
+                            <a href="/user/logout.do" ka="header-logout">退出</a>
                         </div>
                     </li>
                 </ul>
@@ -56,50 +79,44 @@
                 <div class="sider-resume">
                     <div class="resume-attachment">
                         <h3 class="title">附件简历</h3>
-
                         <div class="loadresume">
-                            <span class="file-name">李铁.doc</span>
+                            <span class="file-name">1234.doc</span>
                             <div class="upload-op">
-                                <i class="change">更改</i>
+                                <i class="change" style="cursor: pointer">更改</i>
                                 <a class="btn-upload-file"><input id="fileupload" type="file" name="file" ka="user-resume-change" /></a>
                             </div>
                             <i class="fz-resume fz-close" ka="user-resume-delete"></i>
                         </div>
-
                     </div>
-                    <!--<div class="tit">简历完成度<span class="progress-score">80%</span></div>
-            <div class="progress"><p></p></div>-->
+
                     <div class="resume-nav">
                         <ul>
                             <li><i class="fz-resume fz-info"></i><span>个人信息</span>
-                                <a data-url="/geek/user/info.json" href="javascript:;" ka="user-resume-edit-userinfo-r" data-target="resume-userinfo" class="link-edit">编辑</a>
+                                <a id="nav--summary" class="link-edit">编辑</a>
                             </li>
-                            <!-- <li><i class="fz-resume fz-contact"></i><span>联系方式</span><a href="/niurenweb/user/info" ka="user-resume-edit-phone-r" data-target="resume-contact" class="link-edit">编辑</a></li>-->
                             <li><i class="fz-resume fz-adventage"></i><span>我的优势</span>
-                                <a data-url="/geek/getUserDescForm.json" href="javascript:;" ka="user-resume-edit-desc-r" data-target="resume-summary" class="link-edit">编辑</a>
+                                <a id="nav-description" class="link-edit">编辑</a>
                             </li>
                             <li><i class="fz-resume fz-positon"></i><span>求职意向</span>
-                                <a data-url="/geek/getGeekExpectPositionForm.json" href="javascript:;" ka="user-resume-edit-holpjob-r" data-target="resume-purpose" class="link-add">添加</a>
+                                <a id="nav-dream" class="link-add">添加</a>
                             </li>
                             <li><i class="fz-resume fz-history"></i><span>工作经历</span>
-                                <a data-url="/geek/getWorkExperienceForm.json" href="javascript:;" ka="user-resume-add-workexp-r" data-target="resume-history" class="link-add">添加</a>
+                                <a id="nav-job" class="link-add">添加</a>
                             </li>
                             <li><i class="fz-resume fz-project"></i><span>项目经验</span>
-                                <a data-url="/geek/getGeekProjectExperienceForm.json" href="javascript:;" ka="user-resume-add-project-r" data-target="resume-project" class="link-add">添加</a>
+                                <a id="nav-project" class="link-add">添加</a>
                             </li>
                             <li><i class="fz-resume fz-eaducation"></i><span>教育经历</span>
-                                <a data-url="/geek/getEduExperienceForm.json" href="javascript:;" ka="user-resume-add-eduexp-r" data-target="resume-education" class="link-add">添加</a>
+                                <a id="nav-education" class="link-add">添加</a>
                             </li>
-                            <li><i class="fz-resume fz-socal"></i><span>社交账号</span>
-                                <a data-url="/geek/getSocialContact.json" href="javascript:;" ka="user-resume-add-website-r" data-target="resume-social" class="link-add">添加</a>
-                            </li>
+
                         </ul>
                     </div>
                     <!-- <div class="btns"><a href="#" class="btn btn-download">下载电子简历</a><a href="#" class="btn btn-download">微信版本简历</a></div>-->
                 </div>
             </div>
             <div class="resume">
-                <div class="update-time">最后更新 2017.02.24 16:14</div>
+                <div class="update-time">最后更新 <fmt:formatDate value="${resume.updateTime}" pattern="yyyy-MM-dd HH:mm"/> </div>
                 <div class="resume-box">
                     <div class="resume-item" id="resume-userinfo">
                         <div class="item-primary">
@@ -107,7 +124,7 @@
                                 <div class="profile_form zw_form figure">
                                     <dl class="clearfix avatar_line">
                                         <dd class="txt Rcheck avatar_box">
-                                            <img src="https://img.bosszhipin.com/beijin/mcs/useravatar/20161026/a6d6f3c253ad0c2e0839623048d43415668e4f6582898ba1716941858023f2e0_s.jpg" class="avatar">
+                                            <img src="/img/ico-1.jpg" class="avatar">
                                             <div class="sel_avatar">
                                                 <a ka="choose-avatar" data-title="头像设置" class="upload-layer"></a>
                                             </div>
@@ -117,31 +134,78 @@
                                     </dl>
                                 </div>
                             </form>
-                            <h2 class="name">李铁 <i class="fz-resume fz-male"></i><div class="op"><a data-url="/geek/user/info.json" href="javascript:;" ka="user-resume-edit-userinfo" class="link-edit" ><i class="fz-resume fz-edit"></i>编辑</a></div></h2>
+                            <h2 class="name">${resume.resumeName}<i class="fz-resume fz-male"></i><div class="op"><a data-url="/geek/user/info.json" href="javascript:;" ka="user-resume-edit-userinfo" class="link-edit" ><i class="fz-resume fz-edit"></i>编辑</a></div></h2>
                             <div class="info-labels">
                                 <p class="row-base"><span class="label-text"><i class="fz-resume fz-experience"></i>应届生</span><em class="vline"></em><span class="label-text"><i class="fz-resume fz-degree"></i>本科学历</span> <em class="vline"></em><span class="label-text"><i class="fz-resume fz-status"></i>离职-随时到岗</span></p>
-                                <p class="row-contact"><span class="label-text"><i class="fz-resume fz-tel"></i>18712725112</span><em class="vline"></em><span class="label-text span-wechat"><i class="fz-resume fz-weixin"></i>18712725112</span></p>
-                            </div>
-                        </div>
-                        <div class="item-form"></div>
-                    </div>
-                    <div class="resume-item" id="resume-summary">
-                        <div class="item-primary">
-                            <h3 class="title">我的优势<div class="op"><a data-url="/geek/getUserDescForm.json" href="javascript:;" ka="user-resume-edit-desc" class="link-edit" ><i class="fz-resume fz-edit"></i>编辑</a></div></h3>
-                            <div class="text">
-                                <p>我拥有出色的执行力，以及坚持不懈的毅力！作为应届生我可能缺少实际的工作经验，但是只要给我时间，我就会证明我的潜力！</p>
+                                <p class="row-contact"><span class="label-text"><i class="fz-resume fz-tel"></i>${resume.resumePhone}</span><em class="vline"></em><span class="label-text span-wechat"><i class="fz-resume fz-weixin"></i>18712725112</span></p>
                             </div>
                         </div>
                         <div class="item-form">
                             <div class="item-form">
-                                <form action="/geek/saveUserDesc.json" method="post" class="form-resume">
+                                <form action="/user/resume/addResume.do" method="post" class="form-resume">
+                                    <h3 class="title">个人信息</h3>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>姓名</dt>
+                                            <dd><input type="text" class="ipt required" placeholder="输入您的姓名" name="resumeName"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>最高学历</dt>
+                                            <dd>
+                                                <input type="text" class="ipt" placeholder="输入最高学历" name="resumeEducationLevel">
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>性别</dt>
+                                            <dd>
+                                                <div class="radio-list"><label class="radio-square radio-checked" data-val="1">男</label><label class="radio-square " data-val="0">女</label><input type="hidden" name="gender" class="required" data-blank="请选择性别" value="1"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>工作经验</dt>
+                                            <dd>
+                                                <input type="text" class="ipt" placeholder="输入您的工作经验" name="resumeWorkExperience">
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>工作城市</dt>
+                                            <dd>
+                                                <div class="calendarWarp">
+                                                    <input type="text" name="resumeCity" class='ipt' placeholder="输入您的工作城市"/>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>手机号</dt>
+                                            <dd><input name="resumePhone" type="text" class="ipt" placeholder="输入手机号"></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-btns"><button id="cancelButtonInPersonInfo" class="btn btn-back" type="button">取消</button><button class="btn vali_btn" type="submit">完成</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resume-item" id="resume-summary">
+                        <div class="item-primary">
+                            <h3 class="title">我的优势<div class="op"><a href="javascript:;" class="link-edit" ><i class="fz-resume fz-edit"></i>编辑</a></div></h3>
+                            <div class="text">
+                                <p>${resume.resumeDescription}</p>
+                            </div>
+                        </div>
+                        <div class="item-form">
+                            <div class="item-form">
+                                <form action="/user/resume/addDescription.do" method="post" class="form-resume">
                                     <h3 class="title">我的优势</h3>
                                     <div class="form-row row-area item-form-through">
                                         <dl>
-                                            <dd><textarea placeholder="例如：两年UI设计经验，熟悉IOS和Android的界面设计规范，对产品本色有独特见解，有一定的手绘基础" class="ipt ipt-area required" data-range="1,140" data-blank="不能为空" data-format="请输入 140 个以内的文字" maxlength="280" name="advantage">我拥有出色的执行力，以及坚持不懈的毅力！作为应届生我可能缺少实际的工作经验，但是只要给我时间，我就会证明我的潜力！</textarea><span class="count-num"><em>55</em>/140</span></dd>
+                                            <dd><textarea required="required" placeholder="例如：两年UI设计经验，熟悉IOS和Android的界面设计规范，对产品本色有独特见解，有一定的手绘基础" class="ipt ipt-area required" name="resumeDescription"></textarea><span class="count-num"><em>0</em>/140</span></dd>
                                         </dl>
                                     </div>
-                                    <div class="form-btns"><button class="btn btn-back" type="button" ka="user-resume-desc-edit-cancel">取消</button><button class="btn" type="submit" ka="user-resume-desc-edit-ok">完成</button></div>
+                                    <div class="form-btns"><button id="cancelButtonInSummary" class="btn btn-back" type="button" ka="user-resume-desc-edit-cancel">取消</button><button class="btn" type="submit">完成</button></div>
                                 </form>
                             </div>
                         </div>
@@ -153,35 +217,155 @@
                                     <a data-url="/geek/getGeekExpectPositionForm.json" href="javascript:;" ka="user-resume-add-holpjob" class="link-add"><i class="fz-resume fz-add"></i>添加</a>
                                 </div>
                             </h3>
-
                             <div class="info-labels">
-
-                                <div id="row-ffcd26ea53cbbf201Hxz3Ny0Eg--">
-                                    <span class="label-text"><i class="fz-resume fz-job"></i>Java</span><em class="vline"></em><span class="label-text"><i class="fz-resume fz-salary"></i>7k-9k </span><em class="vline"></em><span class="label-text"><i class="fz-resume fz-industry"></i>不限</span><em class="vline"></em><span class="label-text"><i class="fz-resume fz-place"></i>北京</span>
+                                <div >
+                                    <span class="label-text"><i class="fz-resume fz-job"></i>${resume.dreamjob.dreamJobName}</span><em class="vline"></em>
+                                    <span class="label-text"><i class="fz-resume fz-salary"></i>${resume.dreamjob.dreamSalaryBottom}k-${resume.dreamjob.dreamSalaryTop}k </span>
+                                    <em class="vline"></em><span class="label-text"><i class="fz-resume fz-industry"></i>${resume.dreamjob.dreamJobType}</span><em class="vline"></em>
+                                    <span class="label-text"><i class="fz-resume fz-place"></i>${resume.dreamjob.dreamJobCity}</span>
                                     <div class="op">
-                                        <a data-url="/geek/getGeekExpectPositionForm.json?id=ffcd26ea53cbbf201Hxz3Ny0Eg~~" href="javascript:;" ka="user-resume-edit-holpjob1" class="link-edit"><i class="fz-resume fz-edit"></i>编辑</a>
-
+                                        <a href="javascript:;" class="link-edit"><i class="fz-resume fz-edit"></i>编辑</a>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-                        <div class="item-form"></div>
+                        <div class="item-form">
+                            <div class="item-form">
+                                <form action="/user/resume/addDreamJob.do" method="post" class="form-resume">
+                                    <h3 class="title">添加求职意向</h3>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>期望职位</dt>
+                                            <dd>
+                                                <input type="text" class="ipt" placeholder="期望职位" name="dreamJobName">
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>薪资要求</dt>
+                                            <dd>
+                                                <div class="salary-item start-salary">
+                                                    <input type="text" name="dreamSalaryBottom" class="ipt ipt-short" placeholder="薪资范围最低">
+                                                </div>
+                                                <div class="salary-item end-salary">
+                                                    <input type="text" name="dreamSalaryTop" class="ipt ipt-short" placeholder="薪资范围最高">
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>城市</dt>
+                                            <dd>
+                                                <input type="text" name="dreamJobCity" class="ipt ipt-autocomplete required" placeholder="期望城市">
+                                                <div class="suggest-complete"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>&nbsp;</dt>
+                                            <dd>
+                                                <input type="checkbox" name="jobPush" value="1" checked="checked">
+                                                <span>是否接受职位推送</span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-btns"><button id="cancelButtonPurpose" class="btn btn-back" type="button" ka="user-resume-expect-position-add-cancel">取消</button><button class="btn" type="submit" ka="user-resume-expect-position-add-ok">完成</button></div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="resume-item" id="resume-history">
                         <div class="item-primary">
-                            <h3 class="title">
-                                实习经历
+                            <h3 class="title">工作经历
                                 <div class="op">
-                                    <a data-url="/geek/getWorkExperienceForm.json" href="javascript:;" ka="user-resume-add-workexp" class="link-add"><i class="fz-resume fz-add"></i>添加</a>
+                                    <a href="javascript:;" class="link-add"><i class="fz-resume fz-add"></i>添加</a>
                                 </div>
                             </h3>
                             <div class="history-project">
-
+                                <c:forEach items="${resume.jobexperienceList}" var="jobExperience">
+                                    <div class="history-item" >
+                                        <div class="op">
+                                            <a href="javascript:;" class="link-edit"><i class="fz-resume fz-edit"></i>编辑</a>
+                                        </div>
+                                        <span class="period"><fmt:formatDate value="${jobExperience.jobBeginDate}" pattern="yyyy-MM"/> -<fmt:formatDate value="${jobExperience.jobEndDate}" pattern="yyyy-MM"/></span>
+                                        <h4 class="name">${jobExperience.jobName}</h4>
+                                        <div class="text">
+                                            <h4>${jobExperience.jobCompanyName}<em class="vline"></em>本科</h4>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
-                        <div class="item-form"></div>
+                        <div class="item-form">
+                            <div class="item-form">
+                                <form action="/user/resume/addJobExperience.do" method="post" class="form-resume">
+                                    <input type="hidden" name="id" value="">
+                                    <h3 class="title">添加工作经历</h3>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>公司名称</dt>
+                                            <dd>
+                                                <input type="text" name="jobCompanyName" value="" class="ipt required" placeholder="例如：北京百度科技有限公司">
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>职位类型</dt>
+                                            <dd>
+                                                <input type="text" name="jobType" class="ipt required" placeholder="例如：全职" />
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>职位名称</dt>
+                                            <dd>
+                                                <input type="text" ka="work-position-name" name="jobName" value="" class="ipt required" placeholder="例如：UI设计师">
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>技能标签</dt>
+                                            <dd>
+                                                <input type="text" ka="work-skills" class="ipt" value="" placeholder="技能标签">
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>在职时间</dt>
+                                            <dd>
+                                                <input type="text" name="jobBeginDate" class='ECalendar ipt' id="jobBeginDate" />
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>&nbsp;</dt>
+                                            <dd>
+                                                <span class="prefix-day">至</span>
+                                                <input type="text" name="jobEndDate" class='ECalendar ipt' id="jobEndDate" />
+                                            </dd>
+                                        </dl>
+                                    </div>
+
+                                    <div class="form-row row-area item-form-through">
+                                        <dl>
+                                            <dt>工作内容</dt>
+                                            <dd>
+                                                <textarea name="jobDeatail" ka="work-responsibility" placeholder="例如： 1、主要负责新员工入职培训； 2、分析制定员工每个月个人销售业绩； 3、帮助员工提高每日客单价，整体店面管理等工作； " class="ipt ipt-area required" data-range="1,1600" data-blank="必填" data-format="请输入 1600 字以内的工作内容" maxlength="3200"></textarea>
+                                                <span class="count-num"><em>0</em>/1600</span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row row-area item-form-through">
+                                        <dl>
+                                            <dt>工作职责</dt>
+                                            <dd>
+                                                <textarea name="jobOfYou" ka="work-performance" placeholder="(选填)填写完整、有吸引力的工作业绩，有助于您更多地吸引Boss的关注 例如：1.取得的成绩… 2.实现的突破… 3.获得的表彰…" class="ipt ipt-area" data-range="0,300" data-blank="必填" data-format="请输入 300 字以内的工作业绩" maxlength="600"></textarea>
+                                                <span class="count-num"><em>0</em>/ 300</span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-btns"><button id="cancelButtonHistory" class="btn btn-back" ka="work-cancel" type="button">取消</button><button class="btn" ka="work-save" type="submit">完成</button></div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="resume-item" id="resume-project">
                         <div class="item-primary">
@@ -191,10 +375,75 @@
                                 </div>
                             </h3>
                             <div class="history-project">
-
+                                <c:forEach items="${resume.projectexperienceList}" var="projectExperience">
+                                    <div class="history-item" >
+                                        <div class="op">
+                                            <a href="javascript:;" class="link-edit"><i class="fz-resume fz-edit"></i>编辑</a>
+                                        </div>
+                                        <span class="period"><fmt:formatDate value="${projectExperience.projectBeginDate}" pattern="yyyy-MM"/>-<fmt:formatDate value="${projectExperience.projectEndDate}" pattern="yyyy-MM"/></span>
+                                        <h4 class="name">${projectExperience.projectName}</h4>
+                                        <div class="text">
+                                            <c:if test="${!empty projectExperience.projectUrl}">
+                                                <h4>${projectExperience.projectUrl}</h4>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
-                        <div class="item-form"></div>
+                        <div class="item-form">
+                            <div class="item-form">
+                                <form action="/user/resume/addProjectExperience.do" method="post" class="form-resume">
+                                    <input type="hidden" name="id" value="">
+                                    <input type="hidden" name="orderNum" value="0">
+                                    <h3 class="title">添加项目经验</h3>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>项目名称</dt>
+                                            <dd><input type="text" ka="project-name" name="projectName" value="" class="ipt required" placeholder="例如：百度凤巢广告系统" data-range="1,16" data-blank="必填" data-format="请输入 16 字以内的项目名称" maxlength="32"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>项目角色</dt>
+                                            <dd><input type="text" ka="project-role" name="roleName" value="" class="ipt required" placeholder="例如：UI 设计师" data-range="1,12" data-blank="必填" data-format="请输入 12 字以内的角色名称" maxlength="24"></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row item-form-through">
+                                        <dl>
+                                            <dt>项目URL</dt>
+                                            <dd><input type="text" ka="project-url" name="projectUrl" value="" class="ipt ipt-long" placeholder="(选填)例如：http://www.baidu.com" data-range="0,60" data-format="请输入 60 个字符以内的URL" maxlength="120"></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>项目时间</dt>
+                                            <dd>
+                                                <input type="text" name="projectBeginDate" class='ECalendar ipt' id="projectBeginDate" />
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>&nbsp;</dt>
+                                            <dd>
+                                                <span class="prefix-day">至</span>
+                                                <input type="text" name="projectEndDate" class='ECalendar ipt' id="projectEndDate" />
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row row-area item-form-through">
+                                        <dl>
+                                            <dt>项目描述</dt>
+                                            <dd><textarea name="projectDescription" ka="project-description" placeholder="描述该项目，向Boss展示您的项目经验例如：1.项目概况…2.人员分工…3.我的责任…" class="ipt ipt-area required" data-range="1,1600" data-blank="不能为空" data-format="请输入 1600 个以内的文字" maxlength="3200"></textarea><span class="count-num"><em>0</em>/1600</span></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row row-area item-form-through">
+                                        <dl>
+                                            <dt>项目职责</dt>
+                                            <dd><textarea name="projectDuty" ka="project-performance" placeholder="(选填)描述您的项目业绩，向Boss展示您的工作能力例如：1.项目收益…2.我的贡献…3.我的收获…" class="ipt ipt-area" data-range="0,300" data-blank="" data-format="请输入 300 个以内的文字" maxlength="600"></textarea><span class="count-num"><em>0</em>/300</span></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-btns"><button id="cancelButtonProject" class="btn btn-back" ka="project-cancel" type="button">取消</button><button class="btn" ka="project-save" type="submit">完成</button></div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="resume-item" id="resume-education">
                         <div class="item-primary">
@@ -204,37 +453,84 @@
                                 </div>
                             </h3>
                             <div class="history-education">
-
-                                <div class="history-item" id="row-e8a7e1b2d01343141Xx90tu9Fw~~">
-                                    <div class="op">
-                                        <a href="javascript:;" data-url="/geek/getEduExperienceForm.json?id=e8a7e1b2d01343141Xx90tu9Fw~~" ka="user-resume-edit-eduexp1" class="link-edit"><i class="fz-resume fz-edit"></i>编辑</a>
-
+                                <c:forEach items="${resume.educationexperienceList}" var="educationExperience">
+                                    <div class="history-item" >
+                                        <div class="op">
+                                            <a href="javascript:;" class="link-edit"><i class="fz-resume fz-edit"></i>编辑</a>
+                                        </div>
+                                        <span class="period"><fmt:formatDate value="${educationExperience.educationBeginDate}" pattern="yyyy-MM"/>-<fmt:formatDate value="${educationExperience.educationGraduateDate}" pattern="yyyy-MM"/></span>
+                                        <h4 class="name">${educationExperience.educationSchoolName}</h4>
+                                        <div class="text">
+                                            <h4>${educationExperience.educationMajor}<em class="vline"></em>${educationExperience.educationLevel}</h4>
+                                        </div>
                                     </div>
-                                    <span class="period">2013-至今</span>
-                                    <h4 class="name">燕山大学</h4>
-                                    <div class="text">
-                                        <h4>软件工程<em class="vline"></em>本科</h4>
-
-                                    </div>
-                                </div>
-
+                                </c:forEach>
                             </div>
                         </div>
-                        <div class="item-form"></div>
-                    </div>
-                    <div class="resume-item" id="resume-social">
-                        <div class="item-primary">
-                            <h3 class="title">社交账号
-                                <div class="op">
-                                    <a href="javascript:;" data-url="/geek/getSocialContact.json"  ka="user-resume-add-website" class="link-add"><i class="fz-resume fz-add"></i>添加</a>
-                                </div>
-                            </h3>
-                            <div class="social-account">
-
+                        <div class="item-form">
+                            <div class="item-form">
+                                <form action="/user/resume/addEducationExperience.do" method="post" class="form-resume">
+                                    <input type="hidden" name="id" value="07b5df7e131fbe2e1w~~">
+                                    <h3 class="title">添加教育经历</h3>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>学校名称</dt>
+                                            <dd><input type="text" name="educationSchoolName" class="ipt ipt-autocomplete required" placeholder="例如：北京大学"  maxlength="40">
+                                                <div class="suggest-complete"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>专业名称</dt>
+                                            <dd><input type="text" name="educationMajor" class="ipt ipt-autocomplete required" placeholder="例如：计算机科学与技术" maxlength="40">
+                                                <div class="suggest-complete"></div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row">
+                                        <dl>
+                                            <dt>学历</dt>
+                                            <dd>
+                                                <select class="ipt" name="educationLevel">
+                                                    <option value="中专及以下">中专及以下</option>
+                                                    <option value="高中">高中</option>
+                                                    <option value="大专">大专</option>
+                                                    <option value="本科">本科</option>
+                                                    <option value="硕士">硕士</option>
+                                                    <option value="博士">博士</option>
+                                                </select>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row ">
+                                        <dl>
+                                            <dt>时间段</dt>
+                                            <dd>
+                                                <div class="calendarWarp">
+                                                    <input type="text" name="educationBeginDate" class='ECalendar ipt' id="educationBeginDate" />
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>&nbsp;</dt>
+                                            <dd>
+                                                <div class="calendarWarp">
+                                                    <input type="text" name="educationGraduateDate" class='ECalendar ipt' id="educationGraduateDate" />
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-row row-area item-form-through">
+                                        <dl>
+                                            <dt>在校经历</dt>
+                                            <dd><textarea placeholder="选填" ka="edu-description" name="educationExperience" class="ipt ipt-area" data-range="0,300" data-blank="必填" data-format="请输入 300 个以内的文字" maxlength="600"></textarea><span class="count-num"><em>0</em>/300</span></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="form-btns"><button id="cancelButtonEducation" class="btn btn-back" ka="edu-cancel" type="button">取消</button><button class="btn" ka="edu-save" type="submit">完成</button></div>
+                                </form>
                             </div>
                         </div>
-                        <div class="item-form"></div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -298,7 +594,7 @@
             <div class="des">
                 <h4>上传简历</h4>
                 <div class="resume-title">王家卫-3年Java.doc</div>
-                <p>附件简历将在投递后被Boss预览查看，请 确认显示正确</p>
+                <p>附件简历将在投递后被Boss预览查看，请确认显示正确</p>
                 <div class="btn upload-again" ka="user-resume-preview-fail-reupload">重新上传</div>
                 <p>支持 doc、docx、pdf、jpg、png 格式</p>
             </div>
@@ -315,36 +611,70 @@
             </div>
         </div>
     </div>
-    <!--通用返回顶部-->
-    <div id="siderbar">
-        <ul>
-            <li class="siderbar-top" title="返回顶部"></li>
-            <%--<li class="siderbar-qrcode" title="BOSS直聘APP">
-                <div class="qrcode-layer"><i></i><img src="" alt="" />下载BOSS直聘APP</div>
-            </li>--%>
-        </ul>
-    </div>
-
-        <!--注册成功完善简历-->
-        <div class="sign-form sign-welcome">
-            <h3 class="title">欢迎来到BOSS直聘</h3>
-            <div class="welcome-box">
-                <div class="welcome-text">
-                    <b>快速完善简历</b>
-                    <p>做好与Boss对话前的准备吧。</p>
-                </div>
-                <img src="/v2/web/geek/images/icon-sign-welcome.png" alt="" />
-                <div class="form-btn">
-                    <a ka="registe-complete" href="/niurenweb/complete/guide.html" class="btn">开始完善</a>
-                </div>
-                <div class="count-down"><em class="num">3s</em> 后自动跳转</div>
-            </div>
-        </div>
 </div>
-<script src="../js/jquery-1.12.2.min.js"></script>
-<!--<script src="../js/main.js"></script>-->
+
 </body>
-<input type="hidden" id="page_key_name" value="cpc_user_resume" />
-<script src="../js/resume.js"></script>
+
+<script src="/js/resume.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#educationBeginDate").ECalendar({
+            type: "date", //模式，time: 带时间选择; date: 不带时间选择;
+            stamp: false, //是否转成时间戳，默认true;
+            offset: [0, 2], //弹框手动偏移量;
+            skin: 1, //皮肤颜色，默认随机，可选值：0-8,或者直接标注颜色值;
+            step: 10, //选择时间分钟的精确度;
+            callback: function(v, e) {} //回调函数
+        });
+        $("#educationGraduateDate").ECalendar({
+            type: "date", //模式，time: 带时间选择; date: 不带时间选择;
+            stamp: false, //是否转成时间戳，默认true;
+            offset: [0, 2], //弹框手动偏移量;
+            skin: 1, //皮肤颜色，默认随机，可选值：0-8,或者直接标注颜色值;
+            step: 10, //选择时间分钟的精确度;
+            callback: function(v, e) {} //回调函数
+        });
+        $("#resumeBirthday").ECalendar({
+            type: "date", //模式，time: 带时间选择; date: 不带时间选择;
+            stamp: false, //是否转成时间戳，默认true;
+            offset: [0, 2], //弹框手动偏移量;
+            skin: 1, //皮肤颜色，默认随机，可选值：0-8,或者直接标注颜色值;
+            step: 10, //选择时间分钟的精确度;
+            callback: function(v, e) {} //回调函数
+        });
+        $("#projectBeginDate").ECalendar({
+            type: "date", //模式，time: 带时间选择; date: 不带时间选择;
+            stamp: false, //是否转成时间戳，默认true;
+            offset: [0, 2], //弹框手动偏移量;
+            skin: 1, //皮肤颜色，默认随机，可选值：0-8,或者直接标注颜色值;
+            step: 10, //选择时间分钟的精确度;
+            callback: function(v, e) {} //回调函数
+        });
+        $("#projectEndDate").ECalendar({
+            type: "date", //模式，time: 带时间选择; date: 不带时间选择;
+            stamp: false, //是否转成时间戳，默认true;
+            offset: [0, 2], //弹框手动偏移量;
+            skin: 1, //皮肤颜色，默认随机，可选值：0-8,或者直接标注颜色值;
+            step: 10, //选择时间分钟的精确度;
+            callback: function(v, e) {} //回调函数
+        });
+        $("#jobBeginDate").ECalendar({
+            type: "date", //模式，time: 带时间选择; date: 不带时间选择;
+            stamp: false, //是否转成时间戳，默认true;
+            offset: [0, 2], //弹框手动偏移量;
+            skin: 1, //皮肤颜色，默认随机，可选值：0-8,或者直接标注颜色值;
+            step: 10, //选择时间分钟的精确度;
+            callback: function(v, e) {} //回调函数
+        });
+        $("#jobEndDate").ECalendar({
+            type: "date", //模式，time: 带时间选择; date: 不带时间选择;
+            stamp: false, //是否转成时间戳，默认true;
+            offset: [0, 2], //弹框手动偏移量;
+            skin: 1, //皮肤颜色，默认随机，可选值：0-8,或者直接标注颜色值;
+            step: 10, //选择时间分钟的精确度;
+            callback: function(v, e) {} //回调函数
+        });
+    })
+</script>
 
 </html>

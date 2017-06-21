@@ -60,6 +60,7 @@ public class MethodInDaJie {
             Requirementinfo requirementinfo = parseJobInDaJie(document);
             requirementinfo.setJobMessageId(UUID.randomUUID().toString());
             requirementinfo.setCatchJobTime(new Date());
+            requirementinfo.setJobUrl(url);
             Company company = parseCompanyInDaJie(document);
 
             SqlSession session = sqlSessionFactory.openSession();

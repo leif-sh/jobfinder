@@ -10,7 +10,7 @@ public class Personlibrary {
 
     private String libraryId;
     private String userId;
-    private int businessUserId;
+    private String businessUserId;
     private Date collectDate;
 
     public String getLibraryId() {
@@ -29,11 +29,11 @@ public class Personlibrary {
         this.userId = userId;
     }
 
-    public int getBusinessUserId() {
+    public String getBusinessUserId() {
         return businessUserId;
     }
 
-    public void setBusinessUserId(int businessUserId) {
+    public void setBusinessUserId(String businessUserId) {
         this.businessUserId = businessUserId;
     }
 

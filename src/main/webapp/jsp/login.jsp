@@ -22,7 +22,7 @@
       <div class="sign-tab">
       	<span class="link-signin cur"style="margin-left:120px;border: none;">密码登录</span>
       </div>
-      <form action="/User/login.do" method="post">
+      <form action="/user/login.do" method="post">
         <div class="form-row row-select">
           <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="tel" class="ipt ipt-pwd required account" ka="signin-account" placeholder="账号" name="account" /></span>
         </div>
@@ -44,7 +44,7 @@
       <div class="sign-tab">
         <span>使用邮箱注册</span>
       </div>
-      <form action="/User/register.do" method="post">
+      <form action="/user/register.do" method="post">
         <div class="form-row row-select">
           <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="text" class="ipt ipt-pwd required account" ka="signin-account" placeholder="邮箱" name="account" /></span>
         </div>

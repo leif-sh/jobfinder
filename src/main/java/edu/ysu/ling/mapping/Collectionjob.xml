@@ -5,12 +5,15 @@
 
 <mapper namespace="edu.ysu.ling.dao.ICollectionJobDao">
     <select id="selectCollectionJob" resultType="edu.ysu.ling.pojo.Collectionjob" parameterType="java.lang.String">
-
+        SELECT * FROM collectionjob WHERE userId = #{userId}
     </select>
     <insert id="insertCollectionJob" parameterType="edu.ysu.ling.pojo.Collectionjob">
-
+        INSERT INTO collectionjob
+        (collectionId,jobMessageId,userId,collectionDate)
+        VALUES
+        (#{collectionId},#{jobMessageId},#{userId},#{collectionDate})
     </insert>
     <delete id="deleteCollectionJob" parameterType="edu.ysu.ling.pojo.Collectionjob">
-
+        DELETE FROM collectionjob WHERE collectionId = #{collectionId}
     </delete>
 </mapper>

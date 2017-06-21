@@ -11,9 +11,9 @@
 
     <insert id="insertRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
         INSERT INTO requirementinfo
-        (jobMessageId,bussinessUserId,jobName,jobLabels,jobClass,salaryTop,salaryBottom,jobRequest,jobAdvantage,jobQualification,jobDescription,jobCity,jobAddres,jobExperienceTop,jobExperienceBottom,educationLevel)
+        (catchJobTime,jobExperience,salary,jobDateTime,jobPercent,jobMessageId,businessUserId,jobName,jobLabels,jobClass,salaryTop,salaryBottom,jobRequest,jobAdvantage,jobQualification,jobDescription,jobCity,jobAddress,jobExperienceTop,jobExperienceBottom,educationLevel)
         VALUE
-        (#{jobMessageId},#{bussinessUserId},#{jobName},#{jobLabels},#{jobClass},#{salaryTop},#{salaryBottom},#{jobRequest},#{jobAdvantage},#{jobQualification},#{jobDescription},#{jobCity},#{jobAddres},#{jobExperienceTop},#{jobExperienceBottom},#{educationLevel})
+        (#{catchJobTime},#{jobExperience},#{salary},#{jobDateTime},#{jobPercent},#{jobMessageId},#{businessUserId},#{jobName},#{jobLabels},#{jobClass},#{salaryTop},#{salaryBottom},#{jobRequest},#{jobAdvantage},#{jobQualification},#{jobDescription},#{jobCity},#{jobAddress},#{jobExperienceTop},#{jobExperienceBottom},#{educationLevel})
     </insert>
 
     <insert id="catchRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
@@ -28,33 +28,174 @@
 
     <!--条件：标签 城市 学历 工作经验 规模 行业 薪资-->
     <select id="selectRequirementinfoInSearch" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Requirementinfo">
-        SELECT requirement.jobMessageId,requirement.jobName,requirement.salary,requirement.sourceCompanyName,requirement.educationLevel,requirement.companyId,requirement.jobCity,requirement.jobExperience,requirement.catchJobTime
-        FROM requirementinfo requirement LEFT JOIN joblabels job
-        ON job.jobMessageId = requirement.jobMessageId
+        SELECT DISTINCT requirement.jobUrl,requirement.publishResource,requirement.jobMessageId,requirement.jobName,requirement.salary,requirement.sourceCompanyName,requirement.educationLevel,requirement.companyId,requirement.jobCity,requirement.jobExperience,requirement.catchJobTime
+        FROM requirementinfo requirement
+        <if test="labels != null">
+        LEFT JOIN joblabels job ON job.jobMessageId = requirement.jobMessageId
+        </if>
+        <if test="companyType != null or companyScale != null">
+            LEFT JOIN company ON requirement.companyId = company.companyId
+        </if>
         <where>
             <if test="companyType != null">
-                #{companyType}
+                And company.companyType LIKE CONCAT('%',#{companyType},'%')
             </if>
             <if test="companyScale != null">
-                #{companyScale}
+
+                <choose>
+                    <when test="companyScale == 'scale-0'">
+                         1=1
+                    </when>
+                    <when test="companyScale == 'scale-1'">/*0-20*/
+                         (company.companyScale = '少于15人' or company.companyScale = '15-50人')
+                    </when>
+                    <when test="companyScale == 'scale-2'">/*20-99*/
+                         (company.companyScale = '15-50人' or company.companyScale = '20-99人')
+                    </when>
+                    <when test="companyScale == 'scale-3'">/*100-499*/
+                         (company.companyScale = '50-150人' or company.companyScale = '150-500人' or company.companyScale = '100-499人')
+                    </when>
+                    <when test="companyScale == 'scale-4'">/*500-999*/
+                         (company.companyScale = '150-500人' or company.companyScale = '500-2000人' or company.companyScale = '500-900人')
+                    </when>
+                    <when test="companyScale == 'scale-5'">/*1000-9999*/
+                         (company.companyScale = '500-2000人' or company.companyScale = '2000人以上' or company.companyScale = '1000-9999人')
+                    </when>
+                    <when test="companyScale == 'scale-6'">/*10000以上*/
+                         (company.companyScale = '2000人以上' or company.companyScale = '10000人以上')
+                    </when>
+                    <otherwise>
+                         1=1
+                    </otherwise>
+                </choose>
+
             </if>
             <if test="jobExperience != null">
-                #{jobExperience}
+                <choose>
+                    <when test="jobExperience == 'exp-0'">
+                         1=1
+                    </when>
+                    <when test="jobExperience == 'exp-1'">/*应届生*/
+                         jobExperienceBottom = 0
+                    </when>
+                    <when test="jobExperience == 'exp-2'">/*1年以下*/
+                         1 >= jobExperienceBottom
+                    </when>
+                    <when test="jobExperience == 'exp-3'">/*1-3年*/
+                         (jobExperienceBottom >= 1 AND 3 >= jobExperienceTop)
+                    </when>
+                    <when test="jobExperience == 'exp-4'">/*3-5年*/
+                         (jobExperienceBottom >= 3 AND 5 >= jobExperienceTop)
+                    </when>
+                    <when test="jobExperience == 'exp-5'">/*5-10年*/
+                         (jobExperienceBottom >= 5 AND 10 >= jobExperienceTop)
+                    </when>
+                    <when test="jobExperience == 'exp-6'">/*10年以上*/
+                         requirement.jobExperienceBottom >= 10
+                    </when>
+                    <otherwise>
+                         1=1
+                    </otherwise>
+                </choose>
             </if>
             <if test="educationLevel != null">
-                #{educationLevel}
+                <choose>
+                    <when test="educationLevel == 'degree-0'">
+                         1=1
+                    </when>
+                    <when test="educationLevel == 'degree-1'">/*中专*/
+                         requirement.educationLevel = '中专'
+                    </when>
+                    <when test="educationLevel == 'degree-2'">/*高中*/
+                         requirement.educationLevel IN ('中专','高中','高中及以上')
+                    </when>
+                    <when test="educationLevel == 'degree-3'">/*大专*/
+                         requirement.educationLevel IN ('中专','高中','大专','大专及以上')
+                    </when>
+                    <when test="educationLevel == 'degree-4'">/*本科*/
+                         requirement.educationLevel NOT IN ('硕士','博士','硕士及以上')
+                    </when>
+                    <when test="educationLevel == 'degree-5'">/*硕士*/
+                         requirement.educationLevel NOT IN ('博士')
+                    </when>
+                    <when test="educationLevel == 'degree-6'">/*博士*/
+                         1=1
+                    </when>
+                    <otherwise>
+                         1=1
+                    </otherwise>
+                </choose>
             </if>
             <if test="salary != null">
-                #{salary}
+                <choose>
+                    <when test="salary == 'salary-0'">
+                         1=1
+                    </when>
+                    <when test="salary == 'salary-1'">
+                        (3 >= salaryTop)
+                    </when>
+                    <when test="salary == 'salary-2'">
+                         salaryBottom >= 3 AND 5 >= salaryBottom
+                    </when>
+                    <when test="salary == 'salary-3'">
+                         salaryBottom >= 5 AND 10 >= salaryBottom
+                    </when>
+                    <when test="salary == 'salary-4'">
+                         salaryBottom >= 10 AND 15 >= salaryBottom
+                    </when>
+                    <when test="salary == 'salary-5'">
+                         salaryBottom >= 15 AND 20 >= salaryBottom
+                    </when>
+                    <when test="salary == 'salary-6'">
+                         salaryBottom >= 20 AND 30 >= salaryBottom
+                    </when>
+                    <when test="salary == 'salary-7'">
+                         salaryBottom >= 30 AND 50 >= salaryBottom
+                    </when>
+                    <when test="salary == 'salary-8'">
+                         salaryBottom >= 50
+                    </when>
+                    <otherwise>
+                         1=1
+                    </otherwise>
+                </choose>
             </if>
             <if test="city != null">
                 AND requirement.jobCity = #{city}
             </if>
             <if test="labels != null">
-               AND LOWER(job.labels) LIKE CONCAT('%',LOWER(#{labels}),'%')
+               AND (LOWER(job.labels) LIKE CONCAT('%',LOWER(#{labels}),'%') OR LOWER(requirement.jobName) LIKE CONCAT('%',LOWER(#{labels}),'%'))
             </if>
-
         </where>
+        ORDER BY catchJobTime DESC
         LIMIT #{page.thispage},#{page.pagesize}
     </select>
+    <select id="selectJobForPush" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Requirementinfo">
+        SELECT requirement.sourceCompanyName ,requirement.jobName,requirement.salary,requirement.jobAddress,requirement.jobUrl,requirement.educationLevel,requirement.jobExperience,requirement.publishResource,requirement.catchJobTime
+        FROM requirementinfo requirement LEFT JOIN joblabels job
+        ON job.jobMessageId = requirement.jobMessageId
+        WHERE
+        (LOWER(job.labels) LIKE CONCAT('%',LOWER(#{dreamJobName}),'%') OR LOWER(requirement.jobName) LIKE CONCAT('%',LOWER(#{dreamJobName}),'%')) AND
+        requirement.salaryBottom > #{dreamSalaryBottom} AND
+        #{dreamSalaryTop} > requirement.salaryTop AND
+        requirement.jobCity = #{dreamJobCity}
+        ORDER BY jobPercent DESC ,catchJobTime DESC
+        LIMIT 0,20
+    </select>
+    <select id="selectRequirementinfoByBusinessUser" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Requirementinfo">
+        SELECT jobName,salary,jobCity,jobExperience,jobMessageId,businessUserId,jobDateTime,educationLevel
+        FROM requirementinfo
+        WHERE businessUserId = #{businessUserId}
+        ORDER BY jobDateTime DESC
+        LIMIT 0,20
+    </select>
+    <update id="updateRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
+        UPDATE requirementinfo SET jobName = #{jobName},salary = #{salary},jobExperience = #{jobExperience},jobClass = #{jobClass},jobCity = #{jobCity},
+        jobAddress = #{jobAddress},salary = #{salary}
+        WHERE jobMessageId = #{jobMessageId}
+    </update>
+
+    <delete id="deleteRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
+        DELETE FROM requirementinfo WHERE jobMessageId = #{jobMessageId}
+    </delete>
 </mapper>

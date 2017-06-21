@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.ysu.ling.dao.IDreamPersonDao">
+
+    <select id="selectDreamPersonByBusinessUserId" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Dreamperson">
+        SELECT * FROM dreamperson WHERE businessUserId = #{businessUserId}
+    </select>
+
+    <insert id="insertDreamPerson" parameterType="edu.ysu.ling.pojo.Dreamperson">
+        INSERT INTO dreamperson
+        (dreamPersonId,businessUserId,dreamPersonType,dreamPersonEducation,dreamPersonWorkExperience,dreamPersonSalaryTop,dreamPersonCity)
+        VALUES 
+        (#{dreamPersonId},#{businessUserId},#{dreamPersonType},#{dreamPersonEducation},#{dreamPersonWorkExperience},#{dreamPersonSalaryTop},#{dreamPersonCity})
+    </insert>
+    
+    <update id="updataDreamPerson" parameterType="edu.ysu.ling.pojo.Dreamperson">
+        UPDATE dreamperson SET dreamPersonType = #{dreamPersonType},dreamPersonEducation = #{dreamPersonEducation},dreamPersonWorkExperience = #{dreamPersonWorkExperience},
+        dreamPersonSalaryTop = #{dreamPersonSalaryTop},dreamPersonCity = #{dreamPersonCity}
+        WHERE businessUserId = #{businessUserId}
+    </update>
+
+    <select id="selectDreamPersons" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Dreamperson">
+        SELECT * FROM dreamperson
+    </select>
+</mapper>

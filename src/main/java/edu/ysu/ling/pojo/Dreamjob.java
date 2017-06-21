@@ -8,7 +8,7 @@ import javax.print.DocFlavor;
 
 public class Dreamjob {
 
-    private long dreamJobId;
+    private String dreamJobId;
     private int resumeId;
     private String userId;
     private String dreamJobName;
@@ -17,12 +17,13 @@ public class Dreamjob {
     private int dreamSalaryTop;
     private int dreamSalaryBottom;
     private String dreamJobIntroduction;
+    private String jobPush;
 
-    public long getDreamJobId() {
+    public String getDreamJobId() {
         return dreamJobId;
     }
 
-    public void setDreamJobId(long dreamJobId) {
+    public void setDreamJobId(String dreamJobId) {
         this.dreamJobId = dreamJobId;
     }
 
@@ -89,4 +90,14 @@ public class Dreamjob {
     public void setDreamJobIntroduction(String dreamJobIntroduction) {
         this.dreamJobIntroduction = dreamJobIntroduction;
     }
+
+    public String getJobPush() {
+        return jobPush;
+    }
+
+    public void setJobPush(String jobPush) {
+        this.jobPush = jobPush;
+    }
+
+
 }

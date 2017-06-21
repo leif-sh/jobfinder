@@ -9,12 +9,16 @@
 		<title>JobFinder</title>
 		<meta name="keywords" content="JobFinder" />
 		<meta name="description" content="JobFinder，互联网时代的领跑者！" />
-		<link href="../css/main.css" type="text/css" rel="stylesheet">
-		<link href="../css/index.css" type="text/css" rel="stylesheet" />
+		<link href="/css/main.css" type="text/css" rel="stylesheet">
+		<link href="/css/index.css" type="text/css" rel="stylesheet" />
 	</head>
 
 	<body>
-
+	<c:if test="${empty jobList}">
+		<script type="text/javascript" >
+            window.location = "/job/getJobList.do?pageName=index";
+		</script>
+	</c:if>
 		<div id="wrap">
 			<div id="header">
 				<div class="inner">
@@ -25,12 +29,12 @@
 								<a ka="header-home" href="/jsp/index.jsp">首页</a>
 							</li>
 							<li class="">
-								<a ka="header-job" href="/search/searchJob.do">职位</a>
+								<a ka="header-job" href="/jsp/job.jsp">职位</a>
 							</li>
 							<!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
-							<li class="">
+							<%--<li class="">
 								<a ka="header-article" href="">校招</a>
-							</li>
+							</li>--%>
 						</ul>
 					</div>
 
@@ -41,7 +45,7 @@
 								<li class=""><a ka="header-chat" href="/jsp/chat.jsp" >聊天<span class="nav-chat-num"></span></a></li>
 								<li class=""><a ka="header-delivery-box" href="/jsp/collect.jsp" >收藏</a></li>
 								<li class=""><a ka="header-my-resume" href="/jsp/resume.jsp" >我的简历</a></li>
-								<li class="nav-figure"><a href="/jsp/resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
+								<li class="nav-figure"><a href="/jsp/resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/user/logout.do" ka="header-logout">退出</a></div></li>
 							</ul>
 						</c:if>
 						<c:if test="${sessionScope.userinfo == null}">
@@ -426,7 +430,7 @@
 					<div class="home-main">
 						<div class="search-box">
 							<div class="search-form">
-								<form action="/search/searchJob.do" method="get">
+								<form action="/search/searchJob.do" method="post">
 									<div class="search-form-con">
 										<p class="ipt-wrap"><input type="text" ka="search-keyword" name="query" autocomplete="off" class="ipt-search" placeholder="搜索职位、公司"></p>
 										<div class="city-sel" ka="sel-city">
@@ -434,7 +438,7 @@
 											<span class="label-text"><b>北京</b><i class="icon-arrow-down"></i></span>
 										</div>
 									</div>
-									<input type="hidden" name="scity" class="city-code" value="北京" />
+									<input type="hidden" name="scity" class="city-code" value="北京"/>
 									<input type="hidden" name="source" value="2" />
 									<button type="submit" class="btn btn-search" ka="search-btn">搜索</button>
 									<div class="suggest-result">
@@ -445,7 +449,7 @@
 										<ul class="dorpdown-province">
 											<li class="cur">热门</li>
 											<li ka="province-101010000">北京</li>
-											<li ka="province-101020000">上海</li>
+											<li >上海</li>
 											<li ka="province-101030000">天津</li>
 											<li ka="province-101040000">重庆</li>
 											<li ka="province-101050000">黑龙江</li>
@@ -1309,11 +1313,7 @@
 						</div>
 						<div class="job-list" data-filter="city101010100" data-keyword="" data-l3code="0" data-rescount="281750" data-page="1" data-source="4">
 							<ul>
-								<c:if test="${empty jobList}">
-									<script type="text/javascript" >
-                                        window.location = "/job/getJobList.do?pageName=index";
-									</script>
-								</c:if>
+
 								<c:if test="${!empty jobList}">
 									<c:forEach items="${jobList}" var="job">
 										<li>

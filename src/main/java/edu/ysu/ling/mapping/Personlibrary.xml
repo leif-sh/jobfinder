@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.ysu.ling.dao.IPersonLibraryDao">
+    <insert id="insertPersonLibrary" parameterType="edu.ysu.ling.pojo.Personlibrary">
+        INSERT INTO personlibrary
+        (libraryId,userId,businessUserId,collectDate)
+        VALUES
+        (#{libraryId},#{userId},#{businessUserId},#{collectDate})
+    </insert>
+    <select id="selectPersonLibraryByBusinessUserId" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Personlibrary">
+        SELECT * FROM personlibrary WHERE businessUserId = #{businessUserId}
+    </select>
+</mapper>

@@ -31,6 +31,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public User findUserByAccount(String account) {
+        SqlSession session = sqlSessionFactory.openSession();
+        userDao = session.getMapper(IUserDao.class);
+        User user = userDao.selectUserByAccount(account);
+        return user;
+    }
+
+    @Override
     public User addUser(User user) {
         SqlSession session = sqlSessionFactory.openSession();
         try {

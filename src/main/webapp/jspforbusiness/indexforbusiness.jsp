@@ -14,19 +14,19 @@
     <title>JobFinder-职位</title>
     <meta name="keywords" content="JobFinder" />
     <meta name="description" content="JobFinder，互联网时代的领跑者！" />
-    <link href="../cssforbusiness/mainforbusiness.css" type="text/css" rel="stylesheet">
+    <link href="/cssforbusiness/mainforbusiness.css" type="text/css" rel="stylesheet">
 </head>
 <body class="page-iframe">
 <div id="wrap">
     <div id="header">
         <div class="inner">
-            <h1 class="logo"><a href="javascript:;" title="直聘企业版"><img src="/v2/web/boss/images/logo.png" /><span>直聘企业版</span></a></h1>
+            <h1 class="logo" style="height: 1px;"><a href="javascript:;" title="JobFinder企业版"><span>直聘企业版</span></a></h1>
             <div class="top-inner">
                 <div class="company-title">${company.companyName}</div>
                 <div class="top-user">
                     <a href="javascript:;" ka="header-link-set" class="link-set" data-url="/setting/all.json" title="设置"><i class="fz fz-set"></i></a>
                     <a href="javascript:;" ka="header-link-help" class="link-help" title="帮助"><i class="fz fz-help"></i></a>
-                    <a href="/User/logout.do"  ka="header-link-signout" class="link-signout" title="退出登录"><i class="fz fz-signout"></i></a>
+                    <a href="/user/logout.do"  ka="header-link-signout" class="link-signout" title="退出登录"><i class="fz fz-signout"></i></a>
                 </div>
             </div>
         </div>
@@ -36,10 +36,10 @@
             <div class="side-menu">
                 <div class="figure">
                     <a ka="menu-user-info" href="javascript:;" data-url="/user/boss/info/" title="编辑"><img src="../img/ico-2.jpg" alt="" /></a>
-                    <span>${bussinessuser.userName}</span>
+                    <span>${businessuser.businessUserName}</span>
                 </div>
                 <dl class="menu-position cur">
-                    <dt><a class="menu-job-manage" ka="menu-manager-job" href="joblist.jsp" target="mainframe"><i class="icon-menu-position"></i>职位管理</a></dt>
+                    <dt><a class="menu-job-manage" ka="menu-manager-job" href="joblist.jsp" target="mainframe6"><i class="icon-menu-position"></i>职位管理</a></dt>
                 </dl>
                 <dl class="menu-recommend ">
                     <dt><a class="menu-recommend-person" ka="menu-geek-recommend" href="javascript:;" data-url="/boss/recommend/conditions.json"><i class="icon-menu-recommend"></i>推荐牛人</a></dt>
@@ -58,41 +58,36 @@
             </div>
         </div>
         <div id="container">
+            <!--职位列表-->
+            <div class="job-container page-container"  width="100%" style="display: block;">
+                <iframe name="mainframe6" class="frame-container" src="joblist.jsp"></iframe>
+            </div>
+            <!--职位列表 end-->
+            <!--推荐页面-->
+            <div class="sync-container page-container" style="display: none;">
+                <iframe name="mainframe2" class="frame-container" src="recommendperson.jsp"></iframe>
+            </div>
+            <!--推荐页面 end-->
+            <!--搜索-->
+            <div class="search-container page-container" style="display: none;">
+                <iframe name="mainframe4" class="frame-container" src="personlist.jsp" ></iframe>
+            </div>
+            <!--搜索 end-->
             <!--消息 start-->
             <div class="chat-container page-container" style="display: none;">
-                <iframe name="mainframe" class="frame-container" src="/jspforbusiness/chatforbusiness.jsp"></iframe>
+                <iframe name="mainframe" class="frame-container" src="chatforbusiness.jsp"></iframe>
             </div>
             <!--消息 end-->
-            <!--推荐页面内容插入容器-->
-            <div class="sync-container page-container" style="display: none;">
-                <iframe name="mainframe2" class="frame-container" src="/jspforbusiness/recommendperson.jsp"></iframe>
-            </div>
-            <!--推荐页面内容插入容器 end-->
-            <!--容器-->
-            <div class="viewed-container page-container" style="display: none;">
-                <iframe name="mainframe3" class="frame-container" ></iframe>
-            </div>
-            <!--容器 end-->
-            <!--搜索容器-->
-            <div class="search-container page-container" style="display: none;">
-                <iframe name="mainframe4" class="frame-container" ></iframe>
-            </div>
-            <!--搜索容器 end-->
-            <!--公司信息容器-->
+            <!--公司信息-->
             <div class="company-container page-container" style="display: none;">
-                <iframe name="mainframe5" class="frame-container" ></iframe>
+                <iframe name="mainframe5" class="frame-container" src="companyinfo.jsp"></iframe>
             </div>
-            <!--公司信息容器 end-->
-            <!--职位列表页面插入容器-->
-            <div class="rsync-container page-container"  width="100%" style="display: block;">
-                <iframe name="mainframe6" class="frame-container" src="/jspforbusiness/joblist.jsp"></iframe>
-            </div>
-            <!--职位列表页面插入容器 end-->
-            <!--设置页面内容插入容器-->
+            <!--公司信息 end-->
+            <!--设置页面-->
             <div class="set-container page-container" style="display: none;">
-                <iframe name="mainframe7" class="frame-container" src="/jspforbusiness/settingforbussiness.jsp"></iframe>
+                <iframe name="mainframe7" class="frame-container" src="settingforbussiness.jsp"></iframe>
             </div>
-            <!--设置页面内容插入容器 end-->
+            <!--设置页面 end-->
         </div>
     </div>
 </div>

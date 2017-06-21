@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.ysu.ling.dao.IPersonRecommendDao">
+
+    <select id="selectPersonRecommendByBusinessUserId" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Personrecommend">
+        SELECT * FROM personrecommend WHERE businessUserId = #{businessUserId}
+    </select>
+
+    <select id="selectPersonRecommendById" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Personrecommend">
+        SELECT * FROM personrecommend WHERE recommendId = #{recommendId}
+    </select>
+
+    <insert id="insertPersonRecommend" parameterType="edu.ysu.ling.pojo.Personrecommend">
+        INSERT INTO personrecommend
+        (recommendId,businessUserId,userId,recommendDate)
+        VALUES
+        (#{recommendId},#{businessUserId},#{userId},#{recommendDate})
+    </insert>
+</mapper>

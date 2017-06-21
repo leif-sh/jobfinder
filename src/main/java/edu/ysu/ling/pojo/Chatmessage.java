@@ -9,11 +9,17 @@ import java.util.Date;
 public class Chatmessage {
 
     private String chatId;
-    private int businessUserId;
+    private String businessUserId;
     private String userId;
     private String chatInfo;
     private Date chatDateTime;
     private String sendFrom;//1 表示普通用户发送 2 表示企业用户发送
+    private String jobMessageId;
+
+    private Businessuser businessuser;
+    private User user;
+    private Requirementinfo requirementinfo;
+
 
     public String getChatId() {
         return chatId;
@@ -23,11 +29,12 @@ public class Chatmessage {
         this.chatId = chatId;
     }
 
-    public int getBusinessUserId() {
+
+    public String getBusinessUserId() {
         return businessUserId;
     }
 
-    public void setBusinessUserId(int businessUserId) {
+    public void setBusinessUserId(String businessUserId) {
         this.businessUserId = businessUserId;
     }
 
@@ -61,5 +68,37 @@ public class Chatmessage {
 
     public void setSendFrom(String sendFrom) {
         this.sendFrom = sendFrom;
+    }
+
+    public String getJobMessageId() {
+        return jobMessageId;
+    }
+
+    public void setJobMessageId(String jobMessageId) {
+        this.jobMessageId = jobMessageId;
+    }
+
+    public Businessuser getBusinessuser() {
+        return businessuser;
+    }
+
+    public void setBusinessuser(Businessuser businessuser) {
+        this.businessuser = businessuser;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Requirementinfo getRequirementinfo() {
+        return requirementinfo;
+    }
+
+    public void setRequirementinfo(Requirementinfo requirementinfo) {
+        this.requirementinfo = requirementinfo;
     }
 }

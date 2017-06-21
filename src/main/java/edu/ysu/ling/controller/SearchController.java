@@ -35,96 +35,111 @@ public class SearchController {
         if (StringUtils.isNotBlank(labels)) {
             params.put("labels", labels);
         }
-        if (StringUtils.isBlank(thispage)){
+        if (StringUtils.isBlank(thispage) || thispage.length() == 0){
             thispage = "1";
         }
         Page page = new Page(Integer.parseInt(thispage));
         params.put("page", page);
         if (StringUtils.isNotBlank(salary)){
-            if (salary.equals("不限")){
-                params.put("salary", "");
-            } else if (salary.equals("3k以下")) {
-                params.put("salary", "AND salaryTop < 3");
-            } else if (salary.equals("3-5k")) {
-                params.put("salry", "AND salaryBottom > 3 AND 5 > salaryBottom");
-            } else if (salary.equals("5-10k")) {
-                params.put("salary", "AND salaryBottom > 5 AND 10 > salaryBottom");
-            } else if (salary.equals("10-15k")) {
-                params.put("salary", "AND salaryBottom > 10 AND 15 > salaryBottom");
-            } else if (salary.equals("15-20k")) {
-                params.put("salary", "AND salaryBottom > 15 AND 20 > salaryBottom");
-            } else if (salary.equals("20-30k")) {
-                params.put("salary", "AND salaryBottom > 20 AND 30 > salaryBottom");
-            } else if (salary.equals("30-50k")) {
-                params.put("salary", "AND salaryBottom > 30 AND 50 > salaryBottom");
-            } else if (salary.equals("50k以上")) {
-                params.put("salary", "AND salaryBottom > 50");
-            } else {
-                params.put("salary", "");
-            }
+            params.put("salary", salary);
         }
         if (StringUtils.isNotBlank(companyType)) {
-            if (companyType.equals("不限")) {
+            if (companyType.equals("scale-0")) {
                 params.put("companyType", "");
+            }else if (companyType.equals("type-1")){//健康医疗
+                params.put("companyType", "健康医疗");
+            }else if (companyType.equals("type-2")){//生活服务
+                params.put("companyType", "生活服务");
+            }else if (companyType.equals("type-3")){//旅游
+                params.put("companyType", "旅游");
+            }else if (companyType.equals("type-4")){//金融
+                params.put("companyType", "金融");
+            }else if (companyType.equals("type-5")){//信息安全
+                params.put("companyType", "信息安全");
+            }else if (companyType.equals("type-6")){//广告营销
+                params.put("companyType", "广告营销");
+            }else if (companyType.equals("type-7")){//数据服务
+                params.put("companyType", "数据服务");
+            }else if (companyType.equals("type-8")){//智能硬件
+                params.put("companyType", "智能硬件");
+            }else if (companyType.equals("type-9")){//文化娱乐
+                params.put("companyType", "文化娱乐");
+            }else if (companyType.equals("scale-10")) {//网络招聘
+                params.put("companyType", "网络招聘");
+            }else if (companyType.equals("type-11")){//分类信息
+                params.put("companyType", "分类信息");
+            }else if (companyType.equals("type-12")){//电子商务
+                params.put("companyType", "电子商务");
+            }else if (companyType.equals("type-13")){//移动互联网
+                params.put("companyType", "移动互联网");
+            }else if (companyType.equals("type-14")){//企业服务
+                params.put("companyType", "企业服务");
+            }else if (companyType.equals("type-15")){//社交网络
+                params.put("companyType", "社交网络");
+            }else if (companyType.equals("type-16")){//教育培训
+                params.put("companyType", "教育培训");
+            }else if (companyType.equals("type-17")){//O2O
+                params.put("companyType", "O2O");
+            }else if (companyType.equals("type-18")){//游戏
+                params.put("companyType", "游戏");
+            }else if (companyType.equals("type-19")){//互联网
+                params.put("companyType", "互联网");
+            }else if (companyType.equals("scale-20")) {//媒体
+                params.put("companyType", "媒体");
+            }else if (companyType.equals("type-21")){//IT软件
+                params.put("companyType", "IT软件");
+            }else if (companyType.equals("type-22")){//通信
+                params.put("companyType", "通信");
+            }else if (companyType.equals("type-23")){//公关会展
+                params.put("companyType", "公关会展");
+            }else if (companyType.equals("type-24")){//房地产/建筑
+                params.put("companyType", "房地产/建筑");
+            }else if (companyType.equals("type-25")){//汽车
+                params.put("companyType", "汽车");
+            }else if (companyType.equals("type-26")){//供应链/物流
+                params.put("companyType", "供应链/物流");
+            }else if (companyType.equals("type-27")){//咨询/翻译/法律
+                params.put("companyType", "咨询/翻译/法律");
+            }else if (companyType.equals("type-28")){//采购/贸易
+                params.put("companyType", "采购/贸易");
             }else{
-                params.put("companyType", "AND companyType = " + companyType);
-            }
-        }
-        if (StringUtils.isNotBlank(companyScale)) {
-            if (companyScale.equals("不限")) {
-                params.put("companyScale", "");
+                params.put("companyType", "");
             }
 
         }
+        if (StringUtils.isNotBlank(companyScale)) {
+            params.put("companyScale", companyScale);
+        }
         if (StringUtils.isNotBlank(jobExperience)) {
-            if (jobExperience.equals("不限")) {
-                params.put("jobExperience", "");
-            } else if (jobExperience.equals("应届生")) {
-                params.put("jobExperience", "AND jobExperienceBottom = 0");
-            } else if (jobExperience.equals("1年以内")) {
-                params.put("jobExperience", "AND jobExperienceBottom > 0");
-            } else if (jobExperience.equals("1-3年")) {
-                params.put("jobExperience", "");
-            } else if (jobExperience.equals("3-5年")) {
-                params.put("jobExperience", "");
-            } else if (jobExperience.equals("5-10年")) {
-                params.put("jobExperience", "");
-            } else if (jobExperience.equals("10年以上")) {
-                params.put("jobExperience", "");
-            }
+            params.put("jobExperience", jobExperience);
         }
         if (StringUtils.isNotBlank(educationLevel)) {
-            if (educationLevel.equals("不限")) {
-                params.put("educationLevel", "");
-            } else if (educationLevel.equals("中专")) {
-                params.put("educaitonLevel", "AND educationLevel = '中专'");
-            } else if (educationLevel.equals("高中")) {
-                params.put("educaitonLevel", "AND educationLevel IN ('中专','高中')");
-            } else if (educationLevel.equals("大专")) {
-                params.put("educaitonLevel", "AND educationLevel IN ('中专','高中','大专','大专及以上')");
-            } else if (educationLevel.equals("本科")) {
-                params.put("educaitonLevel", "AND educationLevel NOT IN ('硕士','博士')");
-            } else if (educationLevel.equals("硕士")) {
-                params.put("educaitonLevel", "AND educationLevel NOT IN ('博士')");
-            } else if (educationLevel.equals("博士")) {
-                params.put("educaitonLevel", "");
-            }
+            params.put("educationLevel", educationLevel);
         }
 
         if (StringUtils.isNotBlank(scity)){
-            logger.info("city:" + scity);
             params.put("city", scity);
         }
+        logger.info("salary = " + salary);
+        logger.info("educationLevel = "+educationLevel);
+        logger.info("jobExperience = "+jobExperience);
+        logger.info("companyScale = "+companyScale);
+        logger.info("companyType = "+companyType);
+        logger.info("city = " + scity);
         logger.info("labels = "+labels);
         List<Requirementinfo> list = requirementinfoService.getJobs(params);
-        logger.info("返回"+list.size()+"条数据");
+        //logger.info("返回"+list.size()+"条数据");
+        logger.info("=====================");
         model.addAttribute("jobList", list);
+        model.addAttribute("labels", labels);
+        model.addAttribute("scity", scity);
         model.addAttribute("page", page);
         model.addAttribute("salary", salary);
         model.addAttribute("educationLevel", educationLevel);
         model.addAttribute("jobExperience", jobExperience);
         model.addAttribute("companyScale", companyScale);
         model.addAttribute("companyType", companyType);
+        model.addAttribute("selectStatus", "1");
         return "job";
     }
 

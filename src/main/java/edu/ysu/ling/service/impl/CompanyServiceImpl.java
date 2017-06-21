@@ -5,6 +5,8 @@ import edu.ysu.ling.pojo.Company;
 import edu.ysu.ling.service.ICompanyService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 
@@ -14,6 +16,7 @@ import javax.annotation.Resource;
 
 public class CompanyServiceImpl implements ICompanyService {
 
+    private static Logger logger = LoggerFactory.getLogger(CompanyServiceImpl.class);
     @Resource
     private SqlSessionFactory sqlSessionFactory;
     private ICompanyDao companyDao;
@@ -34,6 +37,36 @@ public class CompanyServiceImpl implements ICompanyService {
             e.printStackTrace();
         }finally {
             sqlSession.close();
+        }
+        return company;
+    }
+
+    @Override
+    public boolean addCompany(Company company) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            companyDao = session.getMapper(ICompanyDao.class);
+            companyDao.insertCompany(company);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public Company changeCompany(Company company) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            companyDao = session.getMapper(ICompanyDao.class);
+            companyDao.updateCompany(company);
+            company = companyDao.selectCompanyById(company.getCompanyId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
         }
         return company;
     }

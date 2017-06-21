@@ -21,7 +21,7 @@ public class BossZhiPinController {
     public static void main(String[] args) throws Exception {
 
         String crawlStorageFolder = "./tmp/boss";
-        int numberOfCrawlers = 3;//设置爬虫的数量
+        int numberOfCrawlers = 1;//设置爬虫的数量
 
         CrawlConfig config = new CrawlConfig();
 
@@ -31,7 +31,7 @@ public class BossZhiPinController {
      * Be polite: Make sure that we don't send more than 1 request per
      * second (1000 milliseconds between requests).
      */
-        config.setPolitenessDelay(2000);
+        config.setPolitenessDelay(3000);
         config.setMaxDepthOfCrawling(5);//设置深度
         config.setMaxPagesToFetch(10000);//要爬取的页面数量
         config.setIncludeBinaryContentInCrawling(false);//是否爬取二进制数据like pdf images

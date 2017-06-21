@@ -9,4 +9,8 @@ import edu.ysu.ling.pojo.Company;
 public interface ICompanyService {
 
     public abstract Company findCompanyById(String companyId);
+
+    public abstract boolean addCompany(Company company);
+
+    public abstract Company changeCompany(Company company);
 }

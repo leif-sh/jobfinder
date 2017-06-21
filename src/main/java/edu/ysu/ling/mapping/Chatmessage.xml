@@ -6,8 +6,40 @@
 <mapper namespace="edu.ysu.ling.dao.IChatmessageDao">
     <insert id="insertChatmessage" parameterType="edu.ysu.ling.pojo.Chatmessage">
         INSERT INTO chatmessage
-        (chatId,businessUserId,userId,chatInfo,chatDateTime,sendFrom)
+        (chatId,businessUserId,userId,chatInfo,chatDateTime,sendFrom,jobMessageId)
         VALUES
-        (#{chatId},#{businessUserId},#{userId},#{chatInfo},#{chatDateTime},#{sendFrom})
+        (#{chatId},#{businessUserId},#{userId},#{chatInfo},#{chatDateTime},#{sendFrom},#{jobMessageId})
     </insert>
+
+    <select id="selectChatmessages" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Chatmessage">
+        SELECT * FROM chatmessage
+        <where>
+            <if test="userId != null">
+                userId = #{userId}
+            </if>
+            <if test="businessUserId != null">
+                AND businessUserId = #{businessUserId}
+            </if>
+        </where>
+        ORDER BY chatDateTime DESC LIMIT 0,1
+    </select>
+
+    <select id="selectChatmessageById" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Chatmessage">
+        SELECT * FROM chatmessage
+        WHERE userId = #{userId}
+        AND businessUserId = #{businessUserId}
+        ORDER BY chatDateTime LIMIT 0,20
+    </select>
+
+    <select id="selectChatUsers" parameterType="java.util.Map" resultType="java.lang.String">
+        SELECT DISTINCT userId FROM chatmessage WHERE businessUserId = #{businessUserId} ORDER BY chatDateTime DESC LIMIT 0,20
+    </select>
+
+    <select id="selectChatBusinessusers" parameterType="java.util.Map" resultType="java.lang.String">
+        SELECT DISTINCT businessUserId FROM chatmessage WHERE userId = #{userId} ORDER BY chatDateTime DESC LIMIT 0,20
+    </select>
+    
+    <select id="selectChatCount" parameterType="java.util.Map" resultType="int">
+        SELECT count(chatId) FROM chatmessage WHERE userId = #{userId} AND businessUserId = #{businessUserId}
+    </select>
 </mapper>

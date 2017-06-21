@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.ysu.ling.dao.IResumeDao">
+    <select id="selectResumeByUserId" resultType="edu.ysu.ling.pojo.Resume" parameterType="java.lang.String">
+        SELECT * FROM resume WHERE userId = #{userId}
+    </select>
+    <update id="updateResume" parameterType="edu.ysu.ling.pojo.Resume">
+        UPDATE resume SET resumeName = #{resumeName},resumeNation = #{resumeNation},resumeBirthday = #{resumeBirthday},
+        resumeCity = #{resumeCity},resumePhone = #{resumePhone},resumeMailAddress = #{resumeMailAddress},resumeDescription = #{resumeDescription},
+        resumeWorkingExperienceTime = #{resumeWorkingExperienceTime},percent = #{percent},updateTime = #{updateTime}
+        WHERE
+        userId = #{userId}
+    </update>
+    <insert id="insertResume" parameterType="edu.ysu.ling.pojo.Resume">
+        INSERT INTO resume
+        (dreamJobId,userId,resumeName,resumeNation,resumeEducationLevel,resumeCity,resumePhone,resumeMailAddress,resumeDescription,resumeWorkingExperienceTime,percent,updateTime)
+        VALUES
+        (#{dreamJobId},#{userId},#{resumeName},#{resumeNation},#{resumeEducationLevel},#{resumeCity},#{resumePhone},#{resumeMailAddress},#{resumeDescription},#{resumeWorkingExperienceTime},#{percent},#{updateTime})
+    </insert>
+    <delete id="deleteResume" parameterType="edu.ysu.ling.pojo.Resume">
+        DELETE FROM resume WHERE userId = #{userId}
+    </delete>
+
+
+    <select id="selectDreamJobByResumeId" resultType="edu.ysu.ling.pojo.Dreamjob" parameterType="int">
+        SELECT * FROM dreamjob WHERE resumeId = #{resumeId}
+    </select>
+    <select id="selectDreamJobs" resultType="edu.ysu.ling.pojo.Dreamjob" parameterType="java.util.Map">
+        SELECT * FROM dreamjob WHERE jobPush = #{jobPush}
+    </select>
+    <update id="updateDreamJob" parameterType="edu.ysu.ling.pojo.Dreamjob">
+        UPDATE dreamjob SET dreamJobName = #{dreamJobName},dreamJobType = #{dreamJobType},dreamJobCity = #{dreamJobCity},dreamSalaryTop = #{dreamSalaryTop},
+        dreamSalaryBottom = #{dreamSalaryBottom},dreamJobIntroduction = #{dreamJobIntroduction},jobPush = #{jobPush} WHERE userId = #{userId}
+    </update>
+    <insert id="insertDreamJob" parameterType="edu.ysu.ling.pojo.Dreamjob">
+        INSERT INTO dreamjob
+        (dreamJobId,resumeId,userId,dreamJobName,dreamJobType,dreamJobCity,dreamSalaryTop,dreamSalaryBottom,dreamJobIntroduction,jobPush)
+        VALUES
+        (#{dreamJobId},#{resumeId},#{userId},#{dreamJobName},#{dreamJobType},#{dreamJobCity},#{dreamSalaryTop},#{dreamSalaryBottom},#{dreamJobIntroduction},#{jobPush})
+    </insert>
+    <delete id="deleteDreamJob" parameterType="edu.ysu.ling.pojo.Dreamjob">
+        DELETE FROM dreamjob WHERE userId = #{userId}
+    </delete>
+
+
+    <select id="selectEducationExperienceByResumeId" parameterType="int" resultType="edu.ysu.ling.pojo.Educationexperience">
+        SELECT * FROM educationexperience WHERE resumeId = #{resumeId}
+    </select>
+    <select id="selectEducationById" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Educationexperience">
+        SELECT * FROM educationexperience WHERE educationExperienceId = #{educationExperienceId}
+    </select>
+    <update id="updateEducationExperience" parameterType="edu.ysu.ling.pojo.Educationexperience">
+        UPDATE educationexperience SET educationSchoolName = #{educationSchoolName},educationMajor = #{educationMajor},educationGraduateDate = #{educationGraduateDate},
+        educationExperience = #{educationExperience},educationBeginDate = #{educationBeginDate} WHERE educationExperienceId = #{educationExperienceId}
+    </update>
+    <insert id="insertEducationExperience" parameterType="edu.ysu.ling.pojo.Educationexperience">
+        INSERT INTO educationexperience
+        (educationLevel,educationExperienceId,resumeId,educationSchoolName,educationMajor,educationGraduateDate,educationExperience,educationBeginDate)
+        VALUES
+        (#{educationLevel},#{educationExperienceId},#{resumeId},#{educationSchoolName},#{educationMajor},#{educationGraduateDate},#{educationExperience},#{educationBeginDate})
+    </insert>
+    <delete id="deleteEducationExperience" parameterType="edu.ysu.ling.pojo.Educationexperience">
+        DELETE FROM educationexperience WHERE educationExperience = #{educationExperience}
+    </delete>
+
+
+    <select id="selectJobExperienceByResumeId" parameterType="int" resultType="edu.ysu.ling.pojo.Jobexperience">
+        SELECT * FROM jobexperience WHERE resumeId = #{resumeId}
+    </select>
+    <select id="selectJobExperienceById" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Jobexperience">
+        SELECT * FROM jobexperience WHERE jobExperienceId = #{jobExperienceId};
+    </select>
+    <update id="updateJobExperience" parameterType="edu.ysu.ling.pojo.Jobexperience">
+        UPDATE jobexperience SET jobCompanyName = #{jobCompanyName},jobOfYou = #{jobOfYou},jobBeginDate = #{jobBeginDate},
+        jobEndDate = #{jobEndDate},jobDetail = #{jobDetail},jobName = #{jobName} WHERE jobExperienceId = #{jobExperienceId}
+    </update>
+    <insert id="insertJobExperience" parameterType="edu.ysu.ling.pojo.Jobexperience">
+        INSERT INTO jobexperience
+        (jobName,jobExperienceId,resumeId,jobCompanyName,jobOfYou,jobBeginDate,jobEndDate,jobDetail)
+        VALUES
+        (#{jobName},#{jobExperienceId},#{resumeId},#{jobCompanyName},#{jobOfYou},#{jobBeginDate},#{jobEndDate},#{jobDetail})
+    </insert>
+    <delete id="deleteJobExperience" parameterType="edu.ysu.ling.pojo.Jobexperience">
+        DELETE FROM jobexperience WHERE jobExperienceId = #{jobExperienceId}
+    </delete>
+
+
+    <select id="selectProjectExperienceByResumeId" parameterType="int" resultType="edu.ysu.ling.pojo.Projectexperience">
+        SELECT * FROM projectexperience WHERE resumeId = #{resumeId}
+    </select>
+    <select id="selectProjectExperienceById" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Projectexperience">
+        SELECT * FROM projectexperience WHERE projectExperienceId = #{projectExperienceId}
+    </select>
+    <update id="updateProjectExperience" parameterType="edu.ysu.ling.pojo.Projectexperience">
+        UPDATE projectexperience SET projectName = #{projectName},projectDuty = #{projectDuty},projectBeginDate = #{projectBeginDate},
+        projectEndDate = #{projectEndDate},projectDescription = #{projectDescription},projectUrl = #{projectUrl} WHERE projectExperienceId = #{projectExperienceId}
+    </update>
+    <insert id="insertProjectExperience" parameterType="edu.ysu.ling.pojo.Projectexperience">
+        INSERT INTO projectexperience
+        (projectExperienceId,resumeId,projectName,projectDuty,projectBeginDate,projectEndDate,projectDescription,projectUrl)
+        VALUES
+        (#{projectExperienceId},#{resumeId},#{projectName},#{projectDuty},#{projectBeginDate},#{projectEndDate},#{projectDescription},#{projectUrl})
+    </insert>
+    <delete id="deleteProjectExperience" parameterType="edu.ysu.ling.pojo.Projectexperience">
+        DELETE FROM projectexperience WHERE projectExperienceId = #{projectExperienceId}
+    </delete>
+
+    <select id="selectResumeForPush" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Resume">
+        SELECT * FROM resume limit 0,3
+    </select>
+</mapper>

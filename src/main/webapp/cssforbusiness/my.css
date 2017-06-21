@@ -1,0 +1,11 @@
+.ipt{
+    min-height: 47px;
+    border: 1px solid #D6D6D6;
+    border-radius: 4px;
+    font-size: 14px;
+    vertical-align: middle;
+    min-width: 300px;
+    padding: 9px 12px;
+    width: 391px;
+    line-height: 22px;
+}

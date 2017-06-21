@@ -42,4 +42,17 @@
             #{item}
         </foreach>
     </select>
+
+    <insert id="insertCompany" parameterType="edu.ysu.ling.pojo.Company">
+        INSERT INTO company
+        (companyId,companyName,companyType,companyScale,companyPosition,companyProperty,companyWebsite,companyIntroduction)
+        VALUES
+        (#{companyId},#{companyName},#{companyType},#{companyScale},#{companyPosition},#{companyProperty},#{companyWebsite},#{companyIntroduction})
+    </insert>
+    <update id="updateCompany" parameterType="edu.ysu.ling.pojo.Company">
+        UPDATE company
+        SET companyName = #{companyName},companyType = #{companyType},companyScale = #{companyScale},companyPosition = #{companyPosition},
+        companyProperty = #{companyProperty},companyWebsite = #{companyWebsite},companyIntroduction = #{companyIntroduction}
+        WHERE companyId = #{companyId}
+    </update>
 </mapper>

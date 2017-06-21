@@ -15,17 +15,33 @@ import java.util.Map;
  **/
 public interface IChatmessageDao {
 
-    //通过Id查询
-    public Chatmessage selectChatmessageById(String userId);
+    /**
+     * 通过Id查询
+     * @param params
+     * @return
+     */
+    public List<Chatmessage> selectChatmessageById(Map params);
 
-    //批量获取聊天记录
-    public List<Chatmessage> getChatmessages(Map params);
+    /**
+     * 获取聊天记录最新的一条
+     * @param params
+     * @return
+     */
+    public Chatmessage selectChatmessages(Map params);
 
-    //获取最近沟通的联系人
-    public List<String> getChatUsers(Map params);
+    /**
+     * 获取最近沟通的联系人
+     * @param params
+     * @return
+     */
+    public List<String> selectChatUsers(Map params);
 
-    //获取最近沟通的企业联系人
-    public List<String> getChatBusinessusers(Map params);
+    /**
+     * 获取最近沟通的企业联系人
+     * @param params
+     * @return
+     */
+    public List<String> selectChatBusinessusers(Map params);
 
     /**
      * 增加聊天信息
@@ -33,6 +49,16 @@ public interface IChatmessageDao {
      */
     public void insertChatmessage(Chatmessage chatmessage);
 
-    //删除聊天
-    public boolean deleteChatmessage();
+    /**
+     * 删除聊天
+     * @return
+     */
+    public boolean deleteChatmessage(Chatmessage chatmessage);
+
+    /**
+     * 计算聊天数量
+     * @param params
+     * @return
+     */
+    public int selectChatCount(Map params);
 }

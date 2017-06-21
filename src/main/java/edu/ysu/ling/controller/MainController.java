@@ -1,7 +1,9 @@
 package edu.ysu.ling.controller;
 
 import edu.ysu.ling.crawlerController.BossZhiPinController;
+import edu.ysu.ling.pojo.Businessuser;
 import edu.ysu.ling.pojo.User;
+import edu.ysu.ling.service.IBusinessUserService;
 import edu.ysu.ling.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,8 @@ public class MainController {
     private static org.slf4j.Logger logger = LoggerFactory.getLogger(BossZhiPinController.class);
     @Resource
     private IUserService userService;
+    @Resource
+    private IBusinessUserService businessUserService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -37,7 +41,7 @@ public class MainController {
         return "test";
     }*/
 
-    @RequestMapping(value = "/User/register.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/register.do", method = RequestMethod.POST)
     public String RegisterUser(String account, String password, String emailCode, Model model , HttpServletRequest request) {
         if (account.length() == 0 || password.length() == 0 || emailCode.length() == 0) {
             return "login";
@@ -56,16 +60,24 @@ public class MainController {
         return "redirect:index";
     }
 
-    @RequestMapping(value = "/User/login.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/login.do", method = RequestMethod.POST)
     public String LoginUser(String account, String password, Model model,HttpServletRequest request) {
+        HttpSession session = request.getSession();
         User user = new User();
         user.setAccount(account);
         user.setPassword(password);
-        if (account.equals("business") && password.equals("123")) {
+        Businessuser businessuser = new Businessuser();
+        businessuser.setBusinessMailAddress(account);
+        businessuser.setBusinessUserPassword(password);
+        if (businessUserService.loginVerify(businessuser)) {
+            businessuser = businessUserService.findUserByEmailAddress(businessuser.getBusinessMailAddress());
+            session.setAttribute("businessuser", businessuser);
+            logger.info("businessuser-----" + businessuser.getBusinessUserId());
             return "redirect:/jspforbusiness/indexforbusiness.jsp";
         }
         if (userService.loginVerify(user)) {
-            HttpSession session = request.getSession();
+            user = userService.findUserByAccount(user.getAccount());
+
             session.setAttribute("userinfo", user);
             return "redirect:/jsp/index.jsp";
         } else {
@@ -74,7 +86,7 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/User/logout.do")
+    @RequestMapping(value = "/user/logout.do")
     public String LogoutUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();

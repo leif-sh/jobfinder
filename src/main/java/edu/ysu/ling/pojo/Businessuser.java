@@ -8,29 +8,31 @@ import javax.print.DocFlavor;
 
 public class Businessuser {
 
-    private int businessUserId;
-    private int companyId;
+    private String businessUserId;
+    private String companyId;
     private String dreamPersonId;
     private String businessUserName;
     private String businessUserPassword;
+
     private String businessPhone;
     private String businessMailAddress;
     private String businessAccountPicture;
     private String businessRealName;
+    private String businessJob;
 
-    public int getBusinessUserId() {
+    public String getBusinessUserId() {
         return businessUserId;
     }
 
-    public void setBusinessUserId(int businessUserId) {
+    public void setBusinessUserId(String businessUserId) {
         this.businessUserId = businessUserId;
     }
 
-    public int getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 
@@ -88,5 +90,13 @@ public class Businessuser {
 
     public void setBusinessRealName(String businessRealName) {
         this.businessRealName = businessRealName;
+    }
+
+    public String getBusinessJob() {
+        return businessJob;
+    }
+
+    public void setBusinessJob(String businessJob) {
+        this.businessJob = businessJob;
     }
 }

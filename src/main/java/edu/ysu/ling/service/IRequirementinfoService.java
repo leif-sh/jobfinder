@@ -34,5 +34,10 @@ public interface IRequirementinfoService {
      */
     public abstract void addJob(Requirementinfo requirementinfo);
 
+    public abstract List<Requirementinfo> getRequirementinfoByBusinessUser(String businessUserId);
+
+    public abstract Requirementinfo changePublishRequirement(Requirementinfo requirementinfo);
+
+    public abstract void closePublishRequirement(Requirementinfo requirementinfo);
 
 }

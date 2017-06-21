@@ -28,5 +28,31 @@
         VALUES
         (#{userId},#{account},#{password});
     </insert>
+    <update id="updateUser" parameterType="edu.ysu.ling.pojo.User">
+        UPDATE user SET
+        <if test="mailAddress != null">
+            mailAddress = #{mailAddress},
+        </if>
+        <if test="phoneNumber != null">
+            phoneNumber = #{phoneNumber},
+        </if>
+        <if test="realName != null">
+            realName = #{realName},
+        </if>
+        <if test="resumeId != null">
+            resumeId = #{resumeId},
+        </if>
+        <if test="dreamJobId != null">
+            dreamJobId = #{dreamJobId}
+        </if>
+        <if test="userName != null">
+            userName = #{userName}
+        </if>
+        <if test="password != null">
+            password = #{password}
+        </if>
+        useId = #{userId}
+        WHERE userId = #{userId}
+    </update>
 
 </mapper>

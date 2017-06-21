@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.ysu.ling.dao.IBusinessUserDao">
+    <select id="selectBusinessUserById" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Businessuser">
+        SELECT * FROM businessuser WHERE businessUserId = #{businessUserId}
+    </select>
+    <select id="selectBusinessUserByEmail" parameterType="java.lang.String" resultType="edu.ysu.ling.pojo.Businessuser">
+        SELECT * FROM businessuser WHERE businessMailAddress = #{businessMailAddress}
+    </select>
+    <insert id="insertBusinessUser" parameterType="edu.ysu.ling.pojo.Businessuser">
+        INSERT INTO businessuser
+        (businessUserId,businessMailAddress,businessUserPassword)
+        VALUES
+        (#{businessUserId},#{businessMailAddress},#{businessUserPassword})
+    </insert>
+    <update id="updateBusinessUser" parameterType="edu.ysu.ling.pojo.Businessuser">
+        UPDATE businessuser SET companyId = #{companyId},dreamPersonId = #{dreamPersonId},businessUserName = #{businessUserName},
+        businessPhone = #{businessPhone}
+        WHERE businessUserId = #{businessUserId}
+    </update>
+    <select id="getBusinessUsers" parameterType="java.util.Map" resultType="edu.ysu.ling.pojo.Businessuser">
+        SELECT * FROM businessuser
+    </select>
+</mapper>

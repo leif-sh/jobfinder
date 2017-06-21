@@ -27,10 +27,10 @@ public interface IRequirementinfoDao {
 
     /**
      * 通过编号删除招聘信息
-     * @param params
+     * @param requirementinfo
      * @return
      */
-    public abstract boolean deleteRequirementinfoById(Map params);
+    public abstract void deleteRequirementinfo(Requirementinfo requirementinfo);
 
     /**
      * 添加招聘信息
@@ -49,11 +49,25 @@ public interface IRequirementinfoDao {
      * @param requirementinfo
      * @return
      */
-    public abstract boolean updateRequirementinfo(Requirementinfo requirementinfo);
+    public abstract void updateRequirementinfo(Requirementinfo requirementinfo);
 
     /**
      * 搜索职位信息
      * @return
      */
     public abstract List<Requirementinfo> selectRequirementinfoInSearch(Map params);
+
+    /**
+     * 查询需要进行推送的职位
+     * @param params
+     * @return
+     */
+    public abstract List<Requirementinfo> selectJobForPush(Map params);
+
+    /**
+     * 查询企业用户发布的职位
+     * @param businessUserId
+     * @return
+     */
+    public abstract List<Requirementinfo> selectRequirementinfoByBusinessUser(String businessUserId);
 }

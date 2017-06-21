@@ -4,46 +4,65 @@ $(document).ready(function(){
 		$(this).addClass("cur");
 	})
 	$(".menu-position").click(function(){
-		$(".rsync-container").show();
+		$(".search-container").hide();
 		$(".viewed-container").hide();
 		$(".sync-container").hide();
 		$(".chat-container").hide();
 		$(".set-container").hide();
+		$(".company-container").hide();
+		$(".job-container").show();
 		/*$(".menu-job-manage").addClass("cur");*/
 		//$(".menu-position").toggleClass("cur");
-		
 	});
 	$(".menu-recommend").click(function(){
-		$(".rsync-container").hide();
+		$(".search-container").hide();
+		$(".job-container").hide();
 		$(".viewed-container").hide();
-		$(".sync-container").show();
 		$(".chat-container").hide();
 		$(".set-container").hide();
+		$(".company-container").hide();
+		$(".sync-container").show();
 		/*$(".viewed-container").toggleClass("cur");*/
 		
 		
 	});
 	$(".menu-geek-search").click(function(){
-		$(".rsync-container").hide();
+		
+		$(".job-container").hide();
 		$(".viewed-container").hide();
-		$(".sync-container").show();
 		$(".chat-container").hide();
 		$(".set-container").hide();
+		$(".company-container").hide();
+		$(".sync-container").hide();
+		$(".search-container").show();
 	});
 	$(".menu-chat-bussiness").click(function(){
-		$(".rsync-container").hide();
+		$(".search-container").hide();
+		$(".job-container").hide();
 		$(".viewed-container").hide();
 		$(".sync-container").hide();
-		$(".chat-container").show();
 		$(".set-container").hide();
+		$(".company-container").hide();
+		$(".chat-container").show();
 	});
 	$(".menu-companyinfo").click(function(){
-		$(".rsync-container").hide();
+		$(".search-container").hide();
+		$(".job-container").hide();
 		$(".viewed-container").hide();
 		$(".sync-container").hide();
 		$(".chat-container").hide();
-		$(".set-container").show();
+		$(".set-container").hide();
+		$(".company-container").show();
 	});
+	$("#setting").click(function(){
+		$(".search-container").hide();
+		$(".job-container").hide();
+		$(".viewed-container").hide();
+		$(".sync-container").hide();
+		$(".chat-container").hide();
+		$(".company-container").hide();
+		$(".set-container").show();
+	})
 	$(".sel-type").click(function(){
 		//$(".sec-filter").attr("display","block");
 		/*if(!$(".sec-filter").hasClass("display")){

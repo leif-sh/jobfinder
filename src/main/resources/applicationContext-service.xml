@@ -15,5 +15,20 @@
     <bean id="companyService" class="edu.ysu.ling.service.impl.CompanyServiceImpl">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+    <bean id="chatService" class="edu.ysu.ling.service.impl.ChatServiceImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="collectionService" class="edu.ysu.ling.service.impl.CollectionServiceImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="resumeService" class="edu.ysu.ling.service.impl.ResumeServiceImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="businessUserService" class="edu.ysu.ling.service.impl.BusinessUserServiceImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="personService" class="edu.ysu.ling.service.impl.PersonServiceImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
     <import resource="spring-mybatis.xml"/>
 </beans>

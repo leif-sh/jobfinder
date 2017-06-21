@@ -18,6 +18,8 @@ public interface IUserService {
      */
     public abstract User findUserByUserId(String userId);
 
+    public abstract User findUserByAccount(String account);
+
     /**
      * 添加用户
      * @param user

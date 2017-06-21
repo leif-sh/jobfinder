@@ -35,13 +35,14 @@ public class Requirementinfo {
     private String teamDescription;//团队描述
     private String companyId;//公司编号
     private long campusRequirementId;//校招编号
-    private int businessUserId;//企业用户Id
+    private String businessUserId;//企业用户Id
     private String jobUrl;
 
     private Date catchJobTime;//抓取时间
     private Company company;
     private List<Joblabels> joblabelsList;
     private Businessuser businessuser;
+    private int jobPercent;
 
     public String getJobMessageId() {
         return jobMessageId;
@@ -227,11 +228,12 @@ public class Requirementinfo {
         this.campusRequirementId = campusRequirementId;
     }
 
-    public int getBusinessUserId() {
+
+    public String getBusinessUserId() {
         return businessUserId;
     }
 
-    public void setBusinessUserId(int businessUserId) {
+    public void setBusinessUserId(String businessUserId) {
         this.businessUserId = businessUserId;
     }
 
@@ -273,6 +275,14 @@ public class Requirementinfo {
 
     public void setBusinessuser(Businessuser businessuser) {
         this.businessuser = businessuser;
+    }
+
+    public int getJobPercent() {
+        return jobPercent;
+    }
+
+    public void setJobPercent(int jobPercent) {
+        this.jobPercent = jobPercent;
     }
 
     @Override

@@ -15,6 +15,7 @@ public class Jobexperience {
     private Date jobBeginDate;
     private Date jobEndDate;
     private String jobDetail;
+    private String jobName;
 
     public String getJobExperienceId() {
         return jobExperienceId;
@@ -70,5 +71,13 @@ public class Jobexperience {
 
     public void setJobDetail(String jobDetail) {
         this.jobDetail = jobDetail;
+    }
+
+    public String getJobName() {
+        return jobName;
+    }
+
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
     }
 }

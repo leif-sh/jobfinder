@@ -10,15 +10,15 @@
 		<title>JobFinder-职位</title>
 		<meta name="keywords" content="JobFinder" />
 		<meta name="description" content="JobFinder，互联网时代的领跑者！" />
-		<link href="../css/main.css" type="text/css" rel="stylesheet">
+		<link href="/css/main.css" type="text/css" rel="stylesheet">
 	</head>
 
 	<body>
-	<%--<c:if test="${empty jobList}">
+	<c:if test="${empty selectStatus}">
 		<script>
-            window.location = "/job/getJobList.do?pageName=job";
+            window.location = "/search/searchJob.do";
 		</script>
-	</c:if>--%>
+	</c:if>
 		<div id="wrap">
 			<div id="header">
 				<div class="inner">
@@ -26,9 +26,9 @@
 					<div class="nav">
 						<ul>
 							<li class=""><a ka="header-home" href="/jsp/index.jsp">首页</a></li>
-							<li class="cur"><a ka="header-job" href="/search/searchJob.do">职位</a></li>
+							<li class="cur"><a ka="header-job" href="/jsp/job.jsp">职位</a></li>
 							<!--<li class=""><a ka="header-app" href="/app.html" >APP</a></li>-->
-							<li class=""><a ka="header-article" href="">校招</a></li>
+							<%--<li class=""><a ka="header-article" href="">校招</a></li>--%>
 						</ul>
 					</div>
 
@@ -36,10 +36,10 @@
 						<c:if test="${sessionScope.userinfo != null}">
 							<!--登录-->
 							<ul>
-								<li class=""><a ka="header-chat" href="chat.jsp" >聊天<span class="nav-chat-num"></span></a></li>
-								<li class=""><a ka="header-delivery-box" href="" >投递箱</a></li>
-								<li class="cur"><a ka="header-my-resume" href="resume.jsp" >我的简历</a></li>
-								<li class="nav-figure"><a href="resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/User/logout.do" ka="header-logout">退出</a></div></li>
+								<li class=""><a ka="header-chat" href="/jsp/chat.jsp" >聊天<span class="nav-chat-num"></span></a></li>
+								<li class=""><a ka="header-delivery-box" href="/jsp/collect.jsp" >收藏</a></li>
+								<li class=""><a ka="header-my-resume" href="/jsp/resume.jsp" >我的简历</a></li>
+								<li class="nav-figure"><a href="/jsp/resume.jsp" ka="header-username" ><span class="label-text">${userinfo.account}</span> <img src="../img/ico-1.jpg" alt="" /></a><div class="dropdown"><a href="/user/logout.do" ka="header-logout">退出</a></div></li>
 							</ul>
 						</c:if>
 						<c:if test="${sessionScope.userinfo == null}">
@@ -55,9 +55,11 @@
 			<div id="main" class="inner">
 				<div class="search-box">
 					<div class="search-form">
-						<form action="/search/searchJob.do" method="get">
+						<form action="/search/searchJob.do" method="post">
 							<div class="search-form-con">
-								<p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" placeholder="搜索职位、公司" value=""></p>
+								<p class="ipt-wrap">
+									<input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" placeholder="搜索职位、公司" value="${labels}">
+								</p>
 								<div class="city-sel" ka="search-select-city">
 									<i class="line"></i>
 									<span class="label-text cur"><b data-val="101010100">北京</b><i class="icon-arrow-down"></i></span>
@@ -65,7 +67,7 @@
 							</div>
 							<input type="hidden" name="scity" class="city-code" value="北京" />
 							<input type="hidden" name="source" value="2">
-							<button type="submit" ka="search-job" class="btn btn-search">搜索</button>
+							<button type="submit" class="btn btn-search">搜索</button>
 							<div class="suggest-result" style="display: none;">
 								<ul>
 								</ul>
@@ -73,40 +75,40 @@
 							<div class="city-box">
 								<ul class="dorpdown-province">
 									<li class="cur">热门</li>
-									<li ka="province-101010000">北京</li>
-									<li ka="province-101020000">上海</li>
-									<li ka="province-101030000">天津</li>
-									<li ka="province-101040000">重庆</li>
-									<li ka="province-101050000">黑龙江</li>
-									<li ka="province-101060000">吉林</li>
-									<li ka="province-101070000">辽宁</li>
-									<li ka="province-101080000">内蒙古</li>
-									<li ka="province-101090000">河北</li>
-									<li ka="province-101100000">山西</li>
-									<li ka="province-101110000">陕西</li>
-									<li ka="province-101120000">山东</li>
-									<li ka="province-101130000">新疆</li>
-									<li ka="province-101150000">青海</li>
-									<li ka="province-101160000">甘肃</li>
-									<li ka="province-101170000">宁夏</li>
-									<li ka="province-101180000">河南</li>
-									<li ka="province-101190000">江苏</li>
-									<li ka="province-101200000">湖北</li>
-									<li ka="province-101210000">浙江</li>
-									<li ka="province-101220000">安徽</li>
-									<li ka="province-101230000">福建</li>
-									<li ka="province-101240000">江西</li>
-									<li ka="province-101250000">湖南</li>
-									<li ka="province-101260000">贵州</li>
-									<li ka="province-101270000">四川</li>
-									<li ka="province-101280000">广东</li>
-									<li ka="province-101290000">云南</li>
-									<li ka="province-101300000">广西</li>
-									<li ka="province-101310000">海南</li>
-									<li ka="province-101340000">台湾</li>
-									<li ka="province-101140000">西藏</li>
-									<li ka="province-101320000">香港</li>
-									<li ka="province-101330000">澳门</li>
+									<li >北京</li>
+									<li >上海</li>
+									<li >天津</li>
+									<li >重庆</li>
+									<li >黑龙江</li>
+									<li >吉林</li>
+									<li >辽宁</li>
+									<li >内蒙古</li>
+									<li >河北</li>
+									<li >山西</li>
+									<li >陕西</li>
+									<li >山东</li>
+									<li >新疆</li>
+									<li >青海</li>
+									<li >甘肃</li>
+									<li >宁夏</li>
+									<li >河南</li>
+									<li >江苏</li>
+									<li >湖北</li>
+									<li >浙江</li>
+									<li >安徽</li>
+									<li >福建</li>
+									<li >江西</li>
+									<li >湖南</li>
+									<li >贵州</li>
+									<li >四川</li>
+									<li >广东</li>
+									<li >云南</li>
+									<li >广西</li>
+									<li >海南</li>
+									<li >台湾</li>
+									<li >西藏</li>
+									<li >香港</li>
+									<li >澳门</li>
 
 								</ul>
 								<div class="dorpdown-city">
@@ -916,109 +918,97 @@
 					<dl class="condition-city">
 						<dt>城市：</dt>
 						<dd>
-							<a href="/search/searchJob.do?scity=北京" ka="cur-city" class="selected disabled">北京</a><em class="icon-arrow-right"></em>
-							<a href="javascript:;" ka="sel-business" class="link-district selected">不限</a>
-							<span class="hot-text">热门城市：</span>
-							<a href="/search/searchJob.do?scity=上海" ka="sel-city-101020100">上海</a>
-							<a href="/search/searchJob.do?scity=广州" ka="sel-city-101280100">广州</a>
-							<a href="/search/searchJob.do?scity=深圳" ka="sel-city-101280600">深圳</a>
-							<a href="/search/searchJob.do?scity=杭州" ka="sel-city-101210100">杭州</a>
-							<a href="/search/searchJob.do?scity=天津" ka="sel-city-101030100">天津</a>
-							<a href="/search/searchJob.do?scity=西安" ka="sel-city-101110100">西安</a>
-							<a href="/search/searchJob.do?scity=苏州" ka="sel-city-101190400">苏州</a>
-							<a href="/search/searchJob.do?scity=武汉" ka="sel-city-101200100">武汉</a>
-							<a href="/search/searchJob.do?scity=厦门" ka="sel-city-101230200">厦门</a>
-							<a href="/search/searchJob.do?scity=长沙" ka="sel-city-101250100">长沙</a>
-							<a href="/search/searchJob.do?scity=成都" ka="sel-city-101270100">成都</a>
+							<a id="selectCondition_city" href="/search/searchJob.do?scity=北京" ka="cur-city" class="selected disabled">北京</a><em class="icon-arrow-right"></em>
+							<a href="/search/searchJob.do" ka="sel-business" class="link-district selected">不限</a>
 						</dd>
 					</dl>
 					<dl class="condition-experience">
 						<dt>经验：</dt>
+						<input type="hidden" name="jobExperience" value="${jobExperience}">
 						<dd>
-							<a class="selected" href="/search/searchJob.do?jobExperience=不限" ka="sel-exp-0">不限</a>
-							<a href="/search/searchJob.do?jobExperience=应届生" ka="sel-exp-102">应届生</a>
-							<a href="/search/searchJob.do?jobExperience=1年以内" ka="sel-exp-103">1年以内</a>
-							<a href="/search/searchJob.do?jobExperience=1-3年" ka="sel-exp-104">1-3年</a>
-							<a href="/search/searchJob.do?jobExperience=3-5年" ka="sel-exp-105">3-5年</a>
-							<a href="/search/searchJob.do?jobExperience=5-10年" ka="sel-exp-106">5-10年</a>
-							<a href="/search/searchJob.do?jobExperience=10年以上" ka="sel-exp-107">10年以上</a>
+							<a id="selectCondition_exp0" class="selected" href="/search/searchJob.do?jobExperience=exp-0" ka="sel-exp-0">不限</a>
+							<a id="selectCondition_exp1" href="/search/searchJob.do?jobExperience=exp-1" ka="sel-exp-102">应届生</a>
+							<a id="selectCondition_exp2" href="/search/searchJob.do?jobExperience=exp-2" ka="sel-exp-103">1年以内</a>
+							<a id="selectCondition_exp3" href="/search/searchJob.do?jobExperience=exp-3" ka="sel-exp-104">1-3年</a>
+							<a id="selectCondition_exp4" href="/search/searchJob.do?jobExperience=exp-4" ka="sel-exp-105">3-5年</a>
+							<a id="selectCondition_exp5" href="/search/searchJob.do?jobExperience=exp-5" ka="sel-exp-106">5-10年</a>
+							<a id="selectCondition_exp6" href="/search/searchJob.do?jobExperience=exp-6" ka="sel-exp-107">10年以上</a>
 						</dd>
 					</dl>
 					<dl class="condition-education">
 						<dt>学历：</dt>
+						<input type="hidden" name="educationLevel" value="${educationLevel}">
 						<dd>
-							<a href='/search/searchJob.do?educationLevel=不限' class="selected" ka="sel-degree-0">不限</a>
-							<a href='/search/searchJob.do?educationLevel=中专' ka="sel-degree-207">中专及以下</a>
-							<a href='/search/searchJob.do?educationLevel=高中' ka="sel-degree-206">高中</a>
-							<a href='/search/searchJob.do?educationLevel=大专' ka="sel-degree-202">大专</a>
-							<a href='/search/searchJob.do?educationLevel=本科' ka="sel-degree-203">本科</a>
-							<a href='/search/searchJob.do?educationLevel=硕士' ka="sel-degree-204">硕士</a>
-							<a href='/search/searchJob.do?educationLevel=博士' ka="sel-degree-205">博士</a>
-
+							<a id="selectCondition_degree0" href='/search/searchJob.do?educationLevel=degree-0' class="selected" ka="sel-degree-0">不限</a>
+							<a id="selectCondition_degree1" href='/search/searchJob.do?educationLevel=degree-1' ka="sel-degree-207">中专及以下</a>
+							<a id="selectCondition_degree2" href='/search/searchJob.do?educationLevel=degree-2' ka="sel-degree-206">高中</a>
+							<a id="selectCondition_degree3" href='/search/searchJob.do?educationLevel=degree-3' ka="sel-degree-202">大专</a>
+							<a id="selectCondition_degree4" href='/search/searchJob.do?educationLevel=degree-4' ka="sel-degree-203">本科</a>
+							<a id="selectCondition_degree5" href='/search/searchJob.do?educationLevel=degree-5' ka="sel-degree-204">硕士</a>
+							<a id="selectCondition_degree6" href='/search/searchJob.do?educationLevel=degree-6' ka="sel-degree-205">博士</a>
 						</dd>
 					</dl>
 					<dl class="condition-scale">
 						<dt>规模：</dt>
+						<input type="hidden" name="companyScale" value="${companyScale}">
 						<dd>
-							<a href='/search/searchJob.do?companyScale=不限' class="selected" ka="sel-scale-0">不限</a>
-							<a href='/search/searchJob.do?companyScale=0-20' ka="sel-scale-301">0-20人</a>
-							<a href='/search/searchJob.do?companyScale=20-99' ka="sel-scale-302">20-99人</a>
-							<a href='/search/searchJob.do?companyScale=100-499' ka="sel-scale-303">100-499人</a>
-							<a href='/search/searchJob.do?companyScale=500-999' ka="sel-scale-304">500-999人</a>
-							<a href='/search/searchJob.do?companyScale=1000-9999' ka="sel-scale-305">1000-9999人</a>
-							<a href='/search/searchJob.do?companyScale=10000' ka="sel-scale-306">10000人以上</a>
+							<a id="selectCondition_scale0" href='/search/searchJob.do?companyScale=scale-0' class="selected" ka="sel-scale-0">不限</a>
+							<a id="selectCondition_scale1" href='/search/searchJob.do?companyScale=scale-1' ka="sel-scale-301">0-20人</a>
+							<a id="selectCondition_scale2" href='/search/searchJob.do?companyScale=scale-2' ka="sel-scale-302">20-99人</a>
+							<a id="selectCondition_scale3" href='/search/searchJob.do?companyScale=scale-3' ka="sel-scale-303">100-499人</a>
+							<a id="selectCondition_scale4" href='/search/searchJob.do?companyScale=scale-4' ka="sel-scale-304">500-999人</a>
+							<a id="selectCondition_scale5" href='/search/searchJob.do?companyScale=scale-5' ka="sel-scale-305">1000-9999人</a>
+							<a id="selectCondition_scale6" href='/search/searchJob.do?companyScale=scale-6' ka="sel-scale-306">10000人以上</a>
 						</dd>
 					</dl>
 					<dl class="condition-insdustry">
 						<dt>行业：</dt>
 						<dd>
 							<span class="btn-all" ka="show-all-industry">全部行业<i class="icon-arrow-down"></i></span>
-
-							<a href="/search/searchJob.do?companyType=不限" class="selected" ka="sel-industry-0">不限</a>
-							<a href="/search/searchJob.do?companyType=健康医疗" ka="sel-industry-502">健康医疗</a>
-							<a href="/search/searchJob.do?companyType=生活服务" ka="sel-industry-503">生活服务</a>
-							<a href="/search/searchJob.do?companyType=旅游" ka="sel-industry-504">旅游</a>
-							<a href="/search/searchJob.do?companyType=金融" ka="sel-industry-505">金融</a>
-							<a href="/search/searchJob.do?companyType=信息安全" ka="sel-industry-506">信息安全</a>
-							<a href="/search/searchJob.do?companyType=广告营销" ka="sel-industry-507">广告营销</a>
-							<a href="/search/searchJob.do?companyType=数据服务" ka="sel-industry-508">数据服务</a>
-							<a href="/search/searchJob.do?companyType=智能硬件" ka="sel-industry-509">智能硬件</a>
-							<a href="/search/searchJob.do?companyType=文化娱乐" ka="sel-industry-510">文化娱乐</a>
-							<a href="/search/searchJob.do?companyType=网络招聘" ka="sel-industry-511">网络招聘</a>
-							<a href="/search/searchJob.do?companyType=分类信息" ka="sel-industry-512">分类信息</a>
-							<a href="/search/searchJob.do?companyType=电子商务" ka="sel-industry-513">电子商务</a>
-							<a href="/search/searchJob.do?companyType=移动互联网" ka="sel-industry-514">移动互联网</a>
-							<a href="/search/searchJob.do?companyType=企业服务" ka="sel-industry-515">企业服务</a>
-							<a href="/search/searchJob.do?companyType=社交网络" ka="sel-industry-516">社交网络</a>
-							<a href="/search/searchJob.do?companyType=教育培训" ka="sel-industry-517">教育培训</a>
-							<a href="/search/searchJob.do?companyType=O2O" ka="sel-industry-518">O2O</a>
-							<a href="/search/searchJob.do?companyType=游戏" ka="sel-industry-519">游戏</a>
-							<a href="/search/searchJob.do?companyType=互联网" ka="sel-industry-520">互联网</a>
-							<a href="/search/searchJob.do?companyType=媒体" ka="sel-industry-521">媒体</a>
-							<a href="/search/searchJob.do?companyType=IT软件" ka="sel-industry-522">IT软件</a>
-							<a href="/search/searchJob.do?companyType=通信" ka="sel-industry-523">通信</a>
-							<a href="/search/searchJob.do?companyType=公关会展" ka="sel-industry-524">公关会展</a>
-							<a href="/search/searchJob.do?companyType=房地产/建筑" ka="sel-industry-525">房地产/建筑</a>
-							<a href="/search/searchJob.do?companyType=汽车" ka="sel-industry-526">汽车</a>
-							<a href="/search/searchJob.do?companyType=供应链/物流" ka="sel-industry-527">供应链/物流</a>
-							<a href="/search/searchJob.do?companyType=咨询/翻译/法律" ka="sel-industry-528">咨询/翻译/法律</a>
-							<a href="/search/searchJob.do?companyType=采购/贸易" ka="sel-industry-529">采购/贸易</a>
-							<a href="/search/searchJob.do?companyType=非互联网行业" ka="sel-industry-501">非互联网行业</a>
+							<a href="/search/searchJob.do?companyType=type-0" class="selected" ka="sel-industry-0">不限</a>
+							<a href="/search/searchJob.do?companyType=type-1" ka="sel-industry-502">健康医疗</a>
+							<a href="/search/searchJob.do?companyType=type-2" ka="sel-industry-503">生活服务</a>
+							<a href="/search/searchJob.do?companyType=type-3" ka="sel-industry-504">旅游</a>
+							<a href="/search/searchJob.do?companyType=type-4" ka="sel-industry-505">金融</a>
+							<a href="/search/searchJob.do?companyType=type-5" ka="sel-industry-506">信息安全</a>
+							<a href="/search/searchJob.do?companyType=type-6" ka="sel-industry-507">广告营销</a>
+							<a href="/search/searchJob.do?companyType=type-7" ka="sel-industry-508">数据服务</a>
+							<a href="/search/searchJob.do?companyType=type-8" ka="sel-industry-509">智能硬件</a>
+							<a href="/search/searchJob.do?companyType=type-9" ka="sel-industry-510">文化娱乐</a>
+							<a href="/search/searchJob.do?companyType=type-10" ka="sel-industry-511">网络招聘</a>
+							<a href="/search/searchJob.do?companyType=type-11" ka="sel-industry-512">分类信息</a>
+							<a href="/search/searchJob.do?companyType=type-12" ka="sel-industry-513">电子商务</a>
+							<a href="/search/searchJob.do?companyType=type-13" ka="sel-industry-514">移动互联网</a>
+							<a href="/search/searchJob.do?companyType=type-14" ka="sel-industry-515">企业服务</a>
+							<a href="/search/searchJob.do?companyType=type-15" ka="sel-industry-516">社交网络</a>
+							<a href="/search/searchJob.do?companyType=type-16" ka="sel-industry-517">教育培训</a>
+							<a href="/search/searchJob.do?companyType=type-17" ka="sel-industry-518">O2O</a>
+							<a href="/search/searchJob.do?companyType=type-18" ka="sel-industry-519">游戏</a>
+							<a href="/search/searchJob.do?companyType=type-19" ka="sel-industry-520">互联网</a>
+							<a href="/search/searchJob.do?companyType=type-20" ka="sel-industry-521">媒体</a>
+							<a href="/search/searchJob.do?companyType=type-21" ka="sel-industry-522">IT软件</a>
+							<a href="/search/searchJob.do?companyType=type-22" ka="sel-industry-523">通信</a>
+							<a href="/search/searchJob.do?companyType=type-23" ka="sel-industry-524">公关会展</a>
+							<a href="/search/searchJob.do?companyType=type-24" ka="sel-industry-525">房地产/建筑</a>
+							<a href="/search/searchJob.do?companyType=type-25" ka="sel-industry-526">汽车</a>
+							<a href="/search/searchJob.do?companyType=type-26" ka="sel-industry-527">供应链/物流</a>
+							<a href="/search/searchJob.do?companyType=type-27" ka="sel-industry-528">咨询/翻译/法律</a>
+							<a href="/search/searchJob.do?companyType=type-28" ka="sel-industry-529">采购/贸易</a>
 
 						</dd>
 					</dl>
 					<dl class="condition-salary">
 						<dt>薪资：</dt>
 						<dd>
-							<a href="/search/searchJob.do?salary=不限" class="selected" ka="sel-salary-0">不限</a>
-							<a href="/search/searchJob.do?salary=3k以下" ka="sel-salary-1">3k以下</a>
-							<a href="/search/searchJob.do?salary=3-5k" ka="sel-salary-2">3-5k</a>
-							<a href="/search/searchJob.do?salary=5-10k" ka="sel-salary-3">5-10k</a>
-							<a href="/search/searchJob.do?salary=10-15k" ka="sel-salary-4">10-15k</a>
-							<a href="/search/searchJob.do?salary=15-20k" ka="sel-salary-5">15-20k</a>
-							<a href="/search/searchJob.do?salary=20-30k" ka="sel-salary-6">20-30k</a>
-							<a href="/search/searchJob.do?salary=30-50k" ka="sel-salary-7">30-50k</a>
-							<a href="/search/searchJob.do?salary=50k以上" ka="sel-salary-8">50k以上</a>
+							<a id="selectCondition_salary0" href="/search/searchJob.do?salary=salary-0" class="selected" ka="sel-salary-0">不限</a>
+							<a id="selectCondition_salary1" href="/search/searchJob.do?salary=salary-1" ka="sel-salary-1">3k以下</a>
+							<a id="selectCondition_salary2" href="/search/searchJob.do?salary=salary-2" ka="sel-salary-2">3-5k</a>
+							<a id="selectCondition_salary3" href="/search/searchJob.do?salary=salary-3" ka="sel-salary-3">5-10k</a>
+							<a id="selectCondition_salary4" href="/search/searchJob.do?salary=salary-4" ka="sel-salary-4">10-15k</a>
+							<a id="selectCondition_salary5" href="/search/searchJob.do?salary=salary-5" ka="sel-salary-5">15-20k</a>
+							<a id="selectCondition_salary6" href="/search/searchJob.do?salary=salary-6" ka="sel-salary-6">20-30k</a>
+							<a id="selectCondition_salary7" href="/search/searchJob.do?salary=salary-7" ka="sel-salary-7">30-50k</a>
+							<a id="selectCondition_salary8" href="/search/searchJob.do?salary=salary-8" ka="sel-salary-8">50k以上</a>
 						</dd>
 					</dl>
 				</div>
@@ -1066,10 +1056,10 @@
 											</div>
 											<div class="job-tags">
 												<div class="job-author">
-													<c:if test="${job.businessUserId == 0}">
+													<c:if test="${!empty job.jobUrl}">
 														<p>数据来源：${job.publishResource}<em class="vline"></em><a href="${job.jobUrl}">原文链接</a></p>
 													</c:if>
-													<c:if test="${job.businessUserId != 0}">
+													<c:if test="${!empty job.businessUserId}">
 														<p>${job.businessuser.businessUserName}<em class="vline"></em>高级技术专家<img src="https://img2.bosszhipin.com/boss/avatar/avatar_6.png" /></p>
 													</c:if>
 												</div>
@@ -1094,17 +1084,17 @@
 							<c:if test="${page.thispage == 1}">
 								<a href="javascript:;" ka="page-prev" class="prev disabled"></a>
 								<a href="javascript:;" class="cur" ka="page-cur">1</a>
-								<a href="/search/searchJob.do?thispage=${page.nextpage}" ka="page-2">2</a>
-								<a href="/search/searchJob.do?thispage=${page.nextpage + 1}" ka="page-3">3</a>
+								<a href="/search/searchJob.do?thispage=${page.nextpage}&salary=${salary}&educationLevel=${educationLevel}&jobExperience=${jobExperience}&companyScale=${companyScale}&companyType=${companyType}&city=${city}&labels=${labels}" ka="page-2">2</a>
+								<a href="/search/searchJob.do?thispage=${page.nextpage + 1}&salary=${salary}&educationLevel=${educationLevel}&jobExperience=${jobExperience}&companyScale=${companyScale}&companyType=${companyType}&city=${city}&labels=${labels}" ka="page-3">3</a>
 							</c:if>
 							<c:if test="${page.thispage != 1}">
-								<a href="/search/searchJob.do?thispage=${page.prepage}" ka="page-prev" class="prev disabled"></a>
-								<a href="/search/searchJob.do?thispage=${page.prepage}" ka="page-cur">${page.prepage}</a>
-								<a href="/search/searchJob.do?thispage=${page.thispage}"class="cur"  ka="page-2">${page.thispage}</a>
-								<a href="/search/searchJob.do?thispage=${page.nextpage}" ka="page-3">${page.nextpage}</a>
+								<a href="/search/searchJob.do?thispage=${page.prepage}&salary=${salary}&educationLevel=${educationLevel}&jobExperience=${jobExperience}&companyScale=${companyScale}&companyType=${companyType}&city=${city}&labels=${labels}" ka="page-prev" class="prev disabled"></a>
+								<a href="/search/searchJob.do?thispage=${page.prepage}&salary=${salary}&educationLevel=${educationLevel}&jobExperience=${jobExperience}&companyScale=${companyScale}&companyType=${companyType}&city=${city}&labels=${labels}" ka="page-cur">${page.prepage}</a>
+								<a href="/search/searchJob.do?thispage=${page.thispage}&salary=${salary}&educationLevel=${educationLevel}&jobExperience=${jobExperience}&companyScale=${companyScale}&companyType=${companyType}&city=${city}&labels=${labels}"class="cur"  ka="page-2">${page.thispage}</a>
+								<a href="/search/searchJob.do?thispage=${page.nextpage}&salary=${salary}&educationLevel=${educationLevel}&jobExperience=${jobExperience}&companyScale=${companyScale}&companyType=${companyType}&city=${city}&labels=${labels}" ka="page-3">${page.nextpage}</a>
 							</c:if>
 							<span>...</span>
-							<a href="/search/searchJob.do?thispage=${page.nextpage}" <%--ka="page-next"--%> class="next"></a>
+							<a href="/search/searchJob.do?thispage=${page.nextpage}&salary=${salary}&educationLevel=${educationLevel}&jobExperience=${jobExperience}&companyScale=${companyScale}&companyType=${companyType}&city=${city}&labels=${labels}" <%--ka="page-next"--%> class="next"></a>
 						</div>
 					</div>
 				</div>
@@ -1128,10 +1118,164 @@
 				</ul>
 			</div>
 
-			<script src="../js/jquery-1.12.2.min.js"></script>
-			<script src="../js/main.js"></script>
-			<input type="hidden" id="pageName" value="job" />
+			<script src="/js/jquery-1.12.2.min.js"></script>
+			<script src="/js/main.js"></script>
+			<script>
+                $(document).ready(function () {
+                    console.log('${scity}');
+                    var scity = '${scity}';
+                    var salary = '${salary}';
+                    var educationLevel = '${educationLevel}';
+                    var jobExperience = '${jobExperience}';
+                    var companyScale = '${companyScale}';
+                    var companyType = '${companyType}';
 
+                    if (scity != null && scity.length>0){
+                        $('#selectCondition_city').text(scity);
+                        $('#selectCondition_city').href("/search/searchJob.do?scity=" + scity);
+                    }
+                    if (salary != null && salary.length>0) {
+                        $('#selectCondition_salary0').removeClass('selected');
+                        $('#selectCondition_salary1').removeClass('selected');
+                        $('#selectCondition_salary2').removeClass('selected');
+                        $('#selectCondition_salary3').removeClass('selected');
+                        $('#selectCondition_salary4').removeClass('selected');
+                        $('#selectCondition_salary5').removeClass('selected');
+                        $('#selectCondition_salary6').removeClass('selected');
+                        $('#selectCondition_salary7').removeClass('selected');
+                        $('#selectCondition_salary8').removeClass('selected');
+
+                        switch (salary) {
+							case "salary-0":
+                                $('#selectCondition_salary0').addClass('selected');
+                                break;
+                            case "salary-1":
+                                $('#selectCondition_salary1').addClass('selected');
+                                break;
+                            case "salary-2":
+                                $('#selectCondition_salary2').addClass('selected');
+                                break;
+                            case "salary-3":
+                                $('#selectCondition_salary3').addClass('selected');
+                                break;
+                            case "salary-4":
+                                $('#selectCondition_salary4').addClass('selected');
+                                break;
+                            case "salary-5":
+                                $('#selectCondition_salary5').addClass('selected');
+                                break;
+                            case "salary-6":
+                                $('#selectCondition_salary6').addClass('selected');
+                                break;
+                            case "salary-7":
+                                $('#selectCondition_salary7').addClass('selected');
+                                break;
+                            case "salary-8":
+                                $('#selectCondition_salary8').addClass('selected');
+                                break;
+                        }
+                    }
+
+                    if(educationLevel != null && educationLevel.length>0) {
+                        $('#selectCondition_degree0').removeClass("selected");
+                        $('#selectCondition_degree1').removeClass("selected");
+                        $('#selectCondition_degree2').removeClass("selected");
+                        $('#selectCondition_degree3').removeClass("selected");
+                        $('#selectCondition_degree4').removeClass("selected");
+                        $('#selectCondition_degree5').removeClass("selected");
+                        $('#selectCondition_degree6').removeClass("selected");
+                        switch (educationLevel) {
+							case "degree-0":
+                                $('#selectCondition_degree0').addClass("selected");
+                                break;
+                            case "degree-1":
+                                $('#selectCondition_degree1').addClass("selected");
+                                break;
+                            case "degree-2":
+                                $('#selectCondition_degree2').addClass("selected");
+                                break;
+                            case "degree-3":
+                                $('#selectCondition_degree3').addClass("selected");
+                                break;
+                            case "degree-4":
+                                $('#selectCondition_degree4').addClass("selected");
+                                break;
+                            case "degree-5":
+                                $('#selectCondition_degree5').addClass("selected");
+                                break;
+                            case "degree-6":
+                                $('#selectCondition_degree6').addClass("selected");
+                                break;
+                        }
+                    }
+
+                    if (jobExperience != null && jobExperience.length>0) {
+                        $('#selectCondition_exp0').removeClass('selected');
+                        $('#selectCondition_exp1').removeClass('selected');
+                        $('#selectCondition_exp2').removeClass('selected');
+                        $('#selectCondition_exp3').removeClass('selected');
+                        $('#selectCondition_exp4').removeClass('selected');
+                        $('#selectCondition_exp5').removeClass('selected');
+                        $('#selectCondition_exp6').removeClass('selected');
+                        switch (jobExperience) {
+							case "exp-0":
+                                $('#selectCondition_exp0').addClass('selected');
+                                break;
+                            case "exp-1":
+                                $('#selectCondition_exp1').addClass('selected');
+                                break;
+                            case "exp-2":
+                                $('#selectCondition_exp2').addClass('selected');
+                                break;
+                            case "exp-3":
+                                $('#selectCondition_exp3').addClass('selected');
+                                break;
+                            case "exp-4":
+                                $('#selectCondition_exp4').addClass('selected');
+                                break;
+                            case "exp-5":
+                                $('#selectCondition_exp5').addClass('selected');
+                                break;
+                            case "exp-6":
+                                $('#selectCondition_exp6').addClass('selected');
+                                break;
+                        }
+                    }
+
+                    if (companyScale != null && companyScale.length>0) {
+                        $('#selectCondition_scale0').removeClass('selected');
+                        $('#selectCondition_scale1').removeClass('selected');
+                        $('#selectCondition_scale2').removeClass('selected');
+                        $('#selectCondition_scale3').removeClass('selected');
+                        $('#selectCondition_scale4').removeClass('selected');
+                        $('#selectCondition_scale5').removeClass('selected');
+                        $('#selectCondition_scale6').removeClass('selected');
+                        switch (companyScale) {
+							case 'scale-0':
+                                $('#selectCondition_scale0').addClass('selected');
+                                break;
+                            case 'scale-1':
+                                $('#selectCondition_scale1').addClass('selected');
+                                break;
+                            case 'scale-2':
+                                $('#selectCondition_scale2').addClass('selected');
+                                break;
+                            case 'scale-3':
+                                $('#selectCondition_scale3').addClass('selected');
+                                break;
+                            case 'scale-4':
+                                $('#selectCondition_scale4').addClass('selected');
+                                break;
+                            case 'scale-5':
+                                $('#selectCondition_scale5').addClass('selected');
+                                break;
+                            case 'scale-6':
+                                $('#selectCondition_scale6').addClass('selected');
+                                break;
+                        }
+                    }
+                });
+			</script>
 		</div>
 	</body>
 

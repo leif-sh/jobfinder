@@ -9,12 +9,17 @@
         <!--properties中还可以配置一些属性名和属性值  -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="username" value="root"/>
-        <property name="password" value="1234"/>
+        <property name="password" value="123"/>
         <property name="url" value="jdbc:mysql://localhost:3306/jobfinder"/>
+        <property name="dialect" value="mysql" />
     </properties>
     <!-- 全局配置参数，需要时再设置 -->
     <settings>
         <setting name="logImpl" value="LOG4J" />
+
+            <!-- 打印查询语句 -->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING" />-->
+
     </settings>
     <!-- <settings>
 
@@ -57,9 +62,21 @@
         <mapper class="edu.ysu.ling.dao.IRequirementinfoDao"/>
         <mapper class="edu.ysu.ling.dao.IJobLabelsDao"/>
         <mapper class="edu.ysu.ling.dao.ICompanyDao"/>
+        <mapper class="edu.ysu.ling.dao.IResumeDao"/>
+        <mapper class="edu.ysu.ling.dao.IUserDao"/>
+        <mapper class="edu.ysu.ling.dao.IDreamPersonDao"/>
+        <mapper class="edu.ysu.ling.dao.IPersonRecommendDao"/>
+        <mapper class="edu.ysu.ling.dao.IBusinessUserDao"/>
+
+
         <mapper resource="edu/ysu/ling/mapping/Requirementinfo.xml"/>
         <mapper resource="edu/ysu/ling/mapping/JobLabels.xml"/>
         <mapper resource="edu/ysu/ling/mapping/Company.xml"/>
+        <mapper resource="edu/ysu/ling/mapping/Resume.xml"/>
+        <mapper resource="edu/ysu/ling/mapping/User.xml"/>
+        <mapper resource="edu/ysu/ling/mapping/Dreamperson.xml"/>
+        <mapper resource="edu/ysu/ling/mapping/Personrecommend.xml"/>
+        <mapper resource="edu/ysu/ling/mapping/BusinessUser.xml"/>
         <!--<mapper class="edu.ysu.ling.dao.IUserDao"/>-->
         <!--<mapper resource="edu/ysu/ling/mapping/User.xml"/>-->
     </mappers>

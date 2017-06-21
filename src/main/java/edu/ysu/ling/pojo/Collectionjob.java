@@ -8,16 +8,18 @@ import java.util.Date;
 
 public class Collectionjob {
 
-    private int collectionId;
+    private String collectionId;
     private String jobMessageId;
     private String userId;
     private Date collectionDate;
+    private Requirementinfo requirementinfo;
 
-    public int getCollectionId() {
+
+    public String getCollectionId() {
         return collectionId;
     }
 
-    public void setCollectionId(int collectionId) {
+    public void setCollectionId(String collectionId) {
         this.collectionId = collectionId;
     }
 
@@ -43,5 +45,13 @@ public class Collectionjob {
 
     public void setCollectionDate(Date collectionDate) {
         this.collectionDate = collectionDate;
+    }
+
+    public Requirementinfo getRequirementinfo() {
+        return requirementinfo;
+    }
+
+    public void setRequirementinfo(Requirementinfo requirementinfo) {
+        this.requirementinfo = requirementinfo;
     }
 }

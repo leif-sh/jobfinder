@@ -46,4 +46,16 @@ public interface ICompanyDao {
      * @return
      */
     public abstract int selectNumInList(List<String> companyIdList);
+
+    /**
+     * 添加公司信息
+     * @param company
+     */
+    public abstract void insertCompany(Company company);
+
+    /**
+     * 更新公司信息
+     * @param company
+     */
+    public abstract void updateCompany(Company company);
 }

@@ -17,10 +17,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link href="../css/style.css" rel="stylesheet" type="text/css">
+
+    <link href="/cssforbusiness/style.css" rel="stylesheet" type="text/css">
+    <link href="/cssforbusiness/my.css" rel="stylesheet">
+
     <script src="https://img.bosszhipin.com/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=60085a6ee91616cf689ce0321e1f30c4&plugin=AMap.Geocoder"></script>
-    <script data-main="../jsforbussiness/home.js" src="https://img.bosszhipin.com/v2/js/require.js"></script>
+    <script data-main="/jsforbussiness/home.js" src="https://img.bosszhipin.com/v2/js/require.js"></script>
+
 </head>
 <body>
 <div class="wrapper" content openurl="1_1">
@@ -33,7 +37,7 @@
         </div>
     </div>
     <!--右侧栏-->
-    <form  method="post" class="zhiwei" action="">
+    <form  method="post" class="zhiwei" action="/business/job/addJob.do">
         <div class="rwrap">
 
             <div class="box baseinfo_unable">
@@ -46,46 +50,6 @@
                         </dd>
                     </dl>
                     <input type="hidden" name="brandId" class="brandid" value="" val="">
-                    <!--<div class="showbox listcinfo">
-                        <dl class="clearfix select_cinfo">
-                            <dt class="tit">选择公司信息</dt>
-                            <dd class="txt Rcheck">
-                                <ul class="list_company">
-
-                                    <li class="addmail"><a class="add_mail_2" href="javascript:void(0)"><i></i>添加公司信息</a></li>
-                                </ul>
-                            </dd>
-                        </dl>
-                    </div>-->
-
-                    <div class="showbox info_iptext" style="display:none">
-                        <dl class="clearfix">
-                            <dt class="tit">所在行业</dt>
-                            <dd class="txt Rcheck">
-                                <input name="zhiwei" type="text" class="kz_input ipt_industry" style="width:280px;" readonly="" value="">
-                            </dd>
-                        </dl>
-                        <dl class="clearfix">
-                            <dt class="tit">公司简称</dt>
-                            <dd class="txt Rcheck">
-                                <input name="zhiwei" type="text" class="kz_input inpt_short" style="width:280px;" readonly="" value="">
-                            </dd>
-                        </dl>
-                        <dl class="clearfix">
-                            <dt class="tit">人员规模</dt>
-                            <dd class="txt Rcheck">
-                                <input name="zhiwei" type="text" class="kz_input ipat_scale" style="width:280px;" readonly="" value="">
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="showbox addcompanybuttonbox" style="display:none">
-                        <dl class="clearfix">
-                            <dt class="tit">公司信息</dt>
-                            <dd class="txt Rcheck">
-                                <a class="add_mail_2" href="javascript:void(0)"><i></i>添加公司信息</a>
-                            </dd>
-                        </dl>
-                    </div>
 
 
                 </div>
@@ -97,7 +61,7 @@
                     <dl class="clearfix">
                         <dt class="tit">职位名称</dt>
                         <dd class="txt Rcheck">
-                            <input ka="job-edit-position" name="positionName" type="text" class="kz_input required" style="width:360px;" length="[1,40]" placeholder="请输入" nullmsg="职位名称" errormsg="输入的职位名称40字以内！" maxlength="16" value="" val="" >
+                            <input ka="job-edit-position" name="jobName" type="text" class="kz_input required" style="width:360px;" length="[1,40]" placeholder="请输入" nullmsg="职位名称" errormsg="输入的职位名称40字以内！" maxlength="16" value="" val="" >
                         </dd>
                         <dd class="tips"></dd>
                     </dl>
@@ -106,58 +70,32 @@
                         <dd class="txt Rcheck">
 
                             <div class="kz_select zw required">
-                                <input ka="job-edit-category" name="positionCategory" type="text" style="width:315px;" datatype="z" placeholder="请选择" nullmsg="请输入选择职位！" errormsg="" value="" val="" readonly>
+                                <input ka="job-edit-category" name="jobType" type="text" style="cursor:text;width:315px;" datatype="z" placeholder="请输入">
                                 <input type="hidden" name="position" class="P_zwcat_2" value="" level2="">
-                                <span class="arrow"><i></i></span>
-                                <div class="openmenu">
-                                    <i class="box_arrow"></i>
-
-                                    <div class="job_box" style="*z-index:18">
-                                        <div class="job_tit">
-                                            <h2>技术</h2>
-                                        </div>
-                                        <ul class="clearfix">
-
-
-                                        </ul>
-                                    </div>
-
-                                </div>
                             </div>
 
 
                         </dd>
                     </dl>
                     <dl class="clearfix" style="z-index:500">
-                        <dt class="tit">技能要求</dt>
+                        <dt class="tit">技能标签</dt>
                         <dd class="txt Rcheck">
-                            <input ka="job-edit-skill" name="skillShow" type="text" class="kz_input required P_multiselect P_skills" placeholder="请选择" style="width:360px;" length="[1,100]" nullmsg="技能要求"  errormsg="输入的技能要求4字以内！" readonly value="" val="">
-                            <select name="skill" multiple class="P_skills_select" data-num="3" style="display:none;">
+                            <input ka="job-edit-skill" name="jobLabels" type="text" class="kz_input required P_multiselect P_skills" placeholder="请选择" style="width:360px;" >
 
-                            </select>
-                            <span class="arrow"><i></i></span>
                         </dd>
                     </dl>
                     <dl class="clearfix" style="z-index:400">
                         <dt class="tit">工作城市</dt>
                         <dd class="txt Rcheck" style="z-index: 1;">
-                            <input ka="job-edit-location" name="locationName" type="text" value="" val="" placeholder="请输入" class="kz_input required P_search_city" style="width:360px;" length="[2,8]" nullmsg="工作城市" errormsg="输入的工作城市4字以内！" data-url="/qrweb/city.json" >
+                            <input ka="job-edit-location" name="jobCity" type="text" value="" val="" placeholder="请输入" class="kz_input required P_search_city" style="width:360px;" >
                             <input name="locationCode" type="hidden" value="">
                             <div class="P_selectbox" style="top: 47px; display: none;"><div class="box"><i></i></div></div>
                         </dd>
                     </dl>
                     <dl class="clearfix" style="height:auto">
-                        <dt class="tit">工作地点</dt>
+                        <dt class="tit">工作地址</dt>
                         <dd class="cont Rcheck">
-                            <input type="hidden" name="city" value="010">
-                            <input type="hidden" name="Geocoder" value="">
-                            <input type="hidden" name="poiProvince" value="">
-                            <input type="hidden" name="poiCity" value="">
-                            <input type="hidden" name="poiArea" value="">
-                            <input type="hidden" name="poiTitle" value="">
-                            <input type="hidden" name="locationInfo" value="">
-                            <input type="hidden" name="houseNumber" value="">
-                            <input  name="address" type="text" placeholder="请输入该职位办公的详细地址" value="" val="" class="kz_input required ipt_readonly address" length="[2,80]" nullmsg="请输入工作地点"  errormsg="输入地址40字以内！" maxlength="80" style="width:567px;" /></dd>
+                            <input  name="jobAddress" type="text" placeholder="请输入该职位办公的详细地址" value="" val="" class="kz_input required ipt_readonly address"  style="width:567px;" /></dd>
                         <dd class="map" style="width:600px; height:340px; overflow:hidden; margin-top:30px;">
                             <div id="container" style="width:600px; height:340px;"></div>
                         </dd>
@@ -166,31 +104,14 @@
                         <dt class="tit">薪资范围</dt>
                         <dd class="txt Rcheck">
                             <div class="kz_select menu required xz" style="float:left">
-                                <input name="lowSalary" type="text" style="width:50px;" datatype="z" nullmsg="请输入选择薪水！"
-                                       errormsg="薪水格式不对！" value="请选择" val="请选择"
-                                       readonly><span class="arrow">K</span>
-                                <div class="layer_option">
-                                    <i class="arrow_up"></i>
-                                    <ul>
-                                        <li>1</li> <li>2</li> <li>3</li> <li>4</li> <li>5</li> <li>6</li> <li>7</li> <li>8</li> <li>9</li> <li>10</li> <li>11</li> <li>12</li> <li>13</li> <li>14</li> <li>15</li> <li>16</li> <li>17</li> <li>18</li> <li>19</li> <li>20</li> <li>21</li> <li>22</li> <li>23</li> <li>24</li> <li>25</li> <li>26</li> <li>27</li> <li>28</li> <li>29</li> <li>30</li> <li>31</li> <li>32</li> <li>33</li> <li>34</li> <li>35</li> <li>36</li> <li>37</li> <li>38</li> <li>39</li> <li>40</li> <li>41</li> <li>42</li> <li>43</li> <li>44</li> <li>45</li> <li>46</li> <li>47</li> <li>48</li> <li>49</li> <li>50</li> <li>60</li> <li>70</li> <li>80</li> <li>90</li> <li>100</li>
-                                        <li>110</li> <li>120</li> <li>130</li><li>140</li> <li>150</li> <li>160</li> <li>170</li> <li>180</li> <li>190</li>
-                                    </ul>
-                                </div>
+                                <input name="salaryBottom" type="text" style="width:50px;cursor: text"
+                                        value="" val="请选择">
+                                <span class="arrow">K</span>
                             </div>
-                            <div class="right_xz">
-                                <em>到</em>
-                                <div class="kz_select menu required xz">
-                                    <input name="highSalary" type="text" style="width:50px;" datatype="z"
-                                           nullmsg="请输入选择薪水！" errormsg="薪水格式不对！"
-                                           value="请选择" val="请选择" readonly><span
-                                        class="arrow">K</span>
-                                    <div class="layer_option">
-                                        <i class="arrow_up"></i>
-                                        <ul>
-
-                                        </ul>
-                                    </div>
-                                </div>
+                            <em>到</em>
+                            <div class="kz_select menu required xz">
+                                    <input name="salaryTop" type="text" style="width:50px;cursor: text"
+                                           value="" val="请选择" ><span class="arrow">K</span>
                             </div>
                         </dd>
                     </dl>
@@ -202,87 +123,48 @@
                     <dl class="clearfix" style="z-index:200">
                         <dt class="tit">经验要求</dt>
                         <dd class="txt Rcheck">
-                            <div class="kz_select menu required">
-                                <input ka="job-edit-experience" name="experienceShow" type="text" placeholder="请选择" style="width:200px;" datatype="z" nullmsg="请选择经验要求" errormsg="邮箱格式不对！" value="" val="" readonly>
-                                <input name="experience" type="hidden" value=""/>
-                                <span class="arrow"><i></i></span>
-                                <div class="layer_option"> <i class="arrow_up"></i>
-                                    <ul>
-
-                                        <li data-val="101">不限</li>
-
-                                        <li data-val="102">应届生</li>
-
-                                        <li data-val="103">1年以内</li>
-
-                                        <li data-val="104">1-3年</li>
-
-                                        <li data-val="105">3-5年</li>
-
-                                        <li data-val="106">5-10年</li>
-
-                                        <li data-val="107">10年以上</li>
-
-                                </div>
-                            </div>
+                            <select class="ipt" name="jobExperience">
+                                <option value="exp-0">不限</option>
+                                <option value="exp-1">应届生</option>
+                                <option value="exp-2">1年以下</option>
+                                <option value="exp-3">1-3年</option>
+                                <option value="exp-4">3-5年</option>
+                                <option value="exp-5">5-10年</option>
+                                <option value="exp-6">10年以上</option>
+                            </select>
                         </dd>
                     </dl>
                     <dl class="clearfix" style="z-index:100">
                         <dt class="tit">最低学历</dt>
                         <dd class="txt Rcheck">
-                            <div class="kz_select menu required">
-                                <input ka="job-edit-degree" name="degreeShow" type="text" style="width:200px;" placeholder="请选择" datatype="z" nullmsg="请选择最低学历" errormsg="邮箱格式不对！" value="" val="" readonly>
-                                <input name="degree" type="hidden" value=""/>
-                                <span class="arrow"><i></i></span>
-                                <div class="layer_option"> <i class="arrow_up"></i>
-                                    <ul>
-
-                                        <li data-val="201">不限</li>
-
-                                        <li data-val="207">中专及以下</li>
-
-                                        <li data-val="206">高中</li>
-
-                                        <li data-val="202">大专</li>
-
-                                        <li data-val="203">本科</li>
-
-                                        <li data-val="204">硕士</li>
-
-                                        <li data-val="205">博士</li>
-
-                                    </ul>
-                                </div>
-                            </div>
+                                <select class="ipt" name="educationLevel">
+                                    <option value="edu-0">不限</option>
+                                    <option value="edu-1">中专以下</option>
+                                    <option value="edu-2">高中</option>
+                                    <option value="edu-3">大专</option>
+                                    <option value="edu-4">本科</option>
+                                    <option value="edu-5">硕士</option>
+                                    <option value="edu-6">博士</option>
+                                </select>
                         </dd>
                     </dl>
                     <dl class="clearfix"  style="height:200px;">
                         <dt class="tit">职位描述</dt>
                         <dd class="txt Rcheck">
-                            <textarea ka="job-edit-description" name="description" placeholder="请输入" class="kz_area required" length="[1,5000]" AddFun="Cal_count(o)" nullmsg="最少1个字符" errormsg="职位描述1-5000个字符！" style="width:570px; height:160px;" maxlength="10000" val=""></textarea>
+                            <textarea ka="job-edit-description" name="jobDescription" placeholder="请输入" class="kz_area required" length="[1,5000]" AddFun="Cal_count(o)" nullmsg="最少1个字符" errormsg="职位描述1-5000个字符！" style="width:570px; height:160px;" maxlength="10000" val=""></textarea>
                             <div class="num"><b>0</b>/5000</div>
                         </dd>
                     </dl>
                 </div>
             </div>
-            <div class="box">
-                <div class="hd">其他信息</div>
-                <div class="zw_form clearfix">
-                    <dl class="clearfix">
-                        <dt class="tit">接收简历邮箱</dt>
-                        <dd class="txt Rcheck">
-                            <div class="inp_mail">
-                                <input ka="resume-email" type="text" name="userResumeEmail" value="litie@blwit.com" class="required"  Optional  Regular="e" AddFun="Cal_count(o)" length="[0,255]" errormsg="邮箱格式有误">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-            </div>
+
             <!--按钮-->
             <div class="btn_submit kz_tcenter">
-                <a ka="job-edit-save" class="kz_btn btn_a btn_a1 vali_btn" href="javascript:;"
-                   data-msg="保存成功，在APP端“我的”页面下划刷新，可同步电脑端数据">保存</a>
+                <%--<a ka="job-edit-save" class="kz_btn btn_a btn_a1 vali_btn" href="javascript:;"
+                   data-msg="保存成功，在APP端“我的”页面下划刷新，可同步电脑端数据">保存</a>--%>
+                <input type="submit" class="kz_btn btn_a btn_a1 vali_btn" value="保存">
             </div>
+
             <!--/按钮-->
         </div>
     </form>

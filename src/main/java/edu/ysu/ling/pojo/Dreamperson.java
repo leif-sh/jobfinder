@@ -7,10 +7,12 @@ package edu.ysu.ling.pojo;
 public class Dreamperson {
 
     private String dreamPersonId;
-    private int businessUserId;
+    private String businessUserId;
     private String  dreamPersonType;
-    private String dreamEducation;
+    private String dreamPersonEducation;
     private String dreamPersonWorkExperience;
+    private int dreamPersonSalaryTop;
+    private String dreamPersonCity;
 
     public String getDreamPersonId() {
         return dreamPersonId;
@@ -20,11 +22,11 @@ public class Dreamperson {
         this.dreamPersonId = dreamPersonId;
     }
 
-    public int getBusinessUserId() {
+    public String getBusinessUserId() {
         return businessUserId;
     }
 
-    public void setBusinessUserId(int businessUserId) {
+    public void setBusinessUserId(String businessUserId) {
         this.businessUserId = businessUserId;
     }
 
@@ -36,12 +38,12 @@ public class Dreamperson {
         this.dreamPersonType = dreamPersonType;
     }
 
-    public String getDreamEducation() {
-        return dreamEducation;
+    public String getDreamPersonEducation() {
+        return dreamPersonEducation;
     }
 
-    public void setDreamEducation(String dreamEducation) {
-        this.dreamEducation = dreamEducation;
+    public void setDreamPersonEducation(String dreamPersonEducation) {
+        this.dreamPersonEducation = dreamPersonEducation;
     }
 
     public String getDreamPersonWorkExperience() {
@@ -50,5 +52,21 @@ public class Dreamperson {
 
     public void setDreamPersonWorkExperience(String dreamPersonWorkExperience) {
         this.dreamPersonWorkExperience = dreamPersonWorkExperience;
+    }
+
+    public int getDreamPersonSalaryTop() {
+        return dreamPersonSalaryTop;
+    }
+
+    public void setDreamPersonSalaryTop(int dreamPersonSalaryTop) {
+        this.dreamPersonSalaryTop = dreamPersonSalaryTop;
+    }
+
+    public String getDreamPersonCity() {
+        return dreamPersonCity;
+    }
+
+    public void setDreamPersonCity(String dreamPersonCity) {
+        this.dreamPersonCity = dreamPersonCity;
     }
 }

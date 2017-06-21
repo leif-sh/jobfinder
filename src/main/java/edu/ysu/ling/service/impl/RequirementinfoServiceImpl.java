@@ -1,11 +1,13 @@
 package edu.ysu.ling.service.impl;
 
+import edu.ysu.ling.dao.IBusinessUserDao;
 import edu.ysu.ling.dao.ICompanyDao;
 import edu.ysu.ling.dao.IJobLabelsDao;
 import edu.ysu.ling.dao.IRequirementinfoDao;
 import edu.ysu.ling.pojo.Company;
 import edu.ysu.ling.pojo.Requirementinfo;
 import edu.ysu.ling.service.IRequirementinfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -27,6 +29,7 @@ public class RequirementinfoServiceImpl implements IRequirementinfoService {
     private IRequirementinfoDao requirementinfoDao;
     private ICompanyDao companyDao;
     private IJobLabelsDao jobLabelsDao;
+    private IBusinessUserDao businessUserDao;
 
     @Override
     public List<Requirementinfo> getJobs(Map params) {
@@ -58,7 +61,7 @@ public class RequirementinfoServiceImpl implements IRequirementinfoService {
                     companyList.get(n).setCompanyScale(companyList.get(n).getCompanyScale().replace("规模", "").trim());
                     companyList.get(n).setCompanyProperty(companyList.get(n).getCompanyProperty().replace("发展阶段", "").trim());
                     companyList.get(n).setCompanyName(companyList.get(n).getCompanyName().replace("拉勾未认证企业", "").trim());
-                    companyList.get(n).setCompanyWebsite(companyList.get(n).getCompanyWebsite().replace("公司主页", "").trim());
+                    //companyList.get(n).setCompanyWebsite(companyList.get(n).getCompanyWebsite().replace("公司主页", "").trim());
                     map.put(companyList.get(n).getCompanyId(), companyList.get(n));
                 }
 
@@ -84,7 +87,16 @@ public class RequirementinfoServiceImpl implements IRequirementinfoService {
         try {
             requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
             requirementinfo = requirementinfoDao.selectRequirementinfoById(jobMessageId);
-            requirementinfo.setJobAddress(requirementinfo.getJobAddress().replace("查看地图","").trim());
+            if (StringUtils.isNotBlank(requirementinfo.getBusinessUserId())){
+                businessUserDao = session.getMapper(IBusinessUserDao.class);
+                requirementinfo.setBusinessuser(businessUserDao.selectBusinessUserById(requirementinfo.getBusinessUserId()));
+            }
+            if (StringUtils.isNotBlank(requirementinfo.getJobAddress())) {
+                requirementinfo.setJobAddress(requirementinfo.getJobAddress().replace("查看地图","").trim());
+            }
+            if (StringUtils.isNotBlank(requirementinfo.getSourceCompanyName())) {
+                requirementinfo.setSourceCompanyName(requirementinfo.getSourceCompanyName().replace("拉勾未认证企业","").trim());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
@@ -95,6 +107,60 @@ public class RequirementinfoServiceImpl implements IRequirementinfoService {
 
     @Override
     public void addJob(Requirementinfo requirementinfo) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
+            requirementinfoDao.insertRequirementinfo(requirementinfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<Requirementinfo> getRequirementinfoByBusinessUser(String businessUserId) {
+        SqlSession session = sqlSessionFactory.openSession();
+        List<Requirementinfo> requirementinfoList = null;
+        try {
+            requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
+            requirementinfoList = requirementinfoDao.selectRequirementinfoByBusinessUser(businessUserId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return requirementinfoList;
+    }
+
+    @Override
+    public Requirementinfo changePublishRequirement(Requirementinfo requirementinfo) {
+        SqlSession session = sqlSessionFactory.openSession();
+        Requirementinfo requirementinfo1 = null;
+        try {
+            requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
+            requirementinfoDao.updateRequirementinfo(requirementinfo);
+            requirementinfo1 = requirementinfoDao.selectRequirementinfoById(requirementinfo.getJobMessageId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return requirementinfo1;
+    }
+
+    @Override
+    public void closePublishRequirement(Requirementinfo requirementinfo) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            requirementinfoDao = session.getMapper(IRequirementinfoDao.class);
+            requirementinfoDao.deleteRequirementinfo(requirementinfo);
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
 
     }
 

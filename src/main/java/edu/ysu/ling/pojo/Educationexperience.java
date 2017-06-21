@@ -1,6 +1,7 @@
 package edu.ysu.ling.pojo;
 
 import javax.print.DocFlavor;
+import java.util.Date;
 
 /**
  * Created by 10047 on 2017/4/22.
@@ -13,6 +14,9 @@ public class Educationexperience {
     private String educationSchoolName;
     private String educationMajor;
     private String educationExperience;
+    private Date educationGraduateDate;
+    private Date educationBeginDate;
+    private String educationLevel;
 
     public String getEducationExperienceId() {
         return educationExperienceId;
@@ -52,5 +56,29 @@ public class Educationexperience {
 
     public void setEducationExperience(String educationExperience) {
         this.educationExperience = educationExperience;
+    }
+
+    public Date getEducationGraduateDate() {
+        return educationGraduateDate;
+    }
+
+    public void setEducationGraduateDate(Date educationGraduateDate) {
+        this.educationGraduateDate = educationGraduateDate;
+    }
+
+    public Date getEducationBeginDate() {
+        return educationBeginDate;
+    }
+
+    public void setEducationBeginDate(Date educationBeginDate) {
+        this.educationBeginDate = educationBeginDate;
+    }
+
+    public String getEducationLevel() {
+        return educationLevel;
+    }
+
+    public void setEducationLevel(String educationLevel) {
+        this.educationLevel = educationLevel;
     }
 }
