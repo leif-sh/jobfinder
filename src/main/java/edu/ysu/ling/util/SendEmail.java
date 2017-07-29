@@ -45,6 +45,37 @@ public class SendEmail {
 			e.printStackTrace();
 		}
 	}
+
+	public static void sendCode(String mail_address,String code) {
+		//String mail_address = "litie@blwit.com";
+		try {
+
+			MailSenderInfo mailInfo = new MailSenderInfo();
+			//mailInfo.setMailServerHost("smtp.qq.com");//smtp.163.com
+			//mailInfo.setMailServerPort("587");//25
+			mailInfo.setValidate(true);
+
+			mailInfo.setUserName("1004774010@qq.com");// 邮箱用户名
+			mailInfo.setPassword("mo44199582844ri*");// 邮箱密码
+			mailInfo.setFromAddress("1004774010@qq.com");// 发件人邮箱
+			mailInfo.setToAddress(mail_address);// 收件人邮箱
+			mailInfo.setSubject("验证码--来自JobFinder");// 邮件标题
+			StringBuffer buffer = new StringBuffer();// 邮件内容
+			buffer.append("您的验证码为:\n"+code);
+			buffer.append("");
+			mailInfo.setContent(buffer.toString());
+
+			//SimpleMailSender.sendTextMail(mailInfo);// 发送文体格式
+
+			SimpleMailSender.sendHtmlMail(mailInfo);// 发送html格式
+			System.out.println("邮件发送完毕");
+
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public static void sendJobMessage(String mail_address, Map params) {
 		//String mail_address = "litie@blwit.com";
 		try {
@@ -98,7 +129,7 @@ public class SendEmail {
 			mailInfo.setPassword("mo44199582844ri*");// 邮箱密码
 			mailInfo.setFromAddress("1004774010@qq.com");// 发件人邮箱
 			mailInfo.setToAddress(mail_address);// 收件人邮箱
-			mailInfo.setSubject("职位推送--来自JobFinder");// 邮件标题
+			mailInfo.setSubject("人才推送--来自JobFinder");// 邮件标题
 			StringBuffer buffer = new StringBuffer();// 邮件内容
 			buffer.append("用户"+businessuser.getBusinessRealName()+"您好，以下人才信息来自JobFinder每日推送：<br><br>");
 			for (int n=0;n<resumeList.size();n++) {

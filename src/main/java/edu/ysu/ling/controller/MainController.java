@@ -5,12 +5,15 @@ import edu.ysu.ling.pojo.Businessuser;
 import edu.ysu.ling.pojo.User;
 import edu.ysu.ling.service.IBusinessUserService;
 import edu.ysu.ling.service.IUserService;
+import edu.ysu.ling.util.SendEmail;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,12 +45,15 @@ public class MainController {
     }*/
 
     @RequestMapping(value = "/user/register.do", method = RequestMethod.POST)
-    public String RegisterUser(String account, String password, String emailCode, Model model , HttpServletRequest request) {
+    public String RegisterUser(String account, String password, String emailCode,String emailCode2, Model model , HttpServletRequest request) {
         if (account.length() == 0 || password.length() == 0 || emailCode.length() == 0) {
             return "login";
         }
-        if (StringUtils.isNotBlank(emailCode)) {
-            model.addAttribute("errormessage", "验证码错误");
+        if (StringUtils.isNotBlank(emailCode)&&StringUtils.isNotBlank(emailCode2)) {
+            if (!emailCode.equals(emailCode2)) {
+                model.addAttribute("errormessage", "验证码错误");
+                return "redirect:/jsp/login.jsp";
+            }
         }
         User user = new User();
         user.setUserId(UUID.randomUUID().toString());
@@ -57,7 +63,7 @@ public class MainController {
         user = userService.addUser(user);
         HttpSession session = request.getSession();
         session.setAttribute("userinfo", user);
-        return "redirect:index";
+        return "redirect:/jsp/index.jsp";
     }
 
     @RequestMapping(value = "/user/login.do", method = RequestMethod.POST)
@@ -91,5 +97,19 @@ public class MainController {
         HttpSession session = request.getSession();
         session.invalidate();
         return "redirect:/jsp/index.jsp";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/sendCode.do")
+    public String sendCode(String account){
+        System.out.println(account);
+
+        String code = "";
+        for (int n=0;n<6;n++) {
+            code += (int) (Math.random()*9)+1;
+        }
+
+        SendEmail.sendCode(account,code);
+        return code;
     }
 }

@@ -58,7 +58,7 @@
                         <a ka="header-my-resume" href="/jsp/resume.jsp">我的简历</a>
                     </li>
                     <li class="nav-figure">
-                        <a href="/geek/myresume.html" ka="header-username"><span class="label-text">${userinfo.userName}</span> <img src="/img/ico-1.jpg" alt="" /></a>
+                        <a href="/jsp/resume.jsp" ka="header-username"><span class="label-text">${userinfo.account}</span> <img src="/img/ico-1.jpg" alt="" /></a>
                         <div class="dropdown">
                             <a href="/user/logout.do" ka="header-logout">退出</a>
                         </div>
@@ -77,17 +77,6 @@
                     <a ka="user-resume-my-resume" href="/jsp/resume.jsp">我的简历<i class="fz fz-cv"></i></a>
                 </div>
                 <div class="sider-resume">
-                    <div class="resume-attachment">
-                        <h3 class="title">附件简历</h3>
-                        <div class="loadresume">
-                            <span class="file-name">1234.doc</span>
-                            <div class="upload-op">
-                                <i class="change" style="cursor: pointer">更改</i>
-                                <a class="btn-upload-file"><input id="fileupload" type="file" name="file" ka="user-resume-change" /></a>
-                            </div>
-                            <i class="fz-resume fz-close" ka="user-resume-delete"></i>
-                        </div>
-                    </div>
 
                     <div class="resume-nav">
                         <ul>
@@ -136,8 +125,11 @@
                             </form>
                             <h2 class="name">${resume.resumeName}<i class="fz-resume fz-male"></i><div class="op"><a data-url="/geek/user/info.json" href="javascript:;" ka="user-resume-edit-userinfo" class="link-edit" ><i class="fz-resume fz-edit"></i>编辑</a></div></h2>
                             <div class="info-labels">
-                                <p class="row-base"><span class="label-text"><i class="fz-resume fz-experience"></i>应届生</span><em class="vline"></em><span class="label-text"><i class="fz-resume fz-degree"></i>本科学历</span> <em class="vline"></em><span class="label-text"><i class="fz-resume fz-status"></i>离职-随时到岗</span></p>
-                                <p class="row-contact"><span class="label-text"><i class="fz-resume fz-tel"></i>${resume.resumePhone}</span><em class="vline"></em><span class="label-text span-wechat"><i class="fz-resume fz-weixin"></i>18712725112</span></p>
+                                <p class="row-base"><span class="label-text"><i class="fz-resume fz-experience"></i>工作经验：${resume.resumeWorkingExperienceTime}</span><em class="vline"></em><span class="label-text"><i class="fz-resume fz-degree"></i>${resume.resumeEducationLevel}</span> <em class="vline"></em><span class="label-text"><i class="fz-resume fz-status"></i>${resume.resumeCity}</span></p>
+                                <p class="row-contact">
+                                    <span class="label-text"><i class="fz-resume fz-tel"></i>${resume.resumePhone}</span><em class="vline"></em>
+                                    <span class="label-text span-wechat">${resume.resumeMailAddress}</span><em class="vline"></em>
+                                </p>
                             </div>
                         </div>
                         <div class="item-form">

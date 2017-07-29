@@ -4,7 +4,11 @@
 
     <bean id="daJieController" class="edu.ysu.ling.crawlerController.DaJieController"/>
     <bean id="laGouController" class="edu.ysu.ling.crawlerController.LaGouController"/>
-    <bean id="JobPush" class="edu.ysu.ling.push.JobPush"/>
+    <bean id="zhilianController" class="edu.ysu.ling.crawlerController.ZhiLianController"/>
+    <bean id="wuyouController" class="edu.ysu.ling.crawlerController.WuYouController"/>
+    <bean id="bossController" class="edu.ysu.ling.crawlerController.BossZhiPinController"/>
+    <bean id="jobPush" class="edu.ysu.ling.push.JobPush"/>
+    <bean id="personPush" class="edu.ysu.ling.push.PersonPush"/>
 
     <!-- 配置MethodInvokingJobDetailFactoryBean -->
     <bean id= "daJiejob"
@@ -17,9 +21,28 @@
         <property name="targetObject" ref="laGouController"/>
         <property name="targetMethod" value="main"/>
     </bean>
-    <bean id="jobPush" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="JobPush"/>
+    <bean id= "zhilianjob"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="zhilianController"/>
+        <property name="targetMethod" value="main"/>
+    </bean>
+    <bean id= "wuyoujob"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="wuyouController"/>
+        <property name="targetMethod" value="main"/>
+    </bean>
+    <bean id= "bossjob"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="bossController"/>
+        <property name="targetMethod" value="main"/>
+    </bean>
+    <bean id="jobPush2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="jobPush"/>
         <property name="targetMethod" value="pushJob"/>
+    </bean>
+    <bean id="personPush2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="personPush"/>
+        <property name="targetMethod" value="pushPerson"/>
     </bean>
 
     <!-- 配置定时表达式 -->
@@ -31,18 +54,38 @@
         <property name="jobDetail" ref="laGoujob" />
         <property name="cronExpression" value="0/5 * * * * ?" />
     </bean>
+    <bean id="zhilianTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
+        <property name="jobDetail" ref="zhilianjob" />
+        <property name="cronExpression" value="0/5 * * * * ?" />
+    </bean>
+    <bean id="wuyouTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
+        <property name="jobDetail" ref="wuyoujob" />
+        <property name="cronExpression" value="0/5 * * * * ?" />
+    </bean>
+    <bean id="bossTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
+        <property name="jobDetail" ref="bossjob" />
+        <property name="cronExpression" value="0/5 * * * * ?" />
+    </bean>
     <bean id="jobPushTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
-        <property name="jobDetail" ref="jobPush" />
-        <property name="cronExpression" value="0 0/1 * * * ?" />
+        <property name="jobDetail" ref="jobPush2" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+    </bean>
+    <bean id="personPushTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
+        <property name="jobDetail" ref="personPush2" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
     </bean>
 
     <!-- 配置调度工厂 -->
     <bean id="testSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers" >
             <list>
-                <!--<ref bean="jobPushTrigger"/>-->
+                <!--<ref bean="jobPushTrigger"/>
+                <ref bean="personPushTrigger"/>-->
                 <!--<ref bean="daJieTrigger" />-->
                 <!--<ref bean="laGouTrigger" />-->
+                <!--<ref bean="bossTrigger" />-->
+                <!--<ref bean="wuyouTrigger" />-->
+                <!--<ref bean="zhilianTrigger" />-->
             </list>
         </property>
     </bean>

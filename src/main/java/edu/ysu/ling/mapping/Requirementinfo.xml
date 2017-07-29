@@ -11,9 +11,9 @@
 
     <insert id="insertRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">
         INSERT INTO requirementinfo
-        (catchJobTime,jobExperience,salary,jobDateTime,jobPercent,jobMessageId,businessUserId,jobName,jobLabels,jobClass,salaryTop,salaryBottom,jobRequest,jobAdvantage,jobQualification,jobDescription,jobCity,jobAddress,jobExperienceTop,jobExperienceBottom,educationLevel)
+        (jobPercent,catchJobTime,jobExperience,salary,jobDateTime,jobPercent,jobMessageId,businessUserId,jobName,jobLabels,jobClass,salaryTop,salaryBottom,jobRequest,jobAdvantage,jobQualification,jobDescription,jobCity,jobAddress,jobExperienceTop,jobExperienceBottom,educationLevel)
         VALUE
-        (#{catchJobTime},#{jobExperience},#{salary},#{jobDateTime},#{jobPercent},#{jobMessageId},#{businessUserId},#{jobName},#{jobLabels},#{jobClass},#{salaryTop},#{salaryBottom},#{jobRequest},#{jobAdvantage},#{jobQualification},#{jobDescription},#{jobCity},#{jobAddress},#{jobExperienceTop},#{jobExperienceBottom},#{educationLevel})
+        (#{jobPercent},#{catchJobTime},#{jobExperience},#{salary},#{jobDateTime},#{jobPercent},#{jobMessageId},#{businessUserId},#{jobName},#{jobLabels},#{jobClass},#{salaryTop},#{salaryBottom},#{jobRequest},#{jobAdvantage},#{jobQualification},#{jobDescription},#{jobCity},#{jobAddress},#{jobExperienceTop},#{jobExperienceBottom},#{educationLevel})
     </insert>
 
     <insert id="catchRequirementinfo" parameterType="edu.ysu.ling.pojo.Requirementinfo">

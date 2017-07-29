@@ -20,7 +20,7 @@ $(document).ready(function(){
     $(".sign-register .emailCode").focus(function(){
         $(".tip-error").text("");
     });
-    $(".sign-register .btn").click(function(){
+    $(".sign-register .btn-submit").click(function(){
         var account = $(".sign-register .account").val();
         var password = $(".sign-register .password").val();
         var emailCode = $(".sign-register .emailCode").val();

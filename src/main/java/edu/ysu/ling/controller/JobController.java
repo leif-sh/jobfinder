@@ -84,6 +84,9 @@ public class JobController {
         requirementinfo.setJobClass(jobType);
         requirementinfo.setJobCity(jobCity);
         requirementinfo.setJobAddress(jobAddress);
+        requirementinfo.setCompanyId(businessuser.getCompanyId());
+
+        requirementinfo.setSourceCompanyName(companyService.findCompanyById(businessuser.getCompanyId()).getCompanyName());
         requirementinfo.setSalaryTop(Integer.parseInt(salaryTop));
         requirementinfo.setSalaryBottom(Integer.parseInt(salaryBottom));
         requirementinfo.setSalary(salaryBottom+"k-"+salaryTop+"k");
@@ -150,6 +153,7 @@ public class JobController {
         requirementinfo.setJobDescription(jobDescription);
         requirementinfo.setJobDateTime(new Date());
         requirementinfo.setCatchJobTime(new Date());
+        requirementinfo.setJobPercent(90);
 
         if (jobLabels.contains(";")) {
             String[] temp = jobLabels.split(";");

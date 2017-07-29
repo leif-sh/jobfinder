@@ -86,10 +86,10 @@
 						<div class="job-sider">
 
 							<div class="promotion-job">
-								<h3><a href="/c101010100-p100703/e_106-y_7/" ka="more-similar-jobs2" class="more" target="_blank">更多相似职位</a>相似职位</h3>
+								<h3><a ka="more-similar-jobs2" class="more" target="_blank">更多相似职位</a>相似职位</h3>
 								<ul>
 									<li>
-										<a ka="job_sug_1" href="/job_detail/1411010968.html" target="_blank">
+										<a ka="job_sug_1" href="/job/553dba22-f17c-4eac-9f9f-216bd55d4571" target="_blank">
 											<div class="company-logo"><img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20160405/15db396d924ee3f94de86cb1cb24e9af8b3f0a3b3321b88d6862d87392cf9f39.jpg" alt="" /></div>
 											<div class="info-primary">
 												<div class="name">测试经理 <span class="red">25k-50k</span></div>
@@ -98,7 +98,7 @@
 										</a>
 									</li>
 									<li>
-										<a ka="job_sug_2" href="/job_detail/1410801849.html" target="_blank">
+										<a ka="job_sug_2" href="/job/e467a335-c683-4fc8-9d01-b13898ef20b8" target="_blank">
 											<div class="company-logo"><img src="https://img2.bosszhipin.com/mcs/chatphoto/20160205/89d1ea38137e0c3b091e2e2fcf381c5bdcbba1006f836c8cf737f0934c9169a0.png" alt="" /></div>
 											<div class="info-primary">
 												<div class="name">测试经理 <span class="red">25k-35k</span></div>
@@ -107,7 +107,7 @@
 										</a>
 									</li>
 									<li>
-										<a ka="job_sug_3" href="/job_detail/1410944393.html" target="_blank">
+										<a ka="job_sug_3" href="/job/f681924c-01db-4f55-868a-ee7b20974722" target="_blank">
 											<div class="company-logo"><img src="https://img2.bosszhipin.com/mcs/chatphoto/20160216/b7ac891c583d73722bdaf1ab23fa1dc79fc7f25bdb44b9a83bc99acd51019b6b.jpg" alt="" /></div>
 											<div class="info-primary">
 												<div class="name">测试leader <span class="red">20k-30k</span></div>
@@ -116,7 +116,7 @@
 										</a>
 									</li>
 									<li>
-										<a ka="job_sug_4" href="/job_detail/1406455349.html" target="_blank">
+										<a ka="job_sug_4" href="/job/367e7284-722a-416a-a7df-f9038ffa06ca" target="_blank">
 											<div class="company-logo"><img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20160711/ffa06c04736c7c010a94f1e479f251d597c30dc1371c903d153b28b57ae0f10b.jpg" alt="" /></div>
 											<div class="info-primary">
 												<div class="name">高级测试经理 <span class="red">30k-50k</span></div>
@@ -125,7 +125,7 @@
 										</a>
 									</li>
 									<li>
-										<a ka="job_sug_5" href="/job_detail/1410922051.html" target="_blank">
+										<a ka="job_sug_5" href="/job/07734b16-6af0-4cb2-8e66-02d89be6c27e" target="_blank">
 											<div class="company-logo"><img src="https://img2.bosszhipin.com/mcs/chatphoto/20151217/1d60af39dc04e6a77c6c6d452b8aa264ac1ccdc4c0499d814afa67b5be50afc9.jpg" alt="" /></div>
 											<div class="info-primary">
 												<div class="name">测试经理 <span class="red">20k-30k</span></div>
@@ -151,8 +151,8 @@
 									</c:if>
 									<a href="/user/collection/addCollection.do?jobMessageId=${Requirementinfo.jobMessageId}"  target="_blank" class="btn">收藏</a>
 								</div>
-								<h2 class="name">武金萍</h2>
-								<p class="gray">测试工程师</p>
+								<h2 class="name">${Requirementinfo.businessuser.businessUserName}</h2>
+								<p class="gray">${Requirementinfo.businessuser.businessJob}</p>
 							</div>
 							<div class="detail-content">
 
