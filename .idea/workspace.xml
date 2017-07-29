@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfbe239c-116f-450b-aba0-d9ae15d85632" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/edu/ysu/ling/test/TestRandom.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/ysu/ling/controller/JobController.java" afterPath="$PROJECT_DIR$/src/main/java/edu/ysu/ling/controller/JobController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/ysu/ling/controller/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/edu/ysu/ling/controller/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/ysu/ling/mapping/Requirementinfo.xml" afterPath="$PROJECT_DIR$/src/main/java/edu/ysu/ling/mapping/Requirementinfo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/ysu/ling/util/SendEmail.java" afterPath="$PROJECT_DIR$/src/main/java/edu/ysu/ling/util/SendEmail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/applicationContext-quarz.xml" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext-quarz.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/js/login.js" afterPath="$PROJECT_DIR$/src/main/webapp/js/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/jobdetail.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/jobdetail.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/login.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/resume.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/resume.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -1465,7 +1455,7 @@
       <workItem from="1498013564427" duration="3617000" />
       <workItem from="1498093747731" duration="11892000" />
       <workItem from="1498175943538" duration="5439000" />
-      <workItem from="1501313155339" duration="29000" />
+      <workItem from="1501313155339" duration="93000" />
     </task>
     <task id="LOCAL-00001" summary="commit through idea">
       <created>1490879339015</created>
@@ -1586,7 +1576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498026306612</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="功能已完成，爬虫部分没有完善">
+      <created>1501313244294</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1501313244294</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1604,7 +1601,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="552737000" />
+    <option name="totallyTimeSpent" value="552801000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -1617,6 +1614,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943678" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1673,7 +1671,8 @@
     <MESSAGE value="界面基本配置完成" />
     <MESSAGE value="调用高德地图api显示地图" />
     <MESSAGE value="大部分功能已完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="大部分功能已完成" />
+    <MESSAGE value="功能已完成，爬虫部分没有完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="功能已完成，爬虫部分没有完善" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1712,6 +1711,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-38">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1830,6 +1830,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1725">
           <caret line="69" column="158" lean-forward="false" selection-start-line="69" selection-start-column="158" selection-end-line="69" selection-end-column="158" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1837,6 +1838,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
           <caret line="40" column="24" lean-forward="false" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1851,6 +1853,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-150">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1865,6 +1868,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="804">
           <caret line="233" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1872,6 +1876,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="804">
           <caret line="79" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1879,6 +1884,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="779">
           <caret line="88" column="1" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="88" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1886,6 +1892,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2146">
           <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1893,6 +1900,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
           <caret line="128" column="27" lean-forward="false" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1900,6 +1908,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
           <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="method#getResume#0;class#ResumeController#0" expanded="false" />
+            <element signature="method#addResume#0;class#ResumeController#0" expanded="false" />
+            <element signature="method#addDreamJob#0;class#ResumeController#0" expanded="false" />
+            <element signature="method#addDescription#0;class#ResumeController#0" expanded="false" />
+            <element signature="method#addJobExperience#0;class#ResumeController#0" expanded="false" />
+            <element signature="method#addProjectExperience#0;class#ResumeController#0" expanded="false" />
+            <element signature="method#addEducationExperience#0;class#ResumeController#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2133,6 +2150,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
           <caret line="54" column="49" lean-forward="false" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2164,6 +2182,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-525">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
